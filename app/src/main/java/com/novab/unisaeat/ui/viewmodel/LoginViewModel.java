@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.repository.UserRepository;
 
-public class LoginViewModel{
+public class LoginViewModel {
 
     private UserRepository userRepository;
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
@@ -25,13 +25,11 @@ public class LoginViewModel{
         userRepository.login(email, password, new UserRepository.LoginCallback() {
             @Override
             public void onSuccess(User user) {
-
                 userLiveData.setValue(user);  // Se login va a buon fine, aggiorna il dato dell'utente
             }
 
             @Override
             public void onError(String errorMessage) {
-
                 errorLiveData.setValue(errorMessage);  // Gestisce eventuali errori
             }
         });

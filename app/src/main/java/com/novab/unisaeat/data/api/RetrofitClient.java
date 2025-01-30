@@ -7,7 +7,7 @@ public class RetrofitClient {
 
     private static Retrofit retrofit;
 
-    private static final String BASEURL = "http://172.26.173.12:5000/";
+    private static final String BASEURL = "http://172.26.117.132:5000/"; // strawberry
 
     public static Retrofit getInstance() {
         if (retrofit == null) {

@@ -3,6 +3,7 @@ package com.novab.unisaeat.ui.view;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private EditText emailEditText, passwordEditText;
     private Button button;
+    private TextView userInfoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
+        userInfoView = findViewById(R.id.userInfo);
         button = findViewById(R.id.buttonLogin);
         button.setOnClickListener(v ->
             onLoginClick()
@@ -30,12 +33,13 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel = new LoginViewModel();
 
-        // Osserva lo stato del login
+        // Osserva i cambiamenti del LiveData dell'utente
         loginViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
-                // Se il login è riuscito, puoi procedere con altre azioni (e.g., navigare alla home)
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                // Naviga alla prossima schermata o salva l'utente (puoi usarlo per salvarlo nel database locale o in SharedPreferences)
+                userInfoView.setText(String.format("Benvenuto %s (%s)", user.getName(), user.getEmail()));
+            } else {
+                userInfoView.setText("Nessun utente trovato");
             }
         });
 
@@ -43,8 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+                userInfoView.setText("Errore: " + errorMessage);
             }
         });
+
     }
 
     // Funzione che viene chiamata quando l'utente clicca il tasto di login

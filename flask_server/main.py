@@ -8,7 +8,7 @@ import threading
 
 # Configurazione dell'app Flask
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://android:android@localhost/mensadb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://android:android@localhost/mensadb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inizializzazione di SQLAlchemy
@@ -26,7 +26,7 @@ class User(db.Model):
     status = db.Column(db.String(50))
     phone = db.Column(db.String(20))
     credit = db.Column(db.Float, default=0.0)
-    
+
 
 class Transazione(db.Model):
     __tablename__ = 'transazioni'
@@ -40,10 +40,7 @@ class Transazione(db.Model):
 def login():
     data = request.get_json()
     email = data.get('email')
-    #password = dat.get('password')
     user = User.query.filter_by(email=email).first()
-    
-    # check password
 
     if user:
         user_data = {
@@ -56,9 +53,10 @@ def login():
             'phone': user.phone,
             'credit': user.credit
         }
-        return jsonify({'user': user_data})
+        return jsonify(user_data)  # Restituisce direttamente il dizionario
     else:
         return jsonify({'status': 'failure', 'message': 'Invalid credentials'}), 400
+
 
 def run_flask():
     app.run(host="0.0.0.0")
@@ -66,6 +64,6 @@ def run_flask():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
- 
+
     flask_thread = threading.Thread(target=run_flask)
     flask_thread.start()

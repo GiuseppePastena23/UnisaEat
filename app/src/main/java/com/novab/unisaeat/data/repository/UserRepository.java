@@ -1,5 +1,7 @@
 package com.novab.unisaeat.data.repository;
 
+import android.util.Log;
+
 import com.novab.unisaeat.data.api.ApiService;
 import com.novab.unisaeat.data.api.RetrofitClient;
 import com.novab.unisaeat.data.model.User;
@@ -25,7 +27,6 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
-
                 } else {
                     callback.onError("Login failed");
                 }
