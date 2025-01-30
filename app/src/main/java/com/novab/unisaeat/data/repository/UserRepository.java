@@ -28,12 +28,14 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
                 } else {
+                    Log.e("UserRepository", "Login failed: " + response.code());
                     callback.onError("Login failed");
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                Log.e("UserRepository", "Login failed: " + t.getMessage());
                 callback.onError(t.getMessage());
             }
         });
