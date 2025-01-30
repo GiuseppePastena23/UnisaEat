@@ -1,5 +1,6 @@
 package com.novab.unisaeat.ui.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                userInfoView.setText(String.format("Benvenuto %s (%s)", user.getName(), user.getEmail()));
+                Intent intent = new Intent(this, user.getStatus().equals("employee") ? HomeEmployeeActivity.class : HomeActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
             } else {
                 userInfoView.setText("Nessun utente trovato");
             }
@@ -57,6 +61,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginClick() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+
+        // DEBUG:
+        // email = "m.r";
+        // password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb";
 
         if (!email.isEmpty() && !password.isEmpty()) {
             loginViewModel.login(email, password);

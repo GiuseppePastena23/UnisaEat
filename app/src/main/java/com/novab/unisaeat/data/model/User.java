@@ -19,4 +19,13 @@ public class User implements Serializable {
     private String status;
     private String phone;
     private float credit;
+
+    private static User instance = null;
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User();
+        }
+        return instance;
+    }
 }

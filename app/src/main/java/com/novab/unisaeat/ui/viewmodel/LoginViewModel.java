@@ -7,13 +7,14 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.repository.UserRepository;
+import com.novab.unisaeat.ui.view.HomeActivity;
+import com.novab.unisaeat.ui.view.HomeEmployeeActivity;
 
 public class LoginViewModel {
 
     private UserRepository userRepository;
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private MutableLiveData<String> errorLiveData = new MutableLiveData<>();
-
 
     public LoginViewModel() {
         userRepository = new UserRepository();
