@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="login_text">Accedi</string>
+    <string name="employee_main_title">Dashboard Lavoratore</string>
+    <string name="orders_button">Prenotazioni</string>
+    <string name="settings_btn">Impostazioni</string>
+    <string name="orders_btn">Prenotazioni</string>
 </resources>

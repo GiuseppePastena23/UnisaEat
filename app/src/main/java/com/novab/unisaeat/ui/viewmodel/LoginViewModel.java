@@ -1,14 +1,10 @@
 package com.novab.unisaeat.ui.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.repository.UserRepository;
-import com.novab.unisaeat.ui.view.HomeActivity;
-import com.novab.unisaeat.ui.view.HomeEmployeeActivity;
 
 public class LoginViewModel {
 
