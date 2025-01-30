@@ -1,82 +1,58 @@
 package com.novab.unisaeat.data.model;
 
-import java.io.Serializable;
-import java.sql.Date;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.internal.bind.DateTypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transaction implements Serializable {
 
     private String id;
+    @SerializedName("user_id")
     private String userId;
     private String amount;
-    private Date date;
+    @SerializedName("datetime")
+    @JsonAdapter(DataTypeAdapter.class)
+    private Date datetime;
     private String mode;
 
-    public Transaction(String id, String userId, String amount, Date date, String mode) {
-        this.id = id;
-        this.userId = userId;
-        this.amount = amount;
-        this.date = date;
-        this.mode = mode;
-    }
 
-    public Transaction(String userId, String amount, Date date, String mode) {
-        this.userId = userId;
-        this.amount = amount;
-        this.date = date;
-        this.mode = mode;
-    }
 
-    public Transaction() {
-    }
 
-    public String getId() {
-        return id;
-    }
+}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+ class DataTypeAdapter extends TypeAdapter<Date> {
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
+    @Override
+    public void write(JsonWriter out, Date value) throws IOException {
+        out.value(dateFormat.format(value));
     }
 
     @Override
-    public String toString() {
-        return "Transaction{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", amount='" + amount + '\'' +
-                ", date=" + date +
-                ", mode='" + mode + '\'' +
-                '}';
+    public Date read(JsonReader in) throws IOException {
+        try {
+            return dateFormat.parse(in.nextString());
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }

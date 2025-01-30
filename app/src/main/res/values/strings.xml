@@ -3,4 +3,9 @@
     <string name="login_text">Log in</string>
     <string name="email_hint" translatable="false">Email</string>
     <string name="password_hint" translatable="false">Password</string>
+    <string name="employee_main_title">Employee Dashboard</string>
+    <string name="orders_button">Orders</string>
+    <string name="settings_btn">Settings</string>
+    <string name="scan_btn" translatable="false">Scan QR</string>
+    <string name="orders_btn">Orders</string>
 </resources>

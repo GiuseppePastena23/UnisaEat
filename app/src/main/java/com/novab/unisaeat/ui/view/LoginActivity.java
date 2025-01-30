@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
+import com.novab.unisaeat.ui.view.employee.HomeEmployeeActivity;
 import com.novab.unisaeat.ui.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // DEBUG:
         // email = "m.r";
-        // password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb";
+         password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb";
 
         if (!email.isEmpty() && !password.isEmpty()) {
             loginViewModel.login(email, password);
