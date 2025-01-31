@@ -27,13 +27,13 @@ public class OrdersViewModel {
         transactionRepository.getOrders(new TransactionRepository.OrdersCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
-
                 ordersLiveData.setValue(transactions);
+
             }
 
             @Override
             public void onError(String errorMessage) {
-                // Gestisce eventuali errori
+                errorLiveData.setValue(errorMessage);
             }
         });
     }

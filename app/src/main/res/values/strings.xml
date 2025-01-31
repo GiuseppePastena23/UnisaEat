@@ -8,4 +8,5 @@
     <string name="settings_btn">Settings</string>
     <string name="scan_btn" translatable="false">Scan QR</string>
     <string name="orders_btn">Orders</string>
+    <string name="no_order_present_text">"No order present "</string>
 </resources>
