@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:padding="40dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <Spinner
+            android:id="@+id/lista_prodotti"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:layout_centerHorizontal="true"
+            android:layout_margin="40dp"
+            android:layout_marginTop="40dp" />
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:timePickerMode="spinner"/>
+
+
+
+
+        <Button
+
+            style="@style/MainButton"
+        android:id="@+id/order_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prenota" />
+
+    </LinearLayout>
+</RelativeLayout>
