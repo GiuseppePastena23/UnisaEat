@@ -41,6 +41,29 @@ public class UserRepository {
         });
     }
 
+    public void getUserById(String id, final LoginCallback callback) {
+        apiService.getUserById(id).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    Log.e("UserRepository", "Get user failed: " + response.code());
+                    callback.onError("Get user failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("UserRepository", "Get user failed: " + t.getMessage());
+                callback.onError(t.getMessage());
+            }
+        });
+    }
+
+
+
+
     public interface LoginCallback {
         void onSuccess(User user);  // Provide the User object when login is successful
         void onError(String errorMessage);  // Handle error cases

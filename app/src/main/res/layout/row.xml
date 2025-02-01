@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- ID a sinistra, in alto -->
+    <TextView
+        android:id="@+id/transaction_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="ID: "
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
+
+    <!-- Prodotti più grande, sotto l'ID -->
+    <TextView
+        android:id="@+id/transaction_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Products: "
+        android:textSize="18sp"
+        android:layout_below="@id/transaction_id"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Data in basso a destra -->
+    <TextView
+        android:id="@+id/transaction_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: "
+        android:textSize="14sp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

@@ -7,4 +7,13 @@
     <string name="orders_btn">Prenotazioni</string>
     <string name="salad">Insalatona</string>
     <string name="sandwich">Panino</string>
+    <string name="no_order_present_text">Nessuna Prenotazione Disponibile</string>
+    <string name="date_text">Data</string>
+    <string name="products_text">Prodotti</string>
+    <string name="exit_btn">Esci</string>
+    <string name="name_text">Nome</string>
+    <string name="surname_text">Cognome</string>
+    <string name="info_title_text">Informazioni Utente</string>
+    <string name="cf_text">CF</string>
+    <string name="scan_prompt">Scan QR code</string>
 </resources>

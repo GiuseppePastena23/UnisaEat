@@ -11,4 +11,15 @@
     <string name="salad">Salad</string>
     <string name="sandwich">Sandwich</string>
     <string name="basket">Basket</string>
+    <string name="no_order_present_text">"No order present "</string>
+    <string name="date_text">Date</string>
+    <string name="products_text">Products</string>
+    <string name="exit_btn">log out</string>
+    <string name="name_text">Name</string>
+    <string name="surname_text">Surname</string>
+    <string name="info_title_text">User Info</string>
+    <string name="cf_text" translatable="false">CF</string>
+    <string name="id_text" translatable="false">ID</string>
+    <string name="scan_prompt">Scan QR code</string>
+
 </resources>

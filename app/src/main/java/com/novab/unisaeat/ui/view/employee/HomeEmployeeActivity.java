@@ -3,9 +3,11 @@ package com.novab.unisaeat.ui.view.employee;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-
+import java.util.Calendar;
+import java.util.Date;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
@@ -14,13 +16,20 @@ import com.novab.unisaeat.ui.view.SettingsActivity;
 
 public class HomeEmployeeActivity extends AppCompatActivity {
 
-    private Button ordersButton, scanButton, settingsButton;
+    private Button ordersButton, scanButton, exitButton;
+    private TextView nameTextView, surnameTextView, emailTextView, cfTextView, dateTextView;
 
     // ASSOCIATE BUTTONS
-    private void associateButtons() {
+    private void associateUI() {
         ordersButton = findViewById(R.id.orders_btn);
         scanButton = findViewById(R.id.scan_btn);
-        settingsButton = findViewById(R.id.settings_btn);
+        exitButton = findViewById(R.id.exit_btn);
+
+        nameTextView = findViewById(R.id.name_text);
+        surnameTextView = findViewById(R.id.surname_text);
+        emailTextView = findViewById(R.id.email_text);
+        cfTextView = findViewById(R.id.cf_text);
+        dateTextView = findViewById(R.id.today_date_text);
     }
 
     // set function for each button
@@ -39,10 +48,8 @@ public class HomeEmployeeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        settingsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            intent.putExtra("user", (User) getIntent().getSerializableExtra("user"));
-            startActivity(intent);
+        exitButton.setOnClickListener(v -> {
+            finish();
         });
     }
 
@@ -55,11 +62,21 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         if (user == null) {
             finish();
         }
+        else {
+            associateUI();
+            setButtonFunctions();
+            changeText(user);
+        }
 
 
-        associateButtons();
-        setButtonFunctions();
 
+    }
 
+    private void changeText(User user) {
+        dateTextView.setText(Calendar.getInstance().getTime().toString());
+        nameTextView.setText(user.getName());
+        surnameTextView.setText(user.getSurname());
+        emailTextView.setText(user.getEmail());
+        cfTextView.setText(user.getCf());
     }
 }
