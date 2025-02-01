@@ -9,7 +9,9 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -18,4 +20,7 @@ public interface ApiService {
 
     @GET("/orders")
     Call<List<Transaction>> getOrders();
+
+    @GET("/getUserTransactions")
+    Call<List<Transaction>> getUserTransactions(@Query("user_id") int userId);
 }

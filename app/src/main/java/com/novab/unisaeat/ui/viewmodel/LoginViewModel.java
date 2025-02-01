@@ -41,5 +41,4 @@ public class LoginViewModel {
         return errorLiveData;
     }
 
-
 }
