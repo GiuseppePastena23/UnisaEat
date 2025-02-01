@@ -11,28 +11,26 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class OrdersTest {
-
+public class WalletTest {
     private TransactionRepository transactionRepository = new TransactionRepository();
 
     @Test
-    public void testGetOrders() throws InterruptedException {
+    public void testGetUserTransaction() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
 
-        transactionRepository.getOrders(new TransactionRepository.OrdersCallback() {
-
+        transactionRepository.getUserTransaction(1, new TransactionRepository.TransactionsCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
                 System.out.println(transactions);
-                Log.d("OrderTest", "onSuccess: " + transactions);
-                assert 2 == transactions.size();
+                Log.d("WalletTest", "onSuccess: " + transactions);
+                assert 12 == transactions.size();
                 latch.countDown();
             }
 
             @Override
             public void onError(String errorMessage) {
                 System.out.println(errorMessage);
-                Log.d("UserTest", "onError: " + errorMessage);
+                Log.d("WalletTest", "onError: " + errorMessage);
                 assert false;
                 latch.countDown();
             }

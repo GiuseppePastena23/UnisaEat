@@ -48,5 +48,4 @@ public class LoginViewModel extends AndroidViewModel {
         return errorLiveData;
     }
 
-
 }
