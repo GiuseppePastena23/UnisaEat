@@ -23,7 +23,7 @@ public class RitiroActivity extends AppCompatActivity {
     private TextView priceText;
     private Button orderButton;
     private TimePicker hourPicker;
-    private PrenotazioneViewModel prenotazioneViewModel;
+
 
     private void associateUI() {
 
@@ -65,7 +65,7 @@ public class RitiroActivity extends AppCompatActivity {
                 } else if (hourOfDay > 20) {
                     showAlertDialog("Errore", "Le prenotazioni non sono possibili dopo le 20:00.");
                 } else {
-                    prenotazioneViewModel.controllaCredito(importoPrenotazione);
+
 
                 }
 
@@ -77,7 +77,7 @@ public class RitiroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ritiro);
-        prenotazioneViewModel = new ViewModelProvider(this).get(PrenotazioneViewModel.class);
+
 
 
         associateUI();
