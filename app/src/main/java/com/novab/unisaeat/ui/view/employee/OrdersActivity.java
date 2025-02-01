@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.model.User;
+import com.novab.unisaeat.ui.adapter.TransactionAdapter;
 import com.novab.unisaeat.ui.viewmodel.LoginViewModel;
 import com.novab.unisaeat.ui.viewmodel.OrdersViewModel;
 
@@ -28,8 +29,8 @@ public class OrdersActivity extends AppCompatActivity {
     }
 
 
-    private void setAdapter(List transactions) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.row, R.id.textViewList, transactions);
+    private void setAdapter(List<Transaction> transactions) {
+        TransactionAdapter adapter = new TransactionAdapter(this, transactions);
         ordersListView.setAdapter(adapter);
     }
 

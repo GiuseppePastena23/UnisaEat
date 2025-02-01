@@ -28,7 +28,6 @@ public class OrdersViewModel {
             @Override
             public void onSuccess(List<Transaction> transactions) {
                 ordersLiveData.setValue(transactions);
-
             }
 
             @Override

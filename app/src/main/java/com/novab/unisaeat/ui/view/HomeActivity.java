@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
 
-        userInfoView.setText(String.format("Benvenuto %s (%s)", user.getStatus(), user.getEmail()));
+        userInfoView.setText(String.format("Benvenuto %s (%s) %s", user.getStatus(), user.getEmail(), user.getToken()));
 
 
     }

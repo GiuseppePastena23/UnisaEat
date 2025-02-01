@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String status;
     private String phone;
     private float credit;
+    private String token;
 
     private static User instance = null;
 
