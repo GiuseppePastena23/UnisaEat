@@ -20,7 +20,7 @@ public class PaymentViewModel extends AndroidViewModel {
         userRepository = new UserRepository();
     }
 
-    public void getUserById(String id) {
+    public void getUserById(int id) {
         userRepository.getUserById(id, new UserRepository.LoginCallback() {
             @Override
             public void onSuccess(User user) {

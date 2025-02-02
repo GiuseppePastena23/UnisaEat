@@ -2,7 +2,6 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
 
@@ -12,10 +11,8 @@ import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.ui.adapter.TransactionAdapter;
-import com.novab.unisaeat.ui.viewmodel.LoginViewModel;
 import com.novab.unisaeat.ui.viewmodel.OrdersViewModel;
 
-import java.util.Collections;
 import java.util.List;
 
 public class OrdersActivity extends AppCompatActivity {

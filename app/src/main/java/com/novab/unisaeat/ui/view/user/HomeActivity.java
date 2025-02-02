@@ -7,11 +7,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
-import com.novab.unisaeat.data.model.User;
+import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private UserViewModel userViewModel;
 
     private TextView userInfoView;
     private Button button;
@@ -20,16 +23,26 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         associateUI();
+        updateLiveData();
+    }
 
-        User user = (User) getIntent().getSerializableExtra("user");
-        if (user == null) {
-            finish();
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateLiveData();
+    }
 
-        userInfoView.setText(String.format("Benvenuto %s (%s) %s", user.getStatus(), user.getEmail(), user.getToken()));
-
-
+    private void updateLiveData() {
+        userViewModel.getUser();
+        userViewModel.getUserLiveData().observe(this, user -> {
+            if (user != null) {
+                userInfoView.setText(user.toString());
+            } else {
+                userInfoView.setText("No user found");
+            }
+        });
     }
 
     private void associateUI() {
@@ -37,9 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         button.setOnClickListener(v -> {
-            Log.d("TAG", "associateUI: button clicked");
             Intent intent = new Intent(this, WalletActivity.class);
-            intent.putExtra("user", getIntent().getSerializableExtra("user"));
             startActivity(intent);
         });
     }

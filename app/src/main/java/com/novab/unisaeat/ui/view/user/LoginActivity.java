@@ -12,12 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.view.employee.HomeEmployeeActivity;
-import com.novab.unisaeat.ui.viewmodel.LoginViewModel;
-import com.novab.unisaeat.ui.viewmodel.ScanViewModel;
+import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+    private UserViewModel userViewModel;
     private EditText emailEditText, passwordEditText;
     private Button button;
     private TextView userInfoView;
@@ -26,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
@@ -35,14 +35,12 @@ public class LoginActivity extends AppCompatActivity {
                 onLoginClick()
         );
 
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         // Osserva i cambiamenti del LiveData dell'utente
-        loginViewModel.getUserLiveData().observe(this, user -> {
+        userViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, user.getStatus().equals("employee") ? HomeEmployeeActivity.class : HomeActivity.class);
-                intent.putExtra("user", user);
                 startActivity(intent);
                 finish();
             } else {
@@ -51,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Osserva gli errori
-        loginViewModel.getErrorLiveData().observe(this, errorMessage -> {
+        userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
                 userInfoView.setText("Errore: " + errorMessage);
@@ -70,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb";
 
         if (!email.isEmpty() && !password.isEmpty()) {
-            loginViewModel.login(email, password);
+            userViewModel.login(email, password);
 
         } else {
             Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show();

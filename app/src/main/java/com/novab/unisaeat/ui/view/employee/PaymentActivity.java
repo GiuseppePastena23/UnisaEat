@@ -70,7 +70,8 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         paymentViewModel = new ViewModelProvider(this).get(PaymentViewModel.class);
 
-        paymentViewModel.getUserById(getIntent().getStringExtra("user_id"));
+        int userId = Integer.valueOf(getIntent().getStringExtra("user_id"));
+        paymentViewModel.getUserById(userId);
 
 
         paymentViewModel.getErrorLiveData().observe(this, errorMessage -> {

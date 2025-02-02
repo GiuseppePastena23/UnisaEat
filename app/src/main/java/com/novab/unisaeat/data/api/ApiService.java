@@ -21,7 +21,7 @@ public interface ApiService {
     Call<List<Transaction>> getOrders();
 
     @GET("/user")
-    Call<User> getUserById(@Query("user_id") String id);
+    Call<User> getUserById(@Query("user_id") int id);
 
     @GET("/getUserTransactions")
     Call<List<Transaction>> getUserTransactions(@Query("user_id") int userId);
