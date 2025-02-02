@@ -15,7 +15,7 @@ public class WalletTest {
     private TransactionRepository transactionRepository = new TransactionRepository();
 
     @Test
-    public void testGetUserTransaction() throws InterruptedException {
+    public void testGetUserTransactions() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
 
         transactionRepository.getUserTransaction(1, new TransactionRepository.TransactionsCallback() {
@@ -23,7 +23,7 @@ public class WalletTest {
             public void onSuccess(List<Transaction> transactions) {
                 System.out.println(transactions);
                 Log.d("WalletTest", "onSuccess: " + transactions);
-                assert 12 == transactions.size();
+                assert !transactions.isEmpty();
                 latch.countDown();
             }
 
@@ -36,8 +36,54 @@ public class WalletTest {
             }
         });
 
-        if (!latch.await(60, TimeUnit.SECONDS)) {
-            assert false;
-        }
+        assert latch.await(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void rechargeWallet() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
+
+        transactionRepository.doTransaction(1, 5, "debug", new TransactionRepository.WalletRechargeCallback() {
+            @Override
+            public void onSuccess(String result) {
+                System.out.println(result);
+                Log.d("WalletTest", "onSuccess: " + result);
+                assert true;
+                latch.countDown();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                System.out.println(errorMessage);
+                Log.d("WalletTest", "onError: " + errorMessage);
+                assert false;
+                latch.countDown();
+            }
+        });
+
+        assert latch.await(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void notEnoughMoney() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
+
+        transactionRepository.doTransaction(1, -1000000, "debug", new TransactionRepository.WalletRechargeCallback() {
+            @Override
+            public void onSuccess(String result) {
+                assert false;
+                latch.countDown();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                System.out.println(errorMessage);
+                Log.d("WalletTest", "onError: " + errorMessage);
+                assert true;
+                latch.countDown();
+            }
+        });
+
+        assert latch.await(5, TimeUnit.SECONDS);
     }
 }

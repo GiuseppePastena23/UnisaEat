@@ -26,4 +26,7 @@ public interface ApiService {
 
     @GET("/getUserTransactions")
     Call<List<Transaction>> getUserTransactions(@Query("user_id") int userId);
+
+    @POST("/doTransaction")
+    Call<Void> doTransaction(@Body Map<String, String> transactionData);
 }
