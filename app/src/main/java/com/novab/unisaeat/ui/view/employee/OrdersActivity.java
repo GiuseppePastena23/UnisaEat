@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
@@ -46,14 +47,12 @@ public class OrdersActivity extends AppCompatActivity {
         }
 
 
-
         ordersViewModel.getOrdersLiveData().observe(this, orders -> {
-            if (orders != null && !orders.isEmpty()){
+            if (orders != null && !orders.isEmpty()) {
 
                 setAdapter(orders);
                 Log.d("OrdersActivity", "Orders: " + orders);
-            }
-            else {
+            } else {
                 ordersText.setText(R.string.no_order_present_text);
             }
         });
@@ -69,8 +68,6 @@ public class OrdersActivity extends AppCompatActivity {
 
 
         associateUI();
-
-
 
 
     }

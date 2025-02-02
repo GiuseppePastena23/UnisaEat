@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
+
 import com.novab.unisaeat.R;
 
 public class RitiroActivity extends AppCompatActivity {
@@ -48,36 +49,35 @@ public class RitiroActivity extends AppCompatActivity {
     private void associateButtons() {
         hourPicker.setIs24HourView(true);
 
-            orderButton.setOnClickListener(v -> {
-                // Ottieni l'orario selezionato
-                int hourOfDay = hourPicker.getHour();
-                int minute = hourPicker.getMinute();
+        orderButton.setOnClickListener(v -> {
+            // Ottieni l'orario selezionato
+            int hourOfDay = hourPicker.getHour();
+            int minute = hourPicker.getMinute();
 
-                // Ottieni la data attuale
-                Calendar currentCalendar = Calendar.getInstance();
-                int currentHour = currentCalendar.get(Calendar.HOUR_OF_DAY);
+            // Ottieni la data attuale
+            Calendar currentCalendar = Calendar.getInstance();
+            int currentHour = currentCalendar.get(Calendar.HOUR_OF_DAY);
 
-                // Verifica che la prenotazione sia tra le 9:00 e le 20:00
-                if (currentHour >= 20) {
-                    showAlertDialog("Errore", "Le prenotazioni non sono più possibili dopo le 20:00.");
-                } else if (hourOfDay < 9) {
-                    showAlertDialog("Errore", "La prenotazione non è possibile prima delle 9:00.");
-                } else if (hourOfDay > 20) {
-                    showAlertDialog("Errore", "Le prenotazioni non sono possibili dopo le 20:00.");
-                } else {
-
-
-                }
+            // Verifica che la prenotazione sia tra le 9:00 e le 20:00
+            if (currentHour >= 20) {
+                showAlertDialog("Errore", "Le prenotazioni non sono più possibili dopo le 20:00.");
+            } else if (hourOfDay < 9) {
+                showAlertDialog("Errore", "La prenotazione non è possibile prima delle 9:00.");
+            } else if (hourOfDay > 20) {
+                showAlertDialog("Errore", "Le prenotazioni non sono possibili dopo le 20:00.");
+            } else {
 
 
-            });
+            }
+
+
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ritiro);
-
 
 
         associateUI();
@@ -91,7 +91,7 @@ public class RitiroActivity extends AppCompatActivity {
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if(title.equals("Prenotazione Confermata")) {
+                        if (title.equals("Prenotazione Confermata")) {
 
                         }
                     }

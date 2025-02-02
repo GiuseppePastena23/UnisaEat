@@ -20,7 +20,7 @@ public class OrdersViewModel {
 
 
     public OrdersViewModel() {
-        transactionRepository= new TransactionRepository();
+        transactionRepository = new TransactionRepository();
     }
 
     public void getOrders() {
@@ -40,6 +40,7 @@ public class OrdersViewModel {
     public LiveData<List<Transaction>> getOrdersLiveData() {
         return ordersLiveData;
     }
+
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
     }

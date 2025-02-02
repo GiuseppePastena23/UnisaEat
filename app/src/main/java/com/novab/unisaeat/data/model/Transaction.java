@@ -3,28 +3,21 @@ package com.novab.unisaeat.data.model;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.internal.bind.DateTypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction implements Serializable {
-
     private String id;
     @SerializedName("user_id")
     private String userId;
@@ -33,13 +26,9 @@ public class Transaction implements Serializable {
     @JsonAdapter(DataTypeAdapter.class)
     private Date datetime;
     private String mode;
-
-
-
-
 }
 
- class DataTypeAdapter extends TypeAdapter<Date> {
+class DataTypeAdapter extends TypeAdapter<Date> {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override

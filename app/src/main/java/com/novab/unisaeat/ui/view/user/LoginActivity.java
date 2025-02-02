@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         userInfoView = findViewById(R.id.userInfo);
         button = findViewById(R.id.buttonLogin);
         button.setOnClickListener(v ->
-            onLoginClick()
+                onLoginClick()
         );
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);

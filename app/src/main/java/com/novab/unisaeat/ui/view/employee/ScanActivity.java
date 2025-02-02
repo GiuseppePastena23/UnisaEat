@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class ScanActivity extends AppCompatActivity {
 
-   private ScanViewModel scanViewModel;
+    private ScanViewModel scanViewModel;
 
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher =
@@ -68,33 +68,32 @@ public class ScanActivity extends AppCompatActivity {
 
     // Estrae l'ID dall'input
     public static String extractID(String str) {
-    Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
-    Matcher matcher = pattern.matcher(str);
-    if (matcher.find()) {
-        return matcher.group(1);
+        Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
     }
-    return null;
-}
 
-// Estrae il codice fiscale dall'input
-public static String extractCf(String str) {
-    Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
-    Matcher matcher = pattern.matcher(str);
-    if (matcher.find()) {
-        return matcher.group(2);
+    // Estrae il codice fiscale dall'input
+    public static String extractCf(String str) {
+        Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            return matcher.group(2);
+        }
+        return null;
     }
-    return null;
-}
 
-public static String extractToken(String str) {
-    Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
-    Matcher matcher = pattern.matcher(str);
-    if (matcher.find()) {
-        return matcher.group(3);
+    public static String extractToken(String str) {
+        Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            return matcher.group(3);
+        }
+        return null;
     }
-    return null;
-}
-
 
 
 }

@@ -44,5 +44,4 @@ public class WalletViewModel extends AndroidViewModel {
     }
 
 
-
 }

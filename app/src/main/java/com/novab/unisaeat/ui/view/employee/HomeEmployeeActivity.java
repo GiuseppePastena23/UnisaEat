@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
@@ -61,13 +62,11 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         User user = (User) getIntent().getSerializableExtra("user");
         if (user == null) {
             finish();
-        }
-        else {
+        } else {
             associateUI();
             setButtonFunctions();
             changeText(user);
         }
-
 
 
     }

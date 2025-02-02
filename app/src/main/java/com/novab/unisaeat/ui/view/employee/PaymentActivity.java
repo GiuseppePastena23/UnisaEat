@@ -22,7 +22,8 @@ public class PaymentActivity extends AppCompatActivity {
     private TextView userCreditText;
 
     private Button makePaymentButton;
-    private Button cancelPaymentButton;;
+    private Button cancelPaymentButton;
+
 
     private Button completeMealButton;
     private Button pizzaMealButton;
@@ -33,7 +34,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     private PaymentViewModel paymentViewModel;
 
-    private void associateUI(){
+    private void associateUI() {
         userNameText = findViewById(R.id.user_name_text);
         userSurnameText = findViewById(R.id.user_surname_text);
         userCfText = findViewById(R.id.user_cf_text);
@@ -49,7 +50,7 @@ public class PaymentActivity extends AppCompatActivity {
         basketMealButton = findViewById(R.id.basket_meal_btn);
     }
 
-    private void setUserData(User user){
+    private void setUserData(User user) {
         userNameText.setText(user.getName());
         userSurnameText.setText(user.getSurname());
         userCfText.setText(user.getCf());
@@ -57,7 +58,7 @@ public class PaymentActivity extends AppCompatActivity {
         userCreditText.setText(String.valueOf(user.getCredit()));
     }
 
-    private void setButtonFunctions(){
+    private void setButtonFunctions() {
         makePaymentButton.setOnClickListener(v -> {
             Toast.makeText(this, "Payment", Toast.LENGTH_SHORT).show();
         });
@@ -72,7 +73,6 @@ public class PaymentActivity extends AppCompatActivity {
         paymentViewModel.getUserById(getIntent().getStringExtra("user_id"));
 
 
-
         paymentViewModel.getErrorLiveData().observe(this, errorMessage -> {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
         });
@@ -82,21 +82,19 @@ public class PaymentActivity extends AppCompatActivity {
         setButtonFunctions();
         paymentViewModel.getUserLiveData().observe(this, user -> {
             user = paymentViewModel.getUserLiveData().getValue();
-            if(user == null){
+            if (user == null) {
                 Log.d("PaymentActivity", "User is null");
                 finish();
             }
-            if (user.getCf().equals(getIntent().getStringExtra("cf"))){
-                if(user.getToken().equals(getIntent().getStringExtra("token"))){
+            if (user.getCf().equals(getIntent().getStringExtra("cf"))) {
+                if (user.getToken().equals(getIntent().getStringExtra("token"))) {
                     Log.d("PaymentActivity", "CF and token match");
-                }
-                else {
+                } else {
                     Log.d("PaymentActivity", "Token does not match");
                     finish();
                 }
                 setUserData(user);
-            }
-            else {
+            } else {
                 Log.d("PaymentActivity", "CF does not match");
                 finish();
             }

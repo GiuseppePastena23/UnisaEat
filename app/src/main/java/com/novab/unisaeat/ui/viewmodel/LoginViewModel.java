@@ -38,7 +38,6 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
 
-
     // Getter per il LiveData (che la View osserverà)
     public LiveData<User> getUserLiveData() {
         return userLiveData;
