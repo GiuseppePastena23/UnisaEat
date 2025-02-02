@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.repository.UserRepository;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
@@ -34,6 +35,13 @@ public class UserViewModel extends AndroidViewModel {
             @Override
             public void onError(String errorMessage) {
                 sharedPreferencesManager.clearData();
+                // set error message based on the error from the server
+                errorMessage = errorMessage.toLowerCase();
+                if (errorMessage.startsWith("failed to connect")) {
+                    errorMessage = getApplication().getString(R.string.failed_to_connect);
+                } else if (errorMessage.equals("bad request")) {
+                    errorMessage = getApplication().getString(R.string.invalid_credentials);
+                }
                 errorLiveData.setValue(errorMessage);
             }
         });

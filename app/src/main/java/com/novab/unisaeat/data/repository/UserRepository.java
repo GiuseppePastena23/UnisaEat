@@ -14,7 +14,7 @@ import retrofit2.Response;
 
 public class UserRepository {
 
-    private ApiService apiService;
+    private final ApiService apiService;
 
     public UserRepository() {
         apiService = RetrofitClient.getInstance().create(ApiService.class);
@@ -27,15 +27,13 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
-                } else {
-                    Log.e("UserRepository", "Login failed: " + response.code());
-                    callback.onError("Login failed");
+                } else { // Wrong credentials
+                    callback.onError(response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.e("UserRepository", "Login failed: " + t.getMessage());
+            public void onFailure(Call<User> call, Throwable t) { // Network error
                 callback.onError(t.getMessage());
             }
         });
@@ -62,10 +60,9 @@ public class UserRepository {
     }
 
 
-
-
     public interface LoginCallback {
         void onSuccess(User user);  // Provide the User object when login is successful
+
         void onError(String errorMessage);  // Handle error cases
     }
 }

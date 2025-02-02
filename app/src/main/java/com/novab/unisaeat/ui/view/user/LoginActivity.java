@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         userViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.login_successful), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this,
                         user.getStatus().equals("employee") ? HomeEmployeeActivity.class :
                                 HomeActivity.class);
@@ -62,7 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         if (!email.isEmpty()) {
             userViewModel.login(email, password);
         } else {
-            Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.both_email_password_error),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

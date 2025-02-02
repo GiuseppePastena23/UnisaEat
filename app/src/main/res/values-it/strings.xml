@@ -19,10 +19,13 @@
     <string name="scan_prompt">Scan QR code</string>
     <string name="email_hint">Inserisci l\'email</string>
     <string name="login">Accedi</string>
-    <string name="bothemailpassworderror">Inserisci email e password</string>
+    <string name="both_email_password_error">Inserisci email e password</string>
     <string name="wallet">Portafoglio</string>
     <string name="welcome">Ciao</string>
     <string name="order">Ordina</string>
     <string name="menu">Menù</string>
     <string name="settings">Impostazioni</string>
+    <string name="failed_to_connect">Connessione fallita</string>
+    <string name="invalid_credentials">Credenziali Invalide</string>
+    <string name="login_successful">Login effettuato</string>
 </resources>

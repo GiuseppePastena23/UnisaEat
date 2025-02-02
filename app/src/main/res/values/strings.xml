@@ -22,11 +22,14 @@
     <string name="id_text" translatable="false">ID</string>
     <string name="scan_prompt">Scan QR code</string>
     <string name="login">Login</string>
-    <string name="bothemailpassworderror">Please enter both email and password</string>
+    <string name="both_email_password_error">Please enter both email and password</string>
     <string name="wallet">Wallet</string>
     <string name="welcome">Hi</string>
     <string name="order">Order</string>
     <string name="menu">Menu</string>
     <string name="settings">Settings</string>
+    <string name="failed_to_connect">Failed to connect</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="login_successful">Login successful</string>
 
 </resources>
