@@ -2,16 +2,16 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
-import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.ui.adapter.TransactionAdapter;
-import com.novab.unisaeat.ui.viewmodel.OrdersViewModel;
+import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class OrdersActivity extends AppCompatActivity {
 
     private TextView ordersText;
     private ListView ordersListView;
-    private OrdersViewModel ordersViewModel = new OrdersViewModel();
+    private TransactionViewModel transactionViewModel;
 
     private void associateUI() {
         ordersText = findViewById(R.id.orders_text);
@@ -35,16 +35,18 @@ public class OrdersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders);
+        setContentView(R.layout.activity_orders_employee);
 
+        transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
 
-        User user = (User) getIntent().getSerializableExtra("user");
-        if (user == null) {
-            finish();
-        }
+        transactionViewModel.getOrders();
 
+        associateUI();
+        fillOrders();
+    }
 
-        ordersViewModel.getOrdersLiveData().observe(this, orders -> {
+    private void fillOrders() {
+        transactionViewModel.getOrdersLiveData().observe(this, orders -> {
             if (orders != null && !orders.isEmpty()) {
 
                 setAdapter(orders);
@@ -54,18 +56,13 @@ public class OrdersActivity extends AppCompatActivity {
             }
         });
 
-        ordersViewModel.getErrorLiveData().observe(this, errorMessage -> {
+        transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 ordersText.setText("Error: " + errorMessage);
                 Log.e("OrdersActivity", "Error: " + errorMessage);
             }
         });
-
-        ordersViewModel.getOrders();
-
-
-        associateUI();
-
-
     }
+
+
 }

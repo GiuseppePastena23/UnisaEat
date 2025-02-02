@@ -8,32 +8,33 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
-import com.novab.unisaeat.ui.viewmodel.WalletViewModel;
+import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
+
 
 public class WalletActivity extends AppCompatActivity {
 
-    private WalletViewModel walletViewModel;
+    private TransactionViewModel transactionViewModel;
     private TextView textView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wallet);
-        walletViewModel = new ViewModelProvider(this).get(WalletViewModel.class);
+        setContentView(R.layout.activity_wallet_user);
+        transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
         associateUI();
         User user = (User) getIntent().getSerializableExtra("user");
 
         assert user != null;
-        walletViewModel.getUserTransaction(user.getId());
+        transactionViewModel.getUserTransaction(user.getId());
 
-        walletViewModel.getTransactionsLiveData().observe(this, transactions -> {
+        transactionViewModel.getTransactionsLiveData().observe(this, transactions -> {
             if (transactions != null) {
                 textView.setText(transactions.toString());
             }
         });
 
-        walletViewModel.getErrorLiveData().observe(this, errorMessage -> {
+        transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 textView.setText(errorMessage);
             }

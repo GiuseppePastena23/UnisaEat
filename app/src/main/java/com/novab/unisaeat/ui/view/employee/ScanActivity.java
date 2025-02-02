@@ -1,13 +1,12 @@
 package com.novab.unisaeat.ui.view.employee;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
 
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -35,7 +34,7 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan);
+        setContentView(R.layout.activity_scan_employee);
         scanViewModel = new ViewModelProvider(this).get(ScanViewModel.class);
         User user = (User) getIntent().getSerializableExtra("user");
         if (user == null) {
@@ -62,8 +61,6 @@ public class ScanActivity extends AppCompatActivity {
             }
             finish();
         });
-
-
     }
 
     // Estrae l'ID dall'input

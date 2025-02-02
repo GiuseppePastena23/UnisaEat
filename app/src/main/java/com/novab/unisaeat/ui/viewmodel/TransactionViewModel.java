@@ -3,14 +3,12 @@ package com.novab.unisaeat.ui.viewmodel;
 import android.app.Application;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.repository.TransactionRepository;
-import com.novab.unisaeat.data.repository.UserRepository;
 
 import java.util.List;
 
@@ -47,7 +45,8 @@ public class TransactionViewModel extends AndroidViewModel {
 
     // RECHARGE WALLET
     private MutableLiveData<String> resultLiveData = new MutableLiveData<>();
-    public void doTransaction(int userId, int amount, String mode) {
+
+    public void doTransaction(int userId, float amount, String mode) {
         transactionRepository.doTransaction(userId, amount, mode, new TransactionRepository.WalletRechargeCallback() {
             @Override
             public void onSuccess(String result) {

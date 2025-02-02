@@ -1,88 +1,76 @@
 package com.novab.unisaeat.ui.view.user;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.TimePicker;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
+import android.widget.SpinnerAdapter;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.DialogInterface;
-
 import com.novab.unisaeat.R;
+import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 
 public class RitiroActivity extends AppCompatActivity {
 
     private Spinner productsSpinner;
-    private TextView priceText;
+    private TimePicker timePicker;
     private Button orderButton;
-    private TimePicker hourPicker;
+
+    private Map<String, Float> products;
 
 
     private void associateUI() {
-
-        // prezzoText = findViewById(R.id.textViewPrezzo);
+        productsSpinner = findViewById(R.id.products_spinner);
+        timePicker = findViewById(R.id.time_picker);
         orderButton = findViewById(R.id.order_btn);
-        hourPicker = findViewById(R.id.timePicker);
-        productsSpinner = findViewById(R.id.lista_prodotti);
-
     }
 
-    private void setSpinner() {
-        ArrayList<String> productsList = new ArrayList<>();
-        productsList.add(getString(R.string.salad));
-        productsList.add(getString(R.string.sandwich));
-        productsList.add(getString(R.string.basket));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, productsList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        productsSpinner.setAdapter(adapter);
+    private void populateSpinner() {
+        products.put(getString(R.string.basket), 1.50f);
+        products.put(getString(R.string.salad), 2.50f);
+        products.put(getString(R.string.sandwich), 1.50f);
+
+
+        ArrayList<String> productsList = new ArrayList<>(products.keySet());
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, productsList);
+        productsSpinner.setAdapter(spinnerAdapter);
     }
 
-    private void associateButtons() {
-        hourPicker.setIs24HourView(true);
+    private void order(int userId) {
+        TransactionViewModel transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        String product = productsSpinner.getSelectedItem().toString();
+        float price = products.get(product);
+        int hour = timePicker.getHour();
+        int minute = timePicker.getMinute();
+        String mode = "order;" + product;
 
-        orderButton.setOnClickListener(v -> {
-            // Ottieni l'orario selezionato
-            int hourOfDay = hourPicker.getHour();
-            int minute = hourPicker.getMinute();
+        transactionViewModel.doTransaction(userId, price, mode);
 
-            // Ottieni la data attuale
-            Calendar currentCalendar = Calendar.getInstance();
-            int currentHour = currentCalendar.get(Calendar.HOUR_OF_DAY);
-
-            // Verifica che la prenotazione sia tra le 9:00 e le 20:00
-            if (currentHour >= 20) {
-                showAlertDialog("Errore", "Le prenotazioni non sono più possibili dopo le 20:00.");
-            } else if (hourOfDay < 9) {
-                showAlertDialog("Errore", "La prenotazione non è possibile prima delle 9:00.");
-            } else if (hourOfDay > 20) {
-                showAlertDialog("Errore", "Le prenotazioni non sono possibili dopo le 20:00.");
-            } else {
-
-
-            }
-
-
-        });
+        String message = "Hai ordinato: " + product + " alle " + hour + ":" + minute;
+        showAlertDialog("Prenotazione Confermata", message);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ritiro);
+        setContentView(R.layout.activity_order_user);
+
+        orderButton.setOnClickListener(v -> {
+
+        });
 
 
-        associateUI();
-        associateButtons();
-        setSpinner();
     }
 
     private void showAlertDialog(String title, String message) {

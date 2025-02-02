@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
-import com.novab.unisaeat.ui.viewmodel.PaymentViewModel;
+import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -32,7 +32,7 @@ public class PaymentActivity extends AppCompatActivity {
     private Button reducedMealButtonB;
     private Button basketMealButton;
 
-    private PaymentViewModel paymentViewModel;
+    private UserViewModel userViewModel;
 
     private void associateUI() {
         userNameText = findViewById(R.id.user_name_text);
@@ -67,22 +67,22 @@ public class PaymentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment);
-        paymentViewModel = new ViewModelProvider(this).get(PaymentViewModel.class);
+        setContentView(R.layout.activity_payment_employee);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         int userId = Integer.valueOf(getIntent().getStringExtra("user_id"));
-        paymentViewModel.getUserById(userId);
+        userViewModel.getUserById(userId);
 
 
-        paymentViewModel.getErrorLiveData().observe(this, errorMessage -> {
+        userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
         });
 
 
         associateUI();
         setButtonFunctions();
-        paymentViewModel.getUserLiveData().observe(this, user -> {
-            user = paymentViewModel.getUserLiveData().getValue();
+        userViewModel.getUserLiveData().observe(this, user -> {
+            user = userViewModel.getUserLiveData().getValue();
             if (user == null) {
                 Log.d("PaymentActivity", "User is null");
                 finish();
@@ -101,4 +101,6 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

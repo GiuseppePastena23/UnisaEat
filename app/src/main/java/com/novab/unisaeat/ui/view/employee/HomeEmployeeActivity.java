@@ -2,21 +2,23 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
-import com.novab.unisaeat.ui.view.user.SettingsActivity;
+import com.novab.unisaeat.ui.viewmodel.UserViewModel;
+
+import java.util.Calendar;
 
 public class HomeEmployeeActivity extends AppCompatActivity {
 
+    private UserViewModel userViewModel;
     private Button ordersButton, scanButton, exitButton;
     private TextView nameTextView, surnameTextView, emailTextView, cfTextView, dateTextView;
 
@@ -58,17 +60,23 @@ public class HomeEmployeeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_employee);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        User user = (User) getIntent().getSerializableExtra("user");
-        if (user == null) {
-            finish();
-        } else {
-            associateUI();
-            setButtonFunctions();
-            changeText(user);
-        }
+        updateLiveData();
+        associateUI();
+        setButtonFunctions();
+    }
 
+    private void updateLiveData() {
 
+        userViewModel.getUser();
+        userViewModel.getUserLiveData().observe(this, user -> {
+            if (user != null) {
+                changeText(user);
+            } else {
+                Log.d("HomeEmployeeActivity", "No user found");
+            }
+        });
     }
 
     private void changeText(User user) {

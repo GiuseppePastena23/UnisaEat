@@ -36,11 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         );
 
 
+
         // Osserva i cambiamenti del LiveData dell'utente
         userViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, user.getStatus().equals("employee") ? HomeEmployeeActivity.class : HomeActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
                 finish();
             } else {

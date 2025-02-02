@@ -7,14 +7,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
-import com.novab.unisaeat.ui.viewmodel.UserViewModel;
+import com.novab.unisaeat.data.model.User;
 
 public class HomeActivity extends AppCompatActivity {
-
-    private UserViewModel userViewModel;
 
     private TextView userInfoView;
     private Button button;
@@ -22,27 +19,17 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        setContentView(R.layout.activity_home_user);
         associateUI();
-        updateLiveData();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateLiveData();
-    }
+        User user = (User) getIntent().getSerializableExtra("user");
+        if (user == null) {
+            finish();
+        }
 
-    private void updateLiveData() {
-        userViewModel.getUser();
-        userViewModel.getUserLiveData().observe(this, user -> {
-            if (user != null) {
-                userInfoView.setText(user.toString());
-            } else {
-                userInfoView.setText("No user found");
-            }
-        });
+        userInfoView.setText(String.format("Benvenuto %s (%s) %s", user.getStatus(), user.getEmail(), user.getToken()));
+
+
     }
 
     private void associateUI() {
@@ -50,7 +37,9 @@ public class HomeActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         button.setOnClickListener(v -> {
+            Log.d("TAG", "associateUI: button clicked");
             Intent intent = new Intent(this, WalletActivity.class);
+            intent.putExtra("user", getIntent().getSerializableExtra("user"));
             startActivity(intent);
         });
     }
