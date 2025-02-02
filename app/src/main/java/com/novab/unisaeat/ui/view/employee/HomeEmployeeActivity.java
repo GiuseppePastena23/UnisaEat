@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
-import com.novab.unisaeat.ui.view.SettingsActivity;
+import com.novab.unisaeat.ui.view.user.SettingsActivity;
 
 public class HomeEmployeeActivity extends AppCompatActivity {
 

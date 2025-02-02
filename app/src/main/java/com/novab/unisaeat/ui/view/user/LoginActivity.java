@@ -1,4 +1,4 @@
-package com.novab.unisaeat.ui.view;
+package com.novab.unisaeat.ui.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;

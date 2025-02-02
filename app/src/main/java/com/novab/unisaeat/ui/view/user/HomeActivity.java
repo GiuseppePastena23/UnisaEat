@@ -1,28 +1,27 @@
-package com.novab.unisaeat.ui.view;
+package com.novab.unisaeat.ui.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
-import com.novab.unisaeat.ui.viewmodel.LoginViewModel;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView userInfoView;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        associateUI();
 
-        userInfoView = findViewById(R.id.textView);
         User user = (User) getIntent().getSerializableExtra("user");
         if (user == null) {
             finish();
@@ -31,5 +30,17 @@ public class HomeActivity extends AppCompatActivity {
         userInfoView.setText(String.format("Benvenuto %s (%s)", user.getStatus(), user.getEmail()));
 
 
+    }
+
+    private void associateUI() {
+        userInfoView = findViewById(R.id.textView);
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            Log.d("TAG", "associateUI: button clicked");
+            Intent intent = new Intent(this, WalletActivity.class);
+            intent.putExtra("user", getIntent().getSerializableExtra("user"));
+            startActivity(intent);
+        });
     }
 }
