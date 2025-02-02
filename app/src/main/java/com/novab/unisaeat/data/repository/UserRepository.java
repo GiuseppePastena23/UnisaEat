@@ -41,7 +41,7 @@ public class UserRepository {
         });
     }
 
-    public void getUserById(String id, final LoginCallback callback) {
+    public void getUserById(int id, final LoginCallback callback) {
         apiService.getUserById(id).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

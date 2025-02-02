@@ -6,21 +6,16 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.repository.TransactionRepository;
 
-import java.util.List;
-
-import lombok.Getter;
-
-public class RechargeWalletModelView extends AndroidViewModel {
+public class RechargeWalletViewModel extends AndroidViewModel {
     private TransactionRepository transactionRepository;
 
     private MutableLiveData<String> resultLiveData = new MutableLiveData<>();
     private MutableLiveData<String> errorLiveData = new MutableLiveData<>();
 
 
-    public RechargeWalletModelView(Application application) {
+    public RechargeWalletViewModel(Application application) {
         super(application);
     }
 

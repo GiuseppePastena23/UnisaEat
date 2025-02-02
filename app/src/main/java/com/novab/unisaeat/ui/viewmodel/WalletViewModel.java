@@ -26,22 +26,7 @@ public class WalletViewModel extends AndroidViewModel {
         transactionRepository = new TransactionRepository();
     }
 
-    public void getUserTransaction(int userId) {
-        transactionRepository.getUserTransaction(userId, new TransactionRepository.TransactionsCallback() {
 
-            @Override
-            public void onSuccess(List<Transaction> transactions) {
-                Log.d("WalletViewModel", "onSuccess: " + transactions);
-                transactionsLiveData.setValue(transactions);
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                Log.d("WalletViewModel", "onError: " + errorMessage);
-                errorLiveData.setValue(errorMessage);
-            }
-        });
-    }
 
 
 }
