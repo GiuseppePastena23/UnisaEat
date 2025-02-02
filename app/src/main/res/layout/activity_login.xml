@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -13,30 +12,27 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-        </EditText>
-
+            android:layout_height="100dp"
+            android:autofillHints="email"
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="100dp"></EditText>
+            android:layout_height="100dp"
+            android:autofillHints="password"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="login"></Button>
+            android:text="@string/login" />
 
-        <TextView
-            android:id="@+id/userInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"></TextView>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

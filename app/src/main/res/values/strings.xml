@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">UnisaEat</string>
     <string name="login_text">Log in</string>
-    <string name="email_hint" translatable="false">Email</string>
-    <string name="password_hint" translatable="false">Password</string>
+    <string name="email_hint">Insert email</string>
+    <string name="password_hint">Insert password</string>
     <string name="employee_main_title">Employee Dashboard</string>
     <string name="orders_button">Orders</string>
     <string name="settings_btn">Settings</string>
@@ -14,12 +14,19 @@
     <string name="no_order_present_text">"No order present "</string>
     <string name="date_text">Date</string>
     <string name="products_text">Products</string>
-    <string name="exit_btn">log out</string>
+    <string name="exit_btn">Log out</string>
     <string name="name_text">Name</string>
     <string name="surname_text">Surname</string>
     <string name="info_title_text">User Info</string>
     <string name="cf_text" translatable="false">CF</string>
     <string name="id_text" translatable="false">ID</string>
     <string name="scan_prompt">Scan QR code</string>
+    <string name="login">Login</string>
+    <string name="bothemailpassworderror">Please enter both email and password</string>
+    <string name="wallet">Wallet</string>
+    <string name="welcome">Hi</string>
+    <string name="order">Order</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Settings</string>
 
 </resources>

@@ -10,17 +10,38 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/wallet_btn"
+            style="@style/MainButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wallet" />
+
+        <Button
+            android:id="@+id/order_btn"
+            style="@style/MainButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/order" />
+
+        <Button
+            android:id="@+id/menu_btn"
+            style="@style/MainButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu" />
+
+        <Button
+            android:id="@+id/settings_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/MainButton"
-            android:text="asdf" />
+            android:text="@string/settings" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

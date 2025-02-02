@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/wallet_btn"
             style="@style/MainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

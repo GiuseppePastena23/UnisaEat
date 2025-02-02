@@ -96,7 +96,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.view.user.RitiroActivity"
+            android:name=".ui.view.user.OrderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
-public class RitiroActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity {
 
     private Spinner productsSpinner;
     private TimePicker timePicker;

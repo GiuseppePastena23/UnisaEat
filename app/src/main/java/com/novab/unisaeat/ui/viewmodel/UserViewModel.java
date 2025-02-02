@@ -12,7 +12,8 @@ import com.novab.unisaeat.data.util.SharedPreferencesManager;
 
 public class UserViewModel extends AndroidViewModel {
 
-    SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(getApplication());
+    SharedPreferencesManager sharedPreferencesManager =
+            new SharedPreferencesManager(getApplication());
     private final UserRepository userRepository;
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();

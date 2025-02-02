@@ -1,7 +1,6 @@
 package com.novab.unisaeat.ui.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class TransactionViewModel extends AndroidViewModel {
     private final TransactionRepository transactionRepository;
-    private MutableLiveData<String> errorLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
 
 
     public TransactionViewModel(Application application) {
@@ -23,7 +22,7 @@ public class TransactionViewModel extends AndroidViewModel {
     }
 
     // ORDERS FOR EMPLOYEE
-    private MutableLiveData<List<Transaction>> ordersLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Transaction>> ordersLiveData = new MutableLiveData<>();
     public void getOrders() {
         transactionRepository.getOrders(new TransactionRepository.OrdersCallback() {
             @Override
@@ -39,18 +38,16 @@ public class TransactionViewModel extends AndroidViewModel {
     }
     public LiveData<List<Transaction>> getOrdersLiveData() {
         return ordersLiveData;
-
     }
 
 
     // RECHARGE WALLET
-    private MutableLiveData<String> resultLiveData = new MutableLiveData<>();
-
+    private final MutableLiveData<String> transactionOutcome = new MutableLiveData<>();
     public void doTransaction(int userId, float amount, String mode) {
         transactionRepository.doTransaction(userId, amount, mode, new TransactionRepository.WalletRechargeCallback() {
             @Override
             public void onSuccess(String result) {
-                resultLiveData.setValue(result);
+                transactionOutcome.setValue(result);
             }
 
             @Override
@@ -59,24 +56,23 @@ public class TransactionViewModel extends AndroidViewModel {
             }
         });
     }
-    public LiveData<String> getResultLiveData() {
-        return resultLiveData;
+
+    public LiveData<String> getTransactionOutcome() {
+        return transactionOutcome;
     }
 
 
     // GET USER TRANSACTIONS
-    private MutableLiveData<List<Transaction>> transactionsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Transaction>> transactionsLiveData = new MutableLiveData<>();
     public void getUserTransaction(int userId) {
         transactionRepository.getUserTransaction(userId, new TransactionRepository.TransactionsCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
-                Log.d("WalletViewModel", "onSuccess: " + transactions);
                 transactionsLiveData.setValue(transactions);
             }
 
             @Override
             public void onError(String errorMessage) {
-                Log.d("WalletViewModel", "onError: " + errorMessage);
                 errorLiveData.setValue(errorMessage);
             }
         });
