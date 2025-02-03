@@ -2,10 +2,8 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,7 +20,20 @@ public class HomeEmployeeActivity extends AppCompatActivity {
     private Button ordersButton, scanButton, exitButton;
     private TextView nameTextView, surnameTextView, emailTextView, cfTextView, dateTextView;
 
-    // ASSOCIATE BUTTONS
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_employee);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        associateUI();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userViewModel.getUser();
+    }
+
     private void associateUI() {
         ordersButton = findViewById(R.id.orders_btn);
         scanButton = findViewById(R.id.scan_btn);
@@ -33,53 +44,37 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         emailTextView = findViewById(R.id.email_text);
         cfTextView = findViewById(R.id.cf_text);
         dateTextView = findViewById(R.id.today_date_text);
-    }
-
-    // set function for each button
-    private void setButtonFunctions() {
 
         ordersButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Orders", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, OrdersActivity.class);
-            intent.putExtra("user", (User) getIntent().getSerializableExtra("user"));
+            intent.putExtra("user", getIntent().getSerializableExtra("user"));
             startActivity(intent);
         });
 
         scanButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, ScanActivity.class);
-            intent.putExtra("user", (User) getIntent().getSerializableExtra("user"));
+            intent.putExtra("user", getIntent().getSerializableExtra("user"));
             startActivity(intent);
         });
 
         exitButton.setOnClickListener(v -> {
             finish();
         });
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_employee);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        updateLiveData();
-        associateUI();
-        setButtonFunctions();
-    }
-
-    private void updateLiveData() {
-
-        userViewModel.getUser();
         userViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
-                changeText(user);
-            } else {
-                Log.d("HomeEmployeeActivity", "No user found");
+                updateText(user);
+            }
+        });
+        userViewModel.getErrorLiveData().observe(this, errorMessage -> {
+            if (errorMessage != null) {
+                finish();
             }
         });
     }
 
-    private void changeText(User user) {
+    private void updateText(User user) {
         dateTextView.setText(Calendar.getInstance().getTime().toString());
         nameTextView.setText(user.getName());
         surnameTextView.setText(user.getSurname());

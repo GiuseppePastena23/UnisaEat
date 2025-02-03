@@ -8,10 +8,14 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.repository.TransactionRepository;
+import com.novab.unisaeat.data.util.SharedPreferencesManager;
 
 import java.util.List;
 
 public class TransactionViewModel extends AndroidViewModel {
+    SharedPreferencesManager sharedPreferencesManager =
+            new SharedPreferencesManager(getApplication());
+
     private final TransactionRepository transactionRepository;
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
 
@@ -76,6 +80,10 @@ public class TransactionViewModel extends AndroidViewModel {
                 errorLiveData.setValue(errorMessage);
             }
         });
+    }
+
+    public void getUserTransaction() {
+        getUserTransaction(sharedPreferencesManager.getUserId());
     }
     public LiveData<List<Transaction>> getTransactionsLiveData() {
         return transactionsLiveData;

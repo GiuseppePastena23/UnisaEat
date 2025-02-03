@@ -67,15 +67,34 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        setObservers();
+    }
 
+    private void setObservers() {
         userViewModel.getUserLiveData().observe(this, user -> {
-            assert user != null;
+            // FIXME: mettere black è sbagliato, bisogna mettere il colore di default
+            welcomeTextView.setTextColor(getResources().getColor(R.color.black));
             welcomeTextView.setText(String.format("%s %s", getString(R.string.welcome), user.getName()));
         });
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Log.e("HomeActivity", errorMessage);
+                welcomeTextView.setTextColor(getResources().getColor(R.color.red));
             }
+            /*
+            Quando una richiesta fallisce non si puo solo chiudere l'app.
+            anche se lo sharedpref è ha l'id facciamo lo stesso la richiesta per prednere l'utente.
+            bisogna rifare la richiesta.
+            è importante da tenere in mente soprattutto per il qr code perché potrebbe rimanere
+            quello precedente. una soluzione semplice è renderizzarlo rosso finché errore non è null
+             */
+            // wait a second and try again
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            userViewModel.getUser();
         });
     }
 }
