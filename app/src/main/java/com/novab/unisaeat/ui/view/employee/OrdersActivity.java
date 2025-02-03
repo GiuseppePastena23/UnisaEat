@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
-import com.novab.unisaeat.ui.adapter.TransactionAdapter;
+import com.novab.unisaeat.ui.adapter.OrderAdapter;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class OrdersActivity extends AppCompatActivity {
 
 
     private void setAdapter(List<Transaction> transactions) {
-        TransactionAdapter adapter = new TransactionAdapter(this, transactions);
+        OrderAdapter adapter = new OrderAdapter(this, transactions);
         ordersListView.setAdapter(adapter);
     }
 

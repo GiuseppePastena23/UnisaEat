@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -19,12 +20,10 @@ import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 import java.util.concurrent.Executor;
 
-// TODO da aggiungere login biometrico se id gia presente, altrimenti login normale
 public class LoginActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
     private EditText emailEditText, passwordEditText;
-    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         int userId = sharedPreferencesManager.getUserId();
         boolean biometric = sharedPreferencesManager.getBiometricCheckbox();
 
-
         if (userId != -1) {
             if (!biometric) {
                 goToHome();
@@ -43,14 +41,12 @@ public class LoginActivity extends AppCompatActivity {
                 checkAndAuthenticate();
             }
         }
-
-
     }
 
     private void associateUI() {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
-        loginButton = findViewById(R.id.login_btn);
+        Button loginButton = findViewById(R.id.login_btn);
         loginButton.setOnClickListener(v -> onLoginClick());
 
         userViewModel.getUserLiveData().observe(this, user -> {
@@ -72,11 +68,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginClick() {
         String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        String password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"; //passwordEditText.getText().toString().trim();
 
         // TODO:
         // email = "m.r";
-        password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb";
+
 
         /*!password.isEmpty()*/
         if (!email.isEmpty()) {
@@ -103,6 +99,15 @@ public class LoginActivity extends AppCompatActivity {
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
                 Toast.makeText(this, "Your device doesn't have any fingerprint enrolled", Toast.LENGTH_SHORT).show();
                 break;
+            case BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED:
+                Toast.makeText(this, "Your device is not updated", Toast.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED:
+                Toast.makeText(this, "Your device is not supported", Toast.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_STATUS_UNKNOWN:
+                Toast.makeText(this, "Biometric status unknown", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
@@ -120,13 +125,13 @@ public class LoginActivity extends AppCompatActivity {
         Executor executor = ContextCompat.getMainExecutor(this);
         BiometricPrompt biometricPrompt = new BiometricPrompt(this, executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
-            public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 goToHome();  // Vai alla schermata principale dopo il successo dell'autenticazione biometrica
             }
 
             @Override
-            public void onAuthenticationError(int errorCode, CharSequence errString) {
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 // FIXME: is this good?
                 super.onAuthenticationError(errorCode, errString);
                 setContentView(R.layout.activity_login);

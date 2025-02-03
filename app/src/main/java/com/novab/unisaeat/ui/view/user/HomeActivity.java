@@ -14,6 +14,8 @@ import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
+import java.util.Objects;
+
 public class HomeActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
@@ -85,8 +87,8 @@ public class HomeActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Log.e("HomeActivity", e.getMessage());
+
+                    Log.e("HomeActivity", Objects.requireNonNull(e.getMessage()));
                 }
 
                 // FIXME: prova solo una volta?
@@ -99,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
             è importante da tenere in mente soprattutto per il qr code perché potrebbe rimanere
             quello precedente. una soluzione semplice è renderizzarlo rosso finché errore non è null
              */
-            // wait a second and try again
+
 
         });
     }

@@ -58,7 +58,12 @@
 - **Scholarship Feature**:
   - The system should display the user’s **scholarship tier** (1/2/3).
   - This should affect the **wallet balance** or **meal pricing** dynamically.
----
+- **Payment mode**:
+  - "order;product": prenotazione da app
+  - "topup;cash": ricarca con contanti dalla mensa
+  - "topup;online": ricarica online da app
+  - "payment": pagamento alla mensa 
+- **ON LOADING**
 
 ## Future Considerations:
 - **QR Code Functionality**: Ensure smooth and efficient handling of QR codes for user actions.
