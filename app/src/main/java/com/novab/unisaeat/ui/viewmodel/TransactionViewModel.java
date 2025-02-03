@@ -82,6 +82,9 @@ public class TransactionViewModel extends AndroidViewModel {
         });
     }
 
+    /**
+     * Fetches transactions for the current logged user from the repository.
+     */
     public void getUserTransaction() {
         getUserTransaction(sharedPreferencesManager.getUserId());
     }

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
@@ -73,13 +74,14 @@ public class HomeActivity extends AppCompatActivity {
     private void setObservers() {
         userViewModel.getUserLiveData().observe(this, user -> {
             // FIXME: mettere black è sbagliato, bisogna mettere il colore di default
-            welcomeTextView.setTextColor(getResources().getColor(R.color.black));
+            // FIXME: cos'è il colore di default?
+            welcomeTextView.setTextColor(ContextCompat.getColor(this, R.color.black));
             welcomeTextView.setText(String.format("%s %s", getString(R.string.welcome), user.getName()));
         });
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Log.e("HomeActivity", errorMessage);
-                welcomeTextView.setTextColor(getResources().getColor(R.color.red));
+                welcomeTextView.setTextColor(ContextCompat.getColor(this, R.color.red));
             }
             /*
             Quando una richiesta fallisce non si puo solo chiudere l'app.
@@ -93,7 +95,10 @@ public class HomeActivity extends AppCompatActivity {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Log.e("HomeActivity", e.getMessage());
             }
+
+            // FIXME: prova solo una volta?
             userViewModel.getUser();
         });
     }

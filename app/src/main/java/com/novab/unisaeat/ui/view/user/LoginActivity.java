@@ -13,6 +13,7 @@ import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.view.employee.HomeEmployeeActivity;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
+// TODO da aggiungere login biometrico se id gia presente, altrimenti login normale
 public class LoginActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;

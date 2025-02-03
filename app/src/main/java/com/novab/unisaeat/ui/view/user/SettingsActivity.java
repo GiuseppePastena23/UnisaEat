@@ -21,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         //associateButtons();
         //setButtonFunctions();
-
+        //TODO add language change
 
     }
 }

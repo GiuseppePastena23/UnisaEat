@@ -47,13 +47,13 @@ public class HomeEmployeeActivity extends AppCompatActivity {
 
         ordersButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, OrdersActivity.class);
-            intent.putExtra("user", getIntent().getSerializableExtra("user"));
+            intent.putExtra("user", getIntent().getSerializableExtra("user")); // FIXME perche sta cosa qua?
             startActivity(intent);
         });
 
         scanButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, ScanActivity.class);
-            intent.putExtra("user", getIntent().getSerializableExtra("user"));
+            intent.putExtra("user", getIntent().getSerializableExtra("user")); // FIXME idem come sopra
             startActivity(intent);
         });
 
@@ -74,6 +74,8 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         });
     }
 
+
+    // FIXME da riscrivere o almeno da cambiare la view
     private void updateText(User user) {
         dateTextView.setText(Calendar.getInstance().getTime().toString());
         nameTextView.setText(user.getName());
