@@ -1,6 +1,8 @@
 package com.novab.unisaeat.ui.view.user;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
-import com.novab.unisaeat.ui.adapter.OrderAdapter;
 import com.novab.unisaeat.ui.adapter.TransactionAdapter;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 
@@ -19,6 +20,8 @@ public class WalletActivity extends AppCompatActivity {
 
     private TransactionViewModel transactionViewModel;
     private ListView transactionsListView;
+
+    private Button rechargeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,11 @@ public class WalletActivity extends AppCompatActivity {
 
     private void associateUI() {
         transactionsListView = findViewById(R.id.transactions_list_view);
+        rechargeButton = findViewById(R.id.goto_recharge_btn);
+        rechargeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RechargeWalletActivity.class);
+            startActivity(intent);
+        });
 
         transactionViewModel.getTransactionsLiveData().observe(this, transactions -> {
             if (transactions != null && !transactions.isEmpty()) {

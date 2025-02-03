@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
-import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 import java.util.Objects;
@@ -44,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void associateUI() {
         welcomeTextView = findViewById(R.id.welcome_text);
-        walletButton = findViewById(R.id.wallet_btn);
+        walletButton = findViewById(R.id.goto_recharge_btn);
         orderButton = findViewById(R.id.order_btn);
         menuButton = findViewById(R.id.menu_btn);
         settingsButton = findViewById(R.id.settings_btn);

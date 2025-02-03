@@ -16,7 +16,7 @@
             android:text="" />
 
         <Button
-            android:id="@+id/wallet_btn"
+            android:id="@+id/goto_recharge_btn"
             style="@style/MainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
