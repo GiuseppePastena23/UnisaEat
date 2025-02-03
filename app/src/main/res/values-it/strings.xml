@@ -28,4 +28,10 @@
     <string name="failed_to_connect">Connessione fallita</string>
     <string name="invalid_credentials">Credenziali Invalide</string>
     <string name="login_successful">Login effettuato</string>
+    <string name="order_confirmed">Prenotazione Confermata</string>
+    <string name="order_denied">Prenotazione Negata</string>
+    <string name="order_success_msg">"Prenotazione Confermata alle "</string>
+    <string name="order_error_msg">Prenotazione Negata</string>
+    <string name="order_time_error_msg">Scegli un orario tra le 9:00 e le 22:00</string>
+    <string name="order_credit_error_msg">Non hai abbastanza credito nel portafoglio</string>
 </resources>

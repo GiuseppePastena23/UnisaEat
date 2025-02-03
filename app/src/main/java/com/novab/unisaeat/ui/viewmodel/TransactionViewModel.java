@@ -61,6 +61,10 @@ public class TransactionViewModel extends AndroidViewModel {
         });
     }
 
+    public void doTransaction(float amount, String mode) {
+        doTransaction(sharedPreferencesManager.getUserId(), amount, mode);
+    }
+
     public LiveData<String> getTransactionOutcome() {
         return transactionOutcome;
     }
