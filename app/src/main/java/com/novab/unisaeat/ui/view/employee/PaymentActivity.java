@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
-import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 public class PaymentActivity extends AppCompatActivity {
@@ -33,7 +32,6 @@ public class PaymentActivity extends AppCompatActivity {
     private Button reducedMealButtonB;
     private Button basketMealButton;
 
-    private TransactionViewModel transactionViewModel;
     private UserViewModel userViewModel;
 
     private void associateUI() {
@@ -62,7 +60,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     private void setButtonFunctions() {
         makePaymentButton.setOnClickListener(v -> {
-
+            Toast.makeText(this, "Payment", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -70,7 +68,6 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_employee);
-        TransactionViewModel transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         int userId = Integer.valueOf(getIntent().getStringExtra("user_id"));
@@ -84,7 +81,25 @@ public class PaymentActivity extends AppCompatActivity {
 
         associateUI();
         setButtonFunctions();
-
+        userViewModel.getUserLiveData().observe(this, user -> {
+            user = userViewModel.getUserLiveData().getValue();
+            if (user == null) {
+                Log.d("PaymentActivity", "User is null");
+                finish();
+            }
+            if (user.getCf().equals(getIntent().getStringExtra("cf"))) {
+                if (user.getToken().equals(getIntent().getStringExtra("token"))) {
+                    Log.d("PaymentActivity", "CF and token match");
+                } else {
+                    Log.d("PaymentActivity", "Token does not match");
+                    finish();
+                }
+                setUserData(user);
+            } else {
+                Log.d("PaymentActivity", "CF does not match");
+                finish();
+            }
+        });
     }
 
 
