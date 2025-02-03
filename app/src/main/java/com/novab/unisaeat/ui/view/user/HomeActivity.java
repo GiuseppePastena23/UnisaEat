@@ -82,6 +82,15 @@ public class HomeActivity extends AppCompatActivity {
             if (errorMessage != null) {
                 Log.e("HomeActivity", errorMessage);
                 welcomeTextView.setTextColor(ContextCompat.getColor(this, R.color.red));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Log.e("HomeActivity", e.getMessage());
+                }
+
+                // FIXME: prova solo una volta?
+                userViewModel.getUser();
             }
             /*
             Quando una richiesta fallisce non si puo solo chiudere l'app.
@@ -91,15 +100,7 @@ public class HomeActivity extends AppCompatActivity {
             quello precedente. una soluzione semplice è renderizzarlo rosso finché errore non è null
              */
             // wait a second and try again
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Log.e("HomeActivity", e.getMessage());
-            }
 
-            // FIXME: prova solo una volta?
-            userViewModel.getUser();
         });
     }
 }

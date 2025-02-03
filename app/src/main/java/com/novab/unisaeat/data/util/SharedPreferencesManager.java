@@ -9,6 +9,7 @@ public class SharedPreferencesManager {
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
 
+
     public SharedPreferencesManager(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -21,6 +22,15 @@ public class SharedPreferencesManager {
 
     public int getUserId() {
         return sharedPreferences.getInt("id", -1); // if not found return -1
+    }
+
+    public void saveBiometricCheckbox(boolean isChecked) {
+        editor.putBoolean("biometric", isChecked);
+        editor.apply();
+    }
+
+    public boolean getBiometricCheckbox() {
+        return sharedPreferences.getBoolean("biometric", false);
     }
 
     public void clearData() {
