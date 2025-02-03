@@ -61,8 +61,8 @@ public class HomeActivity extends AppCompatActivity {
 
         menuButton.setOnClickListener(v -> {
             // FIXME: This should be changed to the correct activity
-            Intent intent = new Intent(this, Utilities.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this, Utilities.class);
+            //startActivity(intent);
         });
 
         settingsButton.setOnClickListener(v -> {

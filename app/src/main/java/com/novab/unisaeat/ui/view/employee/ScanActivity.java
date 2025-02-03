@@ -2,6 +2,7 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,6 +26,7 @@ public class ScanActivity extends AppCompatActivity {
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher =
             registerForActivityResult(new ScanContract(), result -> {
                 if (result.getContents() != null) {
+                   
                     scanViewModel.setScanResult(result.getContents());
                 } else {
                     scanViewModel.setScanResult(null);
@@ -65,9 +67,11 @@ public class ScanActivity extends AppCompatActivity {
 
     // Estrae l'ID dall'input
     public static String extractID(String str) {
+
         Pattern pattern = Pattern.compile("^(\\d+)\\|([A-Z]+)\\|([A-Z0-9]+)$");
         Matcher matcher = pattern.matcher(str);
         if (matcher.find()) {
+            Log.d("ScanActivity", "ID: " + matcher.group(1));
             return matcher.group(1);
         }
         return null;

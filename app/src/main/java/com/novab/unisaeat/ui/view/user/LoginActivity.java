@@ -40,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 checkAndAuthenticate();
             }
+        } else {
+            setContentView(R.layout.activity_login);
+            associateUI();
         }
     }
 
