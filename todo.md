@@ -9,11 +9,10 @@
 - **Responsibility**: **PP**
   - **QR Code**: Display QR code for user authentication and actions (e.g., scanning at checkout).
 
-### PSQ 2.1 Wallet
-- **2.1.1 Transaction List**: Display a list of all user transactions (e.g., payments).
-  - **Responsibility**: **PSQ**
-- **2.1.2 Add Credit**: Static functionality for adding credit (No dynamic transaction handling for now).
-  - **Responsibility**: **PSQ**
+### ~~2.1 Wallet (Completed)~~
+- ~~**2.1.1 Transaction List**: Display a list of all user transactions (e.g., payments).~~
+- ~~**2.1.2 Add Credit**: Static functionality for adding credit (No dynamic transaction handling for now).~~
+
 
 ### PSQ 2.2 Settings
 - **2.2.1 Transaction History**: View the list of past transactions associated with the user’s account.
@@ -33,23 +32,16 @@
 - **2.3.1 Meal List**: Display a scrollable list of meals for each day pulled from the database using ListView.
   - **Responsibility**: **PP**
 
-### PP 2.4 Pickup (Completed)
-- **2.4.1 Book Items**: Option to book food items such as Cestino (Box), Panino (Sandwich), or Insalata Poke.
-  - **Responsibility**: **PP**
-- **2.4.2 Choose Time**: Option for the user to select the time for food pickup.
-  - **Responsibility**: **PP**
-- **2.4.3 In-App Payment with Credit**: Pay for the food using the user’s wallet credit.
-  - **Responsibility**: **PP**
+### ~~2.4 Pickup (Completed)~~
+- ~~**2.4.1 Book Items**: Option to book food items such as Cestino (Box), Panino (Sandwich), or Insalata Poke.~~
+- ~~**2.4.2 Choose Time**: Option for the user to select the time for food pickup.~~
+- ~~**2.4.3 In-App Payment with Credit**: Pay for the food using the user’s wallet credit.~~
 
-## PP 2. Home for Employee (Worker)
-### 2.1 Booking List (Completed)
+##  2. Home for Employee (Worker)
+### ~~2.1 Booking List (Completed)~~
 - **2.1.1 Filter Option**: Consider adding a filter for booking records. *Needs to be confirmed if required.*
-  - **Responsibility**: **PSQ**
-  
-### 2.2 Scan QR Code (Completed)
+### 2.2 Scan QR Code (Completed) FIX AND FINISH
 - **2.2.1 Price Selection, etc.**: Complete functionality for scanning QR code and choosing the price, among other details. *To be finished.*
-  - **Responsibility**: **PP**
-
 ---
 
 ## Notes:
