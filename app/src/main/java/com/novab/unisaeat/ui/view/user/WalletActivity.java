@@ -2,6 +2,7 @@ package com.novab.unisaeat.ui.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -34,7 +35,7 @@ public class WalletActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        transactionViewModel.getUserTransaction();
+        transactionViewModel.getUserTransactions();
     }
 
     private void setAdapter(List<Transaction> transactions) {
@@ -50,7 +51,10 @@ public class WalletActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RechargeWalletActivity.class);
             startActivity(intent);
         });
+        observeViewModel();
+    }
 
+    private void observeViewModel() {
         transactionViewModel.getTransactionsLiveData().observe(this, transactions -> {
             if (transactions != null && !transactions.isEmpty()) {
                 setAdapter(transactions);
@@ -61,7 +65,8 @@ public class WalletActivity extends AppCompatActivity {
 
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
-               // TODO: show error message
+                Log.e("WalletActivity", errorMessage);
+                transactionViewModel.getUserTransactions();
             }
         });
     }

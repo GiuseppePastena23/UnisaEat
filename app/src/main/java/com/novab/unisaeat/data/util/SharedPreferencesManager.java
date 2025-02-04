@@ -3,6 +3,8 @@ package com.novab.unisaeat.data.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.novab.unisaeat.data.model.User;
+
 public class SharedPreferencesManager {
 
     private static final String PREF_NAME = "UnisaEatPreferences";
@@ -15,13 +17,37 @@ public class SharedPreferencesManager {
         editor = sharedPreferences.edit();
     }
 
-    public void saveUserId(int id) {
-        editor.putInt("id", id);
+    public void saveUser(User user) {
+        if (user == null) {
+            return;
+        }
+
+        editor.putInt("id", user.getId());
+        editor.putString("cf", user.getCf());
+        editor.putString("name", user.getName());
+        editor.putString("surname", user.getSurname());
+        editor.putString("email", user.getEmail());
+        editor.putString("status", user.getStatus());
+        editor.putString("phone", user.getPhone());
+        editor.putFloat("credit", user.getCredit());
         editor.apply();
     }
 
-    public int getUserId() {
-        return sharedPreferences.getInt("id", -1); // if not found return -1
+    public User getUser() {
+        User user = new User();
+        if (sharedPreferences.getInt("id", -1) == -1) {
+            return null;
+        }
+
+        user.setId(sharedPreferences.getInt("id", -1));
+        user.setCf(sharedPreferences.getString("cf", ""));
+        user.setName(sharedPreferences.getString("name", ""));
+        user.setSurname(sharedPreferences.getString("surname", ""));
+        user.setEmail(sharedPreferences.getString("email", ""));
+        user.setStatus(sharedPreferences.getString("status", ""));
+        user.setPhone(sharedPreferences.getString("phone", ""));
+        user.setCredit(sharedPreferences.getFloat("credit", 0));
+        return user;
     }
 
     public void saveBiometricCheckbox(boolean isChecked) {

@@ -7,15 +7,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
+import com.novab.unisaeat.data.util.SharedPreferencesManager;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
-import java.util.Objects;
-
 public class HomeActivity extends AppCompatActivity {
+    SharedPreferencesManager sharedPreferencesManager;
 
     private UserViewModel userViewModel;
 
@@ -29,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferencesManager = new SharedPreferencesManager(getApplication());
         setContentView(R.layout.activity_home_user);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         associateUI();
@@ -43,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void associateUI() {
         welcomeTextView = findViewById(R.id.welcome_text);
+        welcomeTextView.setText(String.format("%s %s", getString(R.string.welcome), sharedPreferencesManager.getUser().getName()));
+
         walletButton = findViewById(R.id.goto_recharge_btn);
         orderButton = findViewById(R.id.order_btn);
         menuButton = findViewById(R.id.menu_btn);
@@ -74,34 +76,20 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setObservers() {
         userViewModel.getUserLiveData().observe(this, user -> {
-            // FIXME: mettere black è sbagliato, bisogna mettere il colore di default
-            // FIXME: cos'è il colore di default?
-            welcomeTextView.setTextColor(ContextCompat.getColor(this, R.color.black));
-            welcomeTextView.setText(String.format("%s %s", getString(R.string.welcome), user.getName()));
+            welcomeTextView.setText(String.format("%s %s %s", getString(R.string.welcome), user.getName(), user.getToken()));
         });
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Log.e("HomeActivity", errorMessage);
-                welcomeTextView.setTextColor(ContextCompat.getColor(this, R.color.red));
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-
-                    Log.e("HomeActivity", Objects.requireNonNull(e.getMessage()));
-                }
-
-                // FIXME: prova solo una volta?
                 userViewModel.getUser();
             }
             /*
             Quando una richiesta fallisce non si puo solo chiudere l'app.
-            anche se lo sharedpref è ha l'id facciamo lo stesso la richiesta per prednere l'utente.
+            anche se lo sharedpref e ha l'id facciamo lo stesso la richiesta per prednere l'utente.
             bisogna rifare la richiesta.
             è importante da tenere in mente soprattutto per il qr code perché potrebbe rimanere
             quello precedente. una soluzione semplice è renderizzarlo rosso finché errore non è null
              */
-
-
         });
     }
 }
