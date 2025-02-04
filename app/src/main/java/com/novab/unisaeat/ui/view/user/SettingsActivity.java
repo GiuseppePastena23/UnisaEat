@@ -26,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Spinner languageSpinner;
     private Button logoutButton;
 
+    private String currentLanguage;
 
     private void associateUI() {
         userInfoButton = findViewById(R.id.user_info_btn);
@@ -81,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
         String[] languages = getResources().getStringArray(R.array.language_codes);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         languageSpinner.setAdapter(adapter);
-        String currentLanguage = getResources().getConfiguration().locale.getLanguage();
+        currentLanguage = getResources().getConfiguration().getLocales().get(0).getLanguage();
         int index = 0;
         for (int i = 0; i < languages.length; i++) {
             if (languages[i].equals(currentLanguage)) {
@@ -93,8 +94,7 @@ public class SettingsActivity extends AppCompatActivity {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedLanguage = adapterView.getItemAtPosition(i).toString();
-                changeLanguage(selectedLanguage);
+
             }
 
             @Override
@@ -113,10 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
         biometric = sharedPreferencesManager.getBiometricCheckbox();
         login = sharedPreferencesManager.getLogin();
         associateUI();
-    }
-
-    private void changeLanguage(String language) {
-        // TODO: change language
     }
 
 

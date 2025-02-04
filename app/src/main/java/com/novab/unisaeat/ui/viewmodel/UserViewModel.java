@@ -19,6 +19,7 @@ public class UserViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
 
     public UserViewModel(Application application) {
         super(application);
@@ -26,9 +27,11 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void login(String email, String password) {
+        isLoadingLiveData.setValue(true);
         userRepository.login(email, password, new UserRepository.LoginCallback() {
             @Override
             public void onSuccess(User user) {
+                isLoadingLiveData.setValue(false);
                 sharedPreferencesManager.saveUser(user);
                 userLiveData.setValue(user);
             }
@@ -48,9 +51,11 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void getUserById(int id) {
+        isLoadingLiveData.setValue(true);
         userRepository.getUserById(id, new UserRepository.LoginCallback() {
             @Override
             public void onSuccess(User user) {
+                isLoadingLiveData.setValue(false);
                 userLiveData.setValue(user);
             }
 

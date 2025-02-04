@@ -13,6 +13,8 @@ import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
+import java.util.Objects;
+
 public class PaymentActivity extends AppCompatActivity {
 
     private TextView userNameText;
@@ -70,9 +72,8 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_employee);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        int userId = Integer.valueOf(getIntent().getStringExtra("user_id"));
+        int userId = Integer.valueOf(Objects.requireNonNull(getIntent().getStringExtra("user_id")));
         userViewModel.getUserById(userId);
-
 
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();

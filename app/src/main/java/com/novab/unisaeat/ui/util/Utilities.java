@@ -12,7 +12,7 @@ public class Utilities {
     }
 
 
-    private static void showAlertDialog(Context context, String title, String message,
+    public static void showAlertDialog(Context context, String title, String message,
                                         DialogInterface.OnClickListener positiveAction
     ) {
         new AlertDialog.Builder(context)
@@ -20,6 +20,18 @@ public class Utilities {
                 .setMessage(message)
                 .setPositiveButton("OK", positiveAction)
                 .show();
+    }
+
+    public static void showAlertDialog(Context context, String title, String message,
+                                       DialogInterface.OnClickListener positiveAction, boolean cancelable
+    ) {
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", positiveAction)
+                .show()
+                .setCancelable(cancelable);
+
     }
 
     /*

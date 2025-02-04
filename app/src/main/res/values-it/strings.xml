@@ -36,4 +36,6 @@
     <string name="order_credit_error_msg">Non hai abbastanza credito nel portafoglio</string>
     <string name="owner_s_name">Owner\'s Name</string>
     <string name="fill_all_fields">Fill all fields</string>
+    <string name="credit_text">"Credit: "</string>
+    <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
 </resources>

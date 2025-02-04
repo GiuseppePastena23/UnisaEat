@@ -22,6 +22,7 @@ public class OrderActivity extends AppCompatActivity {
     private Spinner productsSpinner;
     private TimePicker timePicker;
     private Button orderButton;
+    private TransactionViewModel transactionViewModel;
     private HashMap<String, Float> products;
 
     private void associateUI() {
@@ -57,7 +58,10 @@ public class OrderActivity extends AppCompatActivity {
                 Utilities.showAlertDialog(this, getString(
                                 R.string.order_confirmed),
                         getString(R.string.order_success_msg) + hour + ":" + minute + "\n" +
-                                getString(R.string.products_text) + ":\n" + product);
+                                getString(R.string.products_text) + ":\n" + product, (dialog, which) -> {
+                            finish();
+                        });
+
             } else {
                 Log.e("OrderActivity", "Error in order");
             }
@@ -86,15 +90,40 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_user);
-        associateUI();
-        orderButton.setOnClickListener(v -> {
-            if (checkHour()) {
-                doOrder();
-            } else {
-                Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_time_error_msg));
+        transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        checkDay();
+
+
+    }
+
+    private void checkDay() {
+        transactionViewModel.getDay();
+        transactionViewModel.getDayLiveData().observe(this, day -> {
+            if (day != null) {
+                if (day.equals("5") || day.equals("6")) {
+                    Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_day_error_msg), (dialog, which) -> {
+                        finish();
+                    }, false);
+                } else {
+                    setContentView(R.layout.activity_order_user);
+                    associateUI();
+                    orderButton.setOnClickListener(v -> {
+                        if (checkHour()) {
+                            doOrder();
+                        } else {
+                            Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_time_error_msg));
+                        }
+                    });
+                }
             }
         });
+
+        transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
+            if (errorMessage != null) {
+                Log.e("OrderActivity", errorMessage);
+            }
+        });
+
     }
 
 

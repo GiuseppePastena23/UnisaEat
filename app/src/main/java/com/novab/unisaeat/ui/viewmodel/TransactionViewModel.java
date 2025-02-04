@@ -19,6 +19,7 @@ public class TransactionViewModel extends AndroidViewModel {
     private final TransactionRepository transactionRepository;
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> dayLiveData = new MutableLiveData<>();
 
     public TransactionViewModel(Application application) {
         super(application);
@@ -51,9 +52,11 @@ public class TransactionViewModel extends AndroidViewModel {
     // RECHARGE WALLET
     private final MutableLiveData<String> transactionOutcome = new MutableLiveData<>();
     public void doTransaction(int userId, float amount, String mode) {
+        isLoadingLiveData.setValue(true);
         transactionRepository.doTransaction(userId, amount, mode, new TransactionRepository.WalletRechargeCallback() {
             @Override
             public void onSuccess(String result) {
+                isLoadingLiveData.setValue(false);
                 transactionOutcome.setValue(result);
             }
 
@@ -77,9 +80,11 @@ public class TransactionViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Transaction>> transactionsLiveData = new MutableLiveData<>();
 
     private void getUserTransactions(int userId) {
+        isLoadingLiveData.setValue(true);
         transactionRepository.getUserTransaction(userId, new TransactionRepository.TransactionsCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
+                isLoadingLiveData.setValue(false);
                 transactionsLiveData.setValue(transactions);
             }
 
@@ -88,6 +93,24 @@ public class TransactionViewModel extends AndroidViewModel {
                 errorLiveData.setValue(errorMessage);
             }
         });
+    }
+
+    public void getDay() {
+        transactionRepository.getDay(new TransactionRepository.DayCallback() {
+            @Override
+            public void onSuccess(String day) {
+                dayLiveData.setValue(day);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                errorLiveData.setValue(errorMessage);
+            }
+        });
+    }
+
+    public LiveData<String> getDayLiveData() {
+        return dayLiveData;
     }
 
     /**

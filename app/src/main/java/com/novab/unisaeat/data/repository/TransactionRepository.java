@@ -88,6 +88,34 @@ public class TransactionRepository {
         });
     }
 
+    public void getDay(DayCallback callback) {
+        Call<String> call = apiService.getDay();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    Log.d("TransactionRepository", response.message());
+                    callback.onSuccess(response.body());
+                } else {
+                    Log.e("TransactionRepository", "Retrieve Day failed: " + response.code());
+                    callback.onError("Failed to get day");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("TransactionRepository", "Network request failed", t);
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+    }
+
+    public interface DayCallback {
+        void onSuccess(String day);  // Provide the day when the request is successful
+
+        void onError(String errorMessage);  // Handle error cases
+    }
+
     public interface OrdersCallback {
         void onSuccess(List<Transaction> transactions);  // Provide the list of transactions when the request is successful
         void onError(String errorMessage);  // Handle error cases

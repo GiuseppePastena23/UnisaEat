@@ -3,8 +3,11 @@ package com.novab.unisaeat.ui.view.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +16,7 @@ import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.ui.adapter.TransactionAdapter;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
+import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 import java.util.List;
 
@@ -20,7 +24,10 @@ import java.util.List;
 public class WalletActivity extends AppCompatActivity {
 
     private TransactionViewModel transactionViewModel;
+    private UserViewModel userViewModel;
     private ListView transactionsListView;
+    private TextView creditTextView;
+    private ProgressBar progressBar;
 
     private Button rechargeButton;
 
@@ -36,6 +43,7 @@ public class WalletActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         transactionViewModel.getUserTransactions();
+        userViewModel.getUser();
     }
 
     private void setAdapter(List<Transaction> transactions) {
@@ -45,6 +53,8 @@ public class WalletActivity extends AppCompatActivity {
 
 
     private void associateUI() {
+        progressBar = findViewById(R.id.progress_bar);
+        creditTextView = findViewById(R.id.credit_text_view);
         transactionsListView = findViewById(R.id.transactions_list_view);
         rechargeButton = findViewById(R.id.goto_recharge_btn);
         rechargeButton.setOnClickListener(v -> {
@@ -63,10 +73,27 @@ public class WalletActivity extends AppCompatActivity {
             }
         });
 
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        userViewModel.getUser();
+        userViewModel.getUserLiveData().observe(this, user -> {
+            if (user != null) {
+                creditTextView.setText(String.format("%s%s", getString(R.string.credit_text), user.getCredit()));
+            }
+        });
+
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Log.e("WalletActivity", errorMessage);
                 transactionViewModel.getUserTransactions();
+            }
+        });
+
+        transactionViewModel.getIsLoadingLiveData().observe(this, isLoading -> {
+            if (isLoading) {
+                progressBar.setVisibility(View.VISIBLE);
+            } else {
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

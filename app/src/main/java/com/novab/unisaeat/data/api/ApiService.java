@@ -28,4 +28,7 @@ public interface ApiService {
 
     @POST("/doTransaction")
     Call<Void> doTransaction(@Body Map<String, String> transactionData);
+
+    @GET("/getDay")
+    Call<String> getDay();
 }
