@@ -31,4 +31,7 @@ public interface ApiService {
 
     @GET("/getDay")
     Call<String> getDay();
+
+    @GET("/menu")
+    Call<String> getMenu(@Query("day") int day);
 }
