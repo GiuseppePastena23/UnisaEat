@@ -33,6 +33,16 @@ public class SharedPreferencesManager {
         return sharedPreferences.getBoolean("biometric", false);
     }
 
+
+    public void saveLogin(boolean login) {
+        editor.putBoolean("login", login);
+        editor.apply();
+    }
+
+    public boolean getLogin() {
+        return sharedPreferences.getBoolean("login", true);
+    }
+
     public void clearData() {
         editor.clear();
         editor.apply();

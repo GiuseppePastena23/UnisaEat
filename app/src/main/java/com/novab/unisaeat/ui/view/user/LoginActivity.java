@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         /*!password.isEmpty()*/
         if (!email.isEmpty()) {
             userViewModel.login(email, password);
+            // TODO: UPDATE TOKEN
         } else {
             Toast.makeText(this, getString(R.string.both_email_password_error),
                     Toast.LENGTH_SHORT).show();

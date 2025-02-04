@@ -18,7 +18,7 @@ public class TransactionViewModel extends AndroidViewModel {
 
     private final TransactionRepository transactionRepository;
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
-
+    private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
 
     public TransactionViewModel(Application application) {
         super(application);
@@ -28,9 +28,12 @@ public class TransactionViewModel extends AndroidViewModel {
     // ORDERS FOR EMPLOYEE
     private final MutableLiveData<List<Transaction>> ordersLiveData = new MutableLiveData<>();
     public void getOrders() {
+        isLoadingLiveData.setValue(true);
+
         transactionRepository.getOrders(new TransactionRepository.OrdersCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
+                isLoadingLiveData.setValue(false);
                 ordersLiveData.setValue(transactions);
             }
 
@@ -100,4 +103,9 @@ public class TransactionViewModel extends AndroidViewModel {
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
     }
+
+    public LiveData<Boolean> getIsLoadingLiveData() {
+        return isLoadingLiveData;
+    }
+
 }

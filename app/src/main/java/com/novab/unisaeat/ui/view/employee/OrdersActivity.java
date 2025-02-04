@@ -2,7 +2,9 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +22,10 @@ public class OrdersActivity extends AppCompatActivity {
     private TextView ordersText;
     private ListView ordersListView;
     private TransactionViewModel transactionViewModel;
+    private ProgressBar progressBar;
 
     private void associateUI() {
+        progressBar = findViewById(R.id.progress_bar);
         ordersText = findViewById(R.id.orders_text);
         ordersListView = findViewById(R.id.orders_list_view);
     }
@@ -60,6 +64,14 @@ public class OrdersActivity extends AppCompatActivity {
             if (errorMessage != null) {
                 ordersText.setText("Error: " + errorMessage);
                 Log.e("OrdersActivity", "Error: " + errorMessage);
+            }
+        });
+
+        transactionViewModel.getIsLoadingLiveData().observe(this, isLoading -> {
+            if (isLoading) {
+                progressBar.setVisibility(View.VISIBLE);
+            } else {
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
