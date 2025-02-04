@@ -81,10 +81,7 @@ public class OrderActivity extends AppCompatActivity {
         if (hour < 9) {
             return false;
         }
-        if (hour >= 22 && minute > 0) {
-            return false;
-        }
-        return true;
+        return hour < 22 || minute <= 0;
     }
 
     @Override
@@ -121,6 +118,7 @@ public class OrderActivity extends AppCompatActivity {
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Log.e("OrderActivity", errorMessage);
+                transactionViewModel.getDay();
             }
         });
 
