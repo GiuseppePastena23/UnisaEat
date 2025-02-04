@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
+import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
 import com.novab.unisaeat.ui.view.employee.HomeEmployeeActivity;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
@@ -31,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        int userId = sharedPreferencesManager.getUserId();
+        User user = sharedPreferencesManager.getUser();
         boolean biometric = sharedPreferencesManager.getBiometricCheckbox();
 
-        if (userId != -1) {
+        if (user != null) {
             if (!biometric) {
                 goToHome();
             } else {
@@ -158,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     private void goToHome() {
         userViewModel.getUser();
         userViewModel.getUserLiveData().observe(this, user -> {
+            // TODO: userViewModel.updateToken();
             Intent intent = new Intent(this,
                     user.getStatus().equals("employee") ? HomeEmployeeActivity.class :
                             HomeActivity.class);

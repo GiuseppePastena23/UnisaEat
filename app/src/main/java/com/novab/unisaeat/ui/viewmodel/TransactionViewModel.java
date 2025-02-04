@@ -62,7 +62,7 @@ public class TransactionViewModel extends AndroidViewModel {
     }
 
     public void doTransaction(float amount, String mode) {
-        doTransaction(sharedPreferencesManager.getUserId(), amount, mode);
+        doTransaction(sharedPreferencesManager.getUser().getId(), amount, mode);
     }
 
     public LiveData<String> getTransactionOutcome() {
@@ -72,7 +72,8 @@ public class TransactionViewModel extends AndroidViewModel {
 
     // GET USER TRANSACTIONS
     private final MutableLiveData<List<Transaction>> transactionsLiveData = new MutableLiveData<>();
-    public void getUserTransaction(int userId) {
+
+    private void getUserTransactions(int userId) {
         transactionRepository.getUserTransaction(userId, new TransactionRepository.TransactionsCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
@@ -89,8 +90,8 @@ public class TransactionViewModel extends AndroidViewModel {
     /**
      * Fetches transactions for the current logged user from the repository.
      */
-    public void getUserTransaction() {
-        getUserTransaction(sharedPreferencesManager.getUserId());
+    public void getUserTransactions() {
+        getUserTransactions(sharedPreferencesManager.getUser().getId());
     }
     public LiveData<List<Transaction>> getTransactionsLiveData() {
         return transactionsLiveData;

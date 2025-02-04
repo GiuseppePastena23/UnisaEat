@@ -1,6 +1,7 @@
 package com.novab.unisaeat.ui.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -28,13 +29,12 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.login(email, password, new UserRepository.LoginCallback() {
             @Override
             public void onSuccess(User user) {
-                sharedPreferencesManager.saveUserId(user.getId());
+                sharedPreferencesManager.saveUser(user);
                 userLiveData.setValue(user);
             }
 
             @Override
             public void onError(String errorMessage) {
-                sharedPreferencesManager.clearData();
                 // set error message based on the error from the server
                 errorMessage = errorMessage.toLowerCase();
                 if (errorMessage.startsWith("failed to connect")) {
@@ -62,15 +62,21 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void getUser() {
-        getUserById(sharedPreferencesManager.getUserId());
+        getUserById(sharedPreferencesManager.getUser().getId());
     }
 
     public LiveData<User> getUserLiveData() {
+        Log.d("TAG", "getUserLiveData: " + userLiveData.getValue());
         return userLiveData;
     }
 
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
+    }
+
+    private void clearLiveData() {
+        userLiveData.setValue(null);
+        errorLiveData.setValue(null);
     }
 
 }
