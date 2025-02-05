@@ -1,7 +1,6 @@
 package com.novab.unisaeat.ui.view.employee;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,11 +71,12 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_employee);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        int userId = Integer.valueOf(Objects.requireNonNull(getIntent().getStringExtra("user_id")));
+        int userId = Integer.parseInt(Objects.requireNonNull(getIntent().getStringExtra("user_id")));
         userViewModel.getUserById(userId);
 
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+            finish();
         });
 
 
@@ -85,19 +85,19 @@ public class PaymentActivity extends AppCompatActivity {
         userViewModel.getUserLiveData().observe(this, user -> {
             user = userViewModel.getUserLiveData().getValue();
             if (user == null) {
-                Log.d("PaymentActivity", "User is null");
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
                 finish();
             }
             if (user.getCf().equals(getIntent().getStringExtra("cf"))) {
                 if (user.getToken().equals(getIntent().getStringExtra("token"))) {
-                    Log.d("PaymentActivity", "CF and token match");
+
                 } else {
-                    Log.d("PaymentActivity", "Token does not match");
+                    Toast.makeText(this, "Token Scaduto", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 setUserData(user);
             } else {
-                Log.d("PaymentActivity", "CF does not match");
+                Toast.makeText(this, "CF not corretto o ID non corretto", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

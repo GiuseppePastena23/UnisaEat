@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
@@ -38,7 +37,7 @@ public class QrCodeFragment extends Fragment {
         userViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
 
-                String qrCode = user.getId() + "|" + user.getCf() + "|" + user.getToken();
+                String qrCode = user.getId() + ":" + user.getCf() + ":" + user.getToken();
 
 
                 ImageView qrImageView = rootView.findViewById(R.id.qr_image_view);
