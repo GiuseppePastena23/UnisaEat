@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
+import com.novab.unisaeat.ui.fragment.QrCodeFragment;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 public class HomeActivity extends AppCompatActivity {
@@ -38,6 +40,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         userViewModel.getUser();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, new QrCodeFragment())
+                .commit();
     }
 
 

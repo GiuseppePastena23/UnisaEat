@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+
             }
         });
     }
