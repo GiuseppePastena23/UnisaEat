@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_user);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         sharedPreferencesManager = new SharedPreferencesManager(this);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         associateUI();

@@ -3,6 +3,7 @@ package com.novab.unisaeat.ui.view.employee;
 import static android.text.TextUtils.isEmpty;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,7 +33,6 @@ public class PaymentActivity extends AppCompatActivity {
     private TextView userNameText, userSurnameText, userCfText, userEmailText, userCreditText, amountText;
     private ListView productsList;
     private Button makePaymentButton, cancelPaymentButton;
-    private Button[] mealButtons;  // Array to hold all meal buttons
     private ArrayList<Product> products;
     private ProductAdapter productAdapter;
 
@@ -76,7 +76,7 @@ public class PaymentActivity extends AppCompatActivity {
 
 
         products = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, products);
+        productAdapter = new ProductAdapter(this, R.layout.product_row, R.id.product_name, products);
         productsList.setAdapter(productAdapter);
     }
 
@@ -114,6 +114,7 @@ public class PaymentActivity extends AppCompatActivity {
 
         TransactionViewModel transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
         transactionViewModel.doTransaction(userId, amount, "payment");
+
         transactionViewModel.getTransactionOutcome().observe(this, outcome -> {
             Toast.makeText(this, outcome, Toast.LENGTH_SHORT).show();
             finish();
@@ -127,13 +128,15 @@ public class PaymentActivity extends AppCompatActivity {
     private void addProduct(String name, float price) {
         products.add(new Product(name, price));
         updateAmount();
-        productAdapter.notifyDataSetChanged();
+        Log.d("PaymentActivity", products.toString());
+        runOnUiThread(() -> productAdapter.notifyDataSetChanged());
+
     }
 
     public void removeProduct(Product product) {
         if (products.remove(product)) {
             updateAmount();
-            productAdapter.notifyDataSetChanged();
+            runOnUiThread(() -> productAdapter.notifyDataSetChanged());
         }
     }
 

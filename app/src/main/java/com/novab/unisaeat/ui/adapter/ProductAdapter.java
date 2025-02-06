@@ -1,6 +1,7 @@
 package com.novab.unisaeat.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private final Context context;
     private final ArrayList<Product> products;
 
-    public ProductAdapter(Context context, ArrayList<Product> products) {
-        super(context, 0);
+    public ProductAdapter(Context context, int resource, int textViewResourceId, ArrayList<Product> products) {
+        super(context, resource, textViewResourceId, products);
         this.context = context;
         this.products = products;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.d("ProductAdapter", "getView: " + position);
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.product_row, parent, false);
         }
@@ -44,4 +46,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         return convertView;
     }
+
+
 }
