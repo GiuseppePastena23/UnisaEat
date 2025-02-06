@@ -26,23 +26,26 @@ public class HomeActivity extends AppCompatActivity {
     private Button orderButton;
     private Button menuButton;
     private Button settingsButton;
+    private Button showQrButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferencesManager = new SharedPreferencesManager(getApplication());
         setContentView(R.layout.activity_home_user);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         associateUI();
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         userViewModel.getUser();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, new QrCodeFragment())
-                .commit();
+
+
     }
 
 
@@ -51,6 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         welcomeTextView.setText(String.format("%s %s", getString(R.string.welcome), sharedPreferencesManager.getUser().getName()));
 
         walletButton = findViewById(R.id.goto_recharge_btn);
+        showQrButton = findViewById(R.id.show_qr_btn);
         orderButton = findViewById(R.id.order_btn);
         menuButton = findViewById(R.id.menu_btn);
         settingsButton = findViewById(R.id.settings_btn);
@@ -74,8 +78,26 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
+        showQrButton.setOnClickListener(v -> {
+            showQrButton.setVisibility(ImageView.GONE);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new QrCodeFragment())
+                    .commit();
+        });
 
         setObservers();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        showQrButton.setVisibility(ImageView.VISIBLE);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        showQrButton.setVisibility(ImageView.VISIBLE);
     }
 
     private void setObservers() {

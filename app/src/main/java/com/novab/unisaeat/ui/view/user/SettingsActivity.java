@@ -42,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initializeButtons() {
         userInfoButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, UserInfoActivity.class);
             startActivity(intent);
         });
         logoutButton.setOnClickListener(v -> {
@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
             sharedPreferencesManager.clearData();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 

@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Welcome Text at the top -->
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text=""
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Fragment Container right under the welcome text -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text" />
+
+    <!-- Show QR Button, initially hidden -->
+    <Button
+        android:id="@+id/show_qr_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Show QR"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_container" /> <!-- Initially hidden -->
+
+    <!-- Other buttons anchored to the bottom -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/goto_recharge_btn"
@@ -45,10 +67,10 @@
 
         <Button
             android:id="@+id/settings_btn"
+            style="@style/MainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/MainButton"
             android:text="@string/settings" />
-
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

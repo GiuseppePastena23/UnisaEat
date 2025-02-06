@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- Product Name -->
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Product Name"
+        android:textSize="18sp" />
+
+    <!-- Remove Button -->
+    <Button
+        android:id="@+id/remove_product_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
+        android:text="X"
+        android:textSize="20sp" />
+</LinearLayout>

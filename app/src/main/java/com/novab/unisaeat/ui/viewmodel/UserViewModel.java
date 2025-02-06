@@ -75,6 +75,10 @@ public class UserViewModel extends AndroidViewModel {
         return userLiveData;
     }
 
+    public LiveData<Boolean> getIsLoadingLiveData() {
+        return isLoadingLiveData;
+    }
+
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
     }

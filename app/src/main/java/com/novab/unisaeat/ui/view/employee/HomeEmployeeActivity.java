@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
+import com.novab.unisaeat.data.util.SharedPreferencesManager;
+import com.novab.unisaeat.ui.view.user.LoginActivity;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 import java.util.Calendar;
@@ -58,6 +60,10 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         });
 
         exitButton.setOnClickListener(v -> {
+            SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
+            sharedPreferencesManager.clearData();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
             finish();
         });
 

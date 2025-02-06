@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:text="@string/email_hint"
+        android:text="@string/exit_btn"
         android:textColor="@android:color/white" />
 
 </LinearLayout>
