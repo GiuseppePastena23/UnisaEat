@@ -2,6 +2,7 @@ package com.novab.unisaeat.data.api;
 
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.model.User;
+import com.novab.unisaeat.data.util.DayInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,8 @@ public interface ApiService {
     Call<Void> doTransaction(@Body Map<String, String> transactionData);
 
     @GET("/getDay")
-    Call<String> getDay();
+    Call<DayInfo> getDay();
+
 
     @GET("/menu")
     Call<String> getMenu(@Query("day") int day);

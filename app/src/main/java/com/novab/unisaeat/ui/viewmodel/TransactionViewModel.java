@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.repository.TransactionRepository;
+import com.novab.unisaeat.data.util.DayInfo;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class TransactionViewModel extends AndroidViewModel {
     private final TransactionRepository transactionRepository;
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
-    private final MutableLiveData<String> dayLiveData = new MutableLiveData<>();
+    private final MutableLiveData<DayInfo> dayLiveData = new MutableLiveData<>();
 
     public TransactionViewModel(Application application) {
         super(application);
@@ -97,9 +98,10 @@ public class TransactionViewModel extends AndroidViewModel {
 
     public void getDay() {
         transactionRepository.getDay(new TransactionRepository.DayCallback() {
+
             @Override
-            public void onSuccess(String day) {
-                dayLiveData.setValue(day);
+            public void onSuccess(DayInfo dayInfo) {
+                dayLiveData.setValue(dayInfo);
             }
 
             @Override
@@ -109,7 +111,7 @@ public class TransactionViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<String> getDayLiveData() {
+    public LiveData<DayInfo> getDayLiveData() {
         return dayLiveData;
     }
 

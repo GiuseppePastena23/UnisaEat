@@ -5,6 +5,7 @@ import android.util.Log;
 import com.novab.unisaeat.data.api.ApiService;
 import com.novab.unisaeat.data.api.RetrofitClient;
 import com.novab.unisaeat.data.model.Transaction;
+import com.novab.unisaeat.data.util.DayInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -89,10 +90,10 @@ public class TransactionRepository {
     }
 
     public void getDay(DayCallback callback) {
-        Call<String> call = apiService.getDay();
-        call.enqueue(new Callback<String>() {
+        Call<DayInfo> call = apiService.getDay();
+        call.enqueue(new Callback<DayInfo>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<DayInfo> call, Response<DayInfo> response) {
                 if (response.isSuccessful()) {
                     Log.d("TransactionRepository", response.message());
                     callback.onSuccess(response.body());
@@ -103,7 +104,7 @@ public class TransactionRepository {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<DayInfo> call, Throwable t) {
                 Log.e("TransactionRepository", "Network request failed", t);
                 callback.onError("Network error: " + t.getMessage());
             }
@@ -111,7 +112,7 @@ public class TransactionRepository {
     }
 
     public interface DayCallback {
-        void onSuccess(String day);  // Provide the day when the request is successful
+        void onSuccess(DayInfo dayInfo);  // Provide the day when the request is successful
 
         void onError(String errorMessage);  // Handle error cases
     }

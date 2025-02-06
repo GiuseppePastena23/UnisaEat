@@ -32,10 +32,11 @@
     <string name="order_denied">Prenotazione Negata</string>
     <string name="order_success_msg">"Prenotazione Confermata alle "</string>
     <string name="order_error_msg">Prenotazione Negata</string>
-    <string name="order_time_error_msg">Scegli un orario tra le 9:00 e le 22:00</string>
+    <string name="order_time_error_msg">L\'orario scelto non è disponibile. Scegli un orario tra le 9:00 e le 22:00 che sia posteriore all\'orario corrente</string>
     <string name="order_credit_error_msg">Non hai abbastanza credito nel portafoglio</string>
     <string name="owner_s_name">Owner\'s Name</string>
     <string name="fill_all_fields">Fill all fields</string>
     <string name="credit_text">"Credit: "</string>
     <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
+    <string name="order_hour_error_msg">Non e\' possibile ordinare niente dopo le 22:00</string>
 </resources>

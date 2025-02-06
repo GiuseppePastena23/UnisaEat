@@ -76,12 +76,31 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private boolean checkHour() {
-        int hour = timePicker.getHour();
-        int minute = timePicker.getMinute();
-        if (hour < 9) {
+        // Get the current hour and minute
+        transactionViewModel.getDay();
+        int currentHour = transactionViewModel.getDayLiveData().getValue().getHour();
+        int currentMinute = transactionViewModel.getDayLiveData().getValue().getHour();
+
+        // Get the selected hour and minute
+        int selectedHour = timePicker.getHour();
+        int selectedMinute = timePicker.getMinute();
+
+        // If the selected time is before 09:00, it's not valid
+        if (selectedHour < 9) {
             return false;
         }
-        return hour < 22 || minute <= 0;
+
+        // If the selected time is after 22:00, it's not valid
+        if (selectedHour > 22 || (selectedHour == 22 && selectedMinute > 0)) {
+            return false;
+        }
+
+        // If the selected time is before the current time, it's not valid
+        if (selectedHour < currentHour || (selectedHour == currentHour && selectedMinute < currentMinute)) {
+            return false;
+        }
+
+        return true; // If all conditions are met, return true
     }
 
     @Override
@@ -95,24 +114,36 @@ public class OrderActivity extends AppCompatActivity {
 
     private void checkDay() {
         transactionViewModel.getDay();
-        transactionViewModel.getDayLiveData().observe(this, day -> {
-            if (day != null) {
-                if (day.equals("5") || day.equals("6")) {
-                    Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_day_error_msg), (dialog, which) -> {
+        transactionViewModel.getDayLiveData().observe(this, dayInfo -> {
+            int weekDay = dayInfo.getDay();
+            int hour = dayInfo.getHour();
+            int minute = dayInfo.getMinute();
+
+            // CHECK IF DAY IS SATURDAY OR SUNDAY 5=Saturday 6=Sunday
+            if (weekDay == 5 || weekDay == 6) {
+                Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_day_error_msg), (dialog, which) -> {
+                    finish();
+                    }, false);
+            } else {
+
+                // CHECK IF TIME IS AFTER 22:00
+                if (hour > 22 || (hour == 22 && minute > 0)) {
+                    Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_hour_error_msg), (dialog, which) -> {
                         finish();
                     }, false);
-                } else {
-                    setContentView(R.layout.activity_order_user);
-                    associateUI();
-                    orderButton.setOnClickListener(v -> {
-                        if (checkHour()) {
-                            doOrder();
-                        } else {
-                            Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_time_error_msg));
-                        }
-                    });
                 }
+                // EVERYTHING GOOD
+                setContentView(R.layout.activity_order_user);
+                associateUI();
+                orderButton.setOnClickListener(v -> {
+                    if (checkHour()) {
+                        doOrder();
+                    } else {
+                        Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_time_error_msg));
+                    }
+                });
             }
+
         });
 
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {

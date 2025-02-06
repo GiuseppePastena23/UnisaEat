@@ -35,10 +35,11 @@
     <string name="order_denied">Order Denied</string>
     <string name="order_success_msg">Order Confirmed at</string>
     <string name="order_error_msg">Order Denied</string>
-    <string name="order_time_error_msg">Choose a time between 9 AM and 10PM</string>
+    <string name="order_time_error_msg">The selected time is not available. Please choose a time between 9 AM and 10 PM that is later than the current time.</string>
     <string name="order_credit_error_msg">You do not have enough credit in your wallet</string>
     <string name="owner_s_name">Owner\'s Name</string>
     <string name="fill_all_fields">Fill all fields</string>
     <string name="credit_text">"Credit: "</string>
     <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
+    <string name="order_hour_error_msg">Cannot order anything after 10PM</string>
 </resources>
