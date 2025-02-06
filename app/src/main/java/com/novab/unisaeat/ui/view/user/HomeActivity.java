@@ -3,6 +3,7 @@ package com.novab.unisaeat.ui.view.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_user);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         sharedPreferencesManager = new SharedPreferencesManager(this);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         associateUI();
