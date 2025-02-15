@@ -25,17 +25,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_text" />
 
-    <!-- Show QR Button, initially hidden -->
-    <Button
-        android:id="@+id/show_qr_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Show QR"
-        android:visibility="visible"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_container" /> <!-- Initially hidden -->
+
 
     <!-- Other buttons anchored to the bottom -->
     <LinearLayout
