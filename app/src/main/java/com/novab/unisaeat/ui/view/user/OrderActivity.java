@@ -35,9 +35,9 @@ public class OrderActivity extends AppCompatActivity {
 
     private void populateSpinner() {
         products = new HashMap<>();
-        products.put(getString(R.string.basket), 1.50f);
-        products.put(getString(R.string.salad), 2.50f);
-        products.put(getString(R.string.sandwich), 1.50f);
+        products.put(getString(R.string.basket), 3.5f);
+        products.put(getString(R.string.salad), 2.5f);
+        products.put(getString(R.string.sandwich), 3f);
 
         ProductSpinnerAdapter spinnerAdapter = new ProductSpinnerAdapter(this, products);
         productsSpinner.setAdapter(spinnerAdapter);

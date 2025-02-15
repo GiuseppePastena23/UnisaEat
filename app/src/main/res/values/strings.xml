@@ -11,7 +11,7 @@
     <string name="salad">Salad</string>
     <string name="sandwich">Sandwich</string>
     <string name="basket">Basket</string>
-    <string name="no_order_present_text">"No order present "</string>
+    <string name="no_order_present_text">No orders present</string>
     <string name="date_text">Date</string>
     <string name="products_text">Products</string>
     <string name="exit_btn">Log out</string>
@@ -39,11 +39,25 @@
     <string name="order_credit_error_msg">You do not have enough credit in your wallet</string>
     <string name="owner_s_name">Owner\'s Name</string>
     <string name="fill_all_fields">Fill all fields</string>
-    <string name="credit_text">"Credit: "</string>
-    <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
+    <string name="credit_text">"Credit "</string>
+    <string name="order_day_error_msg">Cannot order anything on Saturday and Sunday</string>
     <string name="order_hour_error_msg">Cannot order anything after 10PM</string>
     <string name="new_transaction_notification_title">New Transaction</string>
     <string name="new_transaction_notification_body">A new transaction has been added to your wallet</string>
     <string name="promo_notification_title">Check out our new promo!</string>
     <string name="promo_notification_message">Open UnisaEat for news</string>
+    <string name="error_fetching_menu">Error loading menu day</string>
+    <string name="monday_short">Mon</string>
+    <string name="tuesday_short">Tue</string>
+    <string name="wednesday_short">Wed</string>
+    <string name="thursday_short">Thu</string>
+    <string name="friday_short">Fri</string>
+    <string name="price_list">💰 Cafeteria Price List 💰\n\n
+        🍽️ Complete Meal: €4.50\n
+        🍕 Pizza Meal: €4.50\n
+        🥗 Salad Meal: €2.50\n
+        🥘 Reduced Meal A: €3.00\n
+        🥣 Reduced Meal B: €2.50\n
+        🧺 Basket Meal: €3.00
+    </string>
 </resources>

@@ -34,13 +34,28 @@
     <string name="order_error_msg">Prenotazione Negata</string>
     <string name="order_time_error_msg">L\'orario scelto non è disponibile. Scegli un orario tra le 9:00 e le 22:00 che sia posteriore all\'orario corrente</string>
     <string name="order_credit_error_msg">Non hai abbastanza credito nel portafoglio</string>
-    <string name="owner_s_name">Owner\'s Name</string>
-    <string name="fill_all_fields">Fill all fields</string>
-    <string name="credit_text">"Credit: "</string>
+    <string name="owner_s_name">Nome del proprietario della carta</string>
+    <string name="fill_all_fields">Riempi tutti i campi</string>
+    <string name="credit_text">Credito</string>
     <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
     <string name="order_hour_error_msg">Non e\' possibile ordinare niente dopo le 22:00</string>
     <string name="new_transaction_notification_title">Nuova Transazione</string>
     <string name="new_transaction_notification_body">Una nuova transazione è stata aggiunta al tuo portafoglio</string>
     <string name="promo_notification_title">Dai un\'occhiata alla nostra nuova promozione</string>
     <string name="promo_notification_message">Apri UnisaEat per le novità</string>
+    <string name="error_fetching_menu">Errore caricamento menu</string>
+    <string name="friday_short">Ven</string>
+    <string name="monday_short">Lun</string>
+    <string name="tuesday_short">Mar</string>
+    <string name="wednesday_short">Mer</string>
+    <string name="thursday_short">Gio</string>
+    <string name="price_list">💰 Listino Prezzi Mensa 💰\n\n
+        🍽️ Pasto Completo: 4,50€\n
+        🍕 Pasto Pizza: 4,50€\n
+        🥗 Pasto Insalata: 2,50€\n
+        🥘 Pasto Ridotto A: 3,00€\n
+        🥣 Pasto Ridotto B: 2,50€\n
+        🧺 Cestino Pasto: 3,00€
+    </string>
+
 </resources>

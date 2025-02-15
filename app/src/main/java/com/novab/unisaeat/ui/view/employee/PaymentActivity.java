@@ -23,12 +23,12 @@ import java.util.Objects;
 
 public class PaymentActivity extends AppCompatActivity {
 
-    private static final float COMPLETE_MEAL_PRICE = 10.0f;
-    private static final float PIZZA_MEAL_PRICE = 8.5f;
-    private static final float SALAD_MEAL_PRICE = 5.0f;
-    private static final float REDUCED_MEAL_A_PRICE = 7.0f;
-    private static final float REDUCED_MEAL_B_PRICE = 6.5f;
-    private static final float BASKET_MEAL_PRICE = 9.0f;
+    private static final float COMPLETE_MEAL_PRICE = 4.5f;
+    private static final float PIZZA_MEAL_PRICE = 4.5f;
+    private static final float SALAD_MEAL_PRICE = 2.5f;
+    private static final float REDUCED_MEAL_A_PRICE = 3.0f;
+    private static final float REDUCED_MEAL_B_PRICE = 2.5f;
+    private static final float BASKET_MEAL_PRICE = 3.0f;
     private UserViewModel userViewModel;
     private TextView userNameText, userSurnameText, userCfText, userEmailText, userCreditText, amountText;
     private ListView productsList;
@@ -155,6 +155,4 @@ public class PaymentActivity extends AppCompatActivity {
         userEmailText.setText(user.getEmail());
         userCreditText.setText(String.valueOf(user.getCredit()));
     }
-
-
 }
