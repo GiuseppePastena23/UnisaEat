@@ -1,82 +1,69 @@
 package com.novab.unisaeat.ui.view.user;
 
-import static com.novab.unisaeat.ui.util.Utilities.creditCardClearance;
-import static com.novab.unisaeat.ui.util.Utilities.showAlertDialog;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
-import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
-
+import com.novab.unisaeat.ui.fragment.TopBarFragment;
 
 public class RechargeWalletActivity extends AppCompatActivity {
 
-    private TransactionViewModel transactionViewModel;
 
-    private String transactionOutcome;
-    private EditText ownerNameEditText, creditCardNumberEditText, expirationDateEditText, cvvEditText, amountEditText;
-    private Button rechargeButton;
+    private Button btnPayPal, btnGPay, btnCreditCard;
+    private TopBarFragment topBarFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recharge_wallet);
-        transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
-        associateUI();
+        setContentView(R.layout.activity_recharge_wallet); // Replace with your actual layout file
+
+        // Initialize buttons
+        btnPayPal = findViewById(R.id.btnPayPal);
+        btnGPay = findViewById(R.id.btnGPay);
+        btnCreditCard = findViewById(R.id.btnCreditCard);
+
+        // Associate the buttons with their respective actions
+        associateUi();
+
+        // Add TopBarFragment
+        topBarFragment = new TopBarFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.top_fragment_container, topBarFragment)
+                .commit();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-
-    private void associateUI() {
-        ownerNameEditText = findViewById(R.id.owner_name_edit_text);
-        creditCardNumberEditText = findViewById(R.id.credit_card_number_edit_text);
-        expirationDateEditText = findViewById(R.id.expiration_date_edit_text);
-        cvvEditText = findViewById(R.id.cvv_edit_text);
-        amountEditText = findViewById(R.id.amount_edit_text);
-        rechargeButton = findViewById(R.id.recharge_button);
-        rechargeButton.setOnClickListener(v -> {
-            String ownerName = ownerNameEditText.getText().toString();
-            String creditCardNumber = creditCardNumberEditText.getText().toString();
-            String expirationDate = expirationDateEditText.getText().toString();
-            String cvv = cvvEditText.getText().toString();
-            String amountString = amountEditText.getText().toString();
-            if (ownerName.isEmpty() || creditCardNumber.isEmpty() || expirationDate.isEmpty() || cvv.isEmpty() || amountString.isEmpty()) {
-                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            float amount = Float.parseFloat(amountString);
-            String outcome = creditCardClearance(ownerName, creditCardNumber, expirationDate, cvv, amount);
-            if (outcome.equals("OK")) {
-                transactionViewModel.doTransaction(amount, "topup;online");
-            } else {
-                Toast.makeText(this, outcome, Toast.LENGTH_SHORT).show();
+    private void associateUi() {
+        // PayPal Button click listener
+        btnPayPal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show a toast message for PayPal button (not implemented)
+                Toast.makeText(getApplicationContext(), "PayPal integration not implemented", Toast.LENGTH_SHORT).show();
             }
         });
 
-        transactionViewModel.getTransactionOutcome().observe(this, outcome -> {
-            if (outcome != null) {
-                transactionOutcome = outcome;
-                showAlertDialog(this, "Transaction Outcome", transactionOutcome);
+        // Google Pay Button click listener
+        btnGPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show a toast message for Google Pay button (not implemented)
+                Toast.makeText(getApplicationContext(), "Google Pay integration not implemented", Toast.LENGTH_SHORT).show();
             }
         });
 
-        transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
-            if (errorMessage != null) {
-                showAlertDialog(this, "Error", errorMessage);
+
+        btnCreditCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), RechargeCardActivity.class);
+                startActivity(intent);
             }
         });
     }
-
-
 }

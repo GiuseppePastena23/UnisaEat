@@ -1,66 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- Welcome Text at the top -->
-    <TextView
-        android:id="@+id/welcome_text"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text=""
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Fragment Container right under the welcome text -->
+        android:layout_height="match_parent">
     <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_text" />
 
+        android:id="@+id/top_fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <FrameLayout
+        android:layout_centerInParent="true"
+        android:id="@+id/qr_fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </RelativeLayout>
     <!-- Other buttons anchored to the bottom -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/goto_recharge_btn"
-            style="@style/MainButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wallet" />
 
-        <Button
-            android:id="@+id/order_btn"
-            style="@style/MainButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/order" />
-
-        <Button
-            android:id="@+id/menu_btn"
-            style="@style/MainButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/menu" />
-
-        <Button
-            android:id="@+id/settings_btn"
-            style="@style/MainButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/settings" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

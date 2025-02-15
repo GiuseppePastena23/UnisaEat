@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- FrameLayout with rounded background and elevation -->
+    <FrameLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:elevation="10dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_background"
+        android:padding="24dp">
+
+
+        <!-- Vertical LinearLayout for EditTexts and Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recharge_card"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="left"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/primary"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Owner's Name EditText -->
+            <EditText
+                android:id="@+id/owner_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/owner_s_name"
+                android:inputType="text"
+                android:background="@drawable/rounded_edittext"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Credit Card Number EditText -->
+            <EditText
+                android:id="@+id/credit_card_number_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/credit_card_number"
+                android:inputType="number"
+                android:background="@drawable/rounded_edittext"
+                android:layout_marginBottom="16dp"/>
+
+
+            <!-- Expiration Date and CVV EditTexts -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <EditText
+                    android:id="@+id/expiration_date_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:hint="MM/YY"
+                    android:inputType="date"
+                    android:background="@drawable/rounded_edittext"/>
+
+                <EditText
+                    android:id="@+id/cvv_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="CVV"
+                    android:inputType="numberPassword"
+                    android:background="@drawable/rounded_edittext"/>
+            </LinearLayout>
+            <View
+                android:layout_width="125dp"
+                android:layout_height="1dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/divider">
+
+            </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/amount_text"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                >
+
+
+            </TextView>
+
+            <!-- Amount Selection -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="16dp">
+
+                <Button
+                    android:id="@+id/decrease_amount_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:background="@drawable/ic_minus"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/amount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginRight="9dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+
+                <Button
+                    android:id="@+id/increase_amount_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/plus"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <!-- Recharge Button -->
+            <Button
+                android:id="@+id/recharge_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recharge"
+                android:layout_marginTop="16dp"
+                android:background="@color/primary"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

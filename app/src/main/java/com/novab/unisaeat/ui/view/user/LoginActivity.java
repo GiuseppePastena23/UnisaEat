@@ -2,7 +2,9 @@ package com.novab.unisaeat.ui.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     private EditText emailEditText, passwordEditText;
     SharedPreferencesManager sharedPreferencesManager;
+    private CheckBox showPasswordCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,20 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        showPasswordCheckBox = findViewById(R.id.show_password_checkbox);
+        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // If the checkbox is checked, show the password
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            } else {
+
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+            // Move the cursor to the end of the text
+            passwordEditText.setSelection(passwordEditText.getText().length());
+        });
+
     }
 
     public void onLoginClick() {

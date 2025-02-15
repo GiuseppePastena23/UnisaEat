@@ -1,70 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-    <!-- Sezione del credito -->
-    <TextView
-        android:id="@+id/credit_text_view"
+    <FrameLayout
+        android:id="@+id/top_fragment_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Credito: 0.00€"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content" />
 
-    <!-- Titolo lista transazioni -->
+    <!-- Pulsante per ricaricare con dimensioni più grandi e meno largo -->
+    <Button
+        android:id="@+id/goto_recharge_btn"
+        style="@style/MainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Ricarica Portafoglio"
+        android:layout_below="@id/top_fragment_container"/>
+
+    <!-- Separatore con effetto sfumato -->
+
+
+    <!-- Titolo lista transazioni con sfondo per separazione -->
     <TextView
         android:id="@+id/transactions_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Lista Transazioni"
         android:textColor="#444444"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/credit_text_view" />
+        android:layout_below="@id/separator" />
 
-    <!-- ProgressBar per il caricamento (centro della schermata) -->
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transactions_title" />
-
-    <!-- Lista transazioni (occorre essere visibile solo quando i dati sono pronti) -->
-    <ListView
-        android:id="@+id/transactions_list_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <View
+        android:id="@+id/separator"
+        android:layout_width="200dp"
+        android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@id/goto_recharge_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/separator_gradient"
+        android:layout_below="@id/goto_recharge_btn"/>
 
-    <!-- Pulsante per ricaricare -->
-    <Button
-        android:id="@+id/goto_recharge_btn"
-        style="@style/MainButton"
+    <!-- Background per la lista transazioni con shading -->
+    <LinearLayout
+        android:id="@+id/transactions_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Ricarica Portafoglio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_below="@id/transactions_title">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- ProgressBar per il caricamento -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true" />
+
+
+        <!-- Lista transazioni -->
+        <ListView
+            android:id="@+id/transactions_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@android:color/white"
+            android:clipToPadding="false"
+            android:elevation="10dp"
+            android:padding="20dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,56 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/top_fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-    <LinearLayout
+        >
+
+
+    </FrameLayout>
+    <!-- FrameLayout with rounded background -->
+    <FrameLayout
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:elevation="10dp"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_background"
+        android:padding="24dp">
 
-        <EditText
-            android:id="@+id/owner_name_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="@string/owner_s_name" />
-
-        <EditText
-            android:id="@+id/credit_card_number_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number" />
-
+        <!-- PayPal Button -->
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="@string/add_funds"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
 
-            <EditText
-                android:id="@+id/expiration_date_edit_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="date" />
+            >
 
-            <EditText
-                android:id="@+id/cvv_edit_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="numberPassword" />
-        </LinearLayout>
 
-        <EditText
-            android:id="@+id/amount_edit_text"
+
+        </TextView>
+
+            <Button
+            style="@style/MainButton"
+            android:id="@+id/btnPayPal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:text="PayPal"
+            android:textColor="@android:color/white"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"/>
 
         <Button
-            android:id="@+id/recharge_button"
+            style="@style/MainButton"
+            android:id="@+id/btnGPay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Recharge" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="Google Pay"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/btnPayPal"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"/>
+
+        <Button
+            style="@style/MainButton"
+            android:id="@+id/btnCreditCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credit Card"
+            android:textColor="@android:color/white"
+
+            android:layout_below="@id/btnGPay"
+            android:padding="12dp"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

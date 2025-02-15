@@ -7,26 +7,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.ui.adapter.TransactionAdapter;
+import com.novab.unisaeat.ui.fragment.TopBarFragment;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 import java.util.List;
-
 
 public class WalletActivity extends AppCompatActivity {
 
     private TransactionViewModel transactionViewModel;
     private UserViewModel userViewModel;
     private ListView transactionsListView;
-    private TextView creditTextView;
     private ProgressBar progressBar;
 
     private Button rechargeButton;
@@ -36,7 +35,10 @@ public class WalletActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet_user);
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
         associateUI();
+        loadTopBarFragment();
     }
 
     @Override
@@ -51,10 +53,8 @@ public class WalletActivity extends AppCompatActivity {
         transactionsListView.setAdapter(adapter);
     }
 
-
     private void associateUI() {
         progressBar = findViewById(R.id.progress_bar);
-        creditTextView = findViewById(R.id.credit_text_view);
         transactionsListView = findViewById(R.id.transactions_list_view);
         rechargeButton = findViewById(R.id.goto_recharge_btn);
         rechargeButton.setOnClickListener(v -> {
@@ -73,15 +73,6 @@ public class WalletActivity extends AppCompatActivity {
             }
         });
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-        userViewModel.getUser();
-        userViewModel.getUserLiveData().observe(this, user -> {
-            if (user != null) {
-                creditTextView.setText(String.format("%s%s", getString(R.string.credit_text), user.getCredit()));
-            }
-        });
-
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Log.e("WalletActivity", errorMessage);
@@ -96,5 +87,12 @@ public class WalletActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void loadTopBarFragment() {
+        Fragment topBarFragment = new TopBarFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.top_fragment_container, topBarFragment)
+                .commit();
     }
 }

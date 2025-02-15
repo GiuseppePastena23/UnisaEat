@@ -43,4 +43,8 @@
     <string name="new_transaction_notification_body">Una nuova transazione è stata aggiunta al tuo portafoglio</string>
     <string name="promo_notification_title">Dai un\'occhiata alla nostra nuova promozione</string>
     <string name="promo_notification_message">Apri UnisaEat per le novità</string>
+    <string name="add_funds">Aggiungi Fondi</string>
+    <string name="credit_card_number">Credit Card Number</string>
+    <string name="amount_text">Amount</string>
+    <string name="recharge_card">Recharge with Card</string>
 </resources>
