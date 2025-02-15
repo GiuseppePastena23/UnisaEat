@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Main Content Container -->
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_bar" />
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottombar_background"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:showDividers="middle"
+        android:divider="@drawable/divider"
+        android:dividerPadding="8dp">
+
+        <!-- Wallet Icon -->
+        <ImageButton
+            android:id="@+id/wallet_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_wallet"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:maxWidth="32dp"
+            android:maxHeight="32dp"
+            android:contentDescription="Wallet" />
+
+        <!-- Preorder Icon -->
+        <ImageButton
+            android:id="@+id/order_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_preorder"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:maxWidth="32dp"
+            android:maxHeight="32dp"
+            android:contentDescription="Preorder" />
+
+        <!-- Menu Icon -->
+        <ImageButton
+            android:id="@+id/menu_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:maxWidth="32dp"
+            android:maxHeight="32dp"
+            android:contentDescription="Menu" />
+
+        <!-- Settings Icon -->
+        <ImageButton
+            android:id="@+id/settings_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_settings"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:maxWidth="32dp"
+            android:maxHeight="32dp"
+            android:contentDescription="Settings" />
+
+    </LinearLayout>
+
+</RelativeLayout>

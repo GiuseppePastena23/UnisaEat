@@ -29,9 +29,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("androidx.work:work-runtime:2.8.1")
     implementation(libs.lombok)

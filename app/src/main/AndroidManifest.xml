@@ -4,11 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,19 +18,21 @@
         android:theme="@style/Theme.UnisaEat"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+
+
         <activity
             android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.view.user.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
@@ -39,51 +40,40 @@
             tools:replace="android:screenOrientation" />
         <activity
             android:name=".ui.view.user.HomeActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".ui.view.employee.HomeEmployeeActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.employee.OrdersActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.employee.ScanActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.user.SettingsActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.user.WalletActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.employee.PaymentActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.user.OrderActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
-            android:name=".ui.view.user.RechargeWalletActivity"
-            android:exported="true">
-        </activity>
-
+            android:name=".ui.view.user.RechargeCardActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.view.user.MenuActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.user.UserInfoActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.user.RechargeWalletActivity"
+            android:exported="true" />
     </application>
-
 
 </manifest>

@@ -1,38 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.view.user.LoginActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout android:id="@+id/background_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:elevation="10dp"
+        android:background="@drawable/rounded_background"
+        android:layout_centerInParent="true"
+        android:padding="24dp">
 
-        <EditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:autofillHints="email"
-            android:hint="@string/email_hint"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/password_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:autofillHints="password"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/login_btn"
+        <!-- LinearLayout containing EditTexts and Button -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login" />
+            android:orientation="vertical"
+            android:gravity="center">
 
-    </LinearLayout>
+            <!-- Title Text -->
+            <TextView
+                android:layout_marginLeft="6dp"
+                android:layout_gravity="left"
+                android:layout_width="wrap_content"
+                android:text="Login"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Email EditText -->
+            <EditText
+                android:background="@drawable/rounded_edittext"
+                android:id="@+id/email_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints="email"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Password EditText with Checkbox -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <!-- Password EditText -->
+                <EditText
+
+                    android:background="@drawable/rounded_edittext"
+                    android:id="@+id/password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_toEndOf="@id/show_password_checkbox"
+                    android:autofillHints="password"
+                    android:hint="@string/password_hint"
+
+                    android:inputType="textPassword" />
+
+                <!-- Show Password CheckBox -->
+                <CheckBox
+                    android:id="@+id/show_password_checkbox"
+                    android:layout_below="@+id/password_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show"
+                    android:layout_marginEnd="12dp" />
+
+            </RelativeLayout>
+
+            <!-- Login Button -->
+            <Button
+                style="@style/MainButton"
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login" />
+        </LinearLayout>
+
+    </FrameLayout>
+</RelativeLayout>

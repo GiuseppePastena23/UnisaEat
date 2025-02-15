@@ -13,12 +13,12 @@ import com.novab.unisaeat.data.repository.TransactionRepository;
 import com.novab.unisaeat.data.util.DayInfo;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
 import com.novab.unisaeat.ui.util.NotificationHelper;
-import com.novab.unisaeat.ui.view.user.HomeActivity;
 
 import java.util.List;
 
-public class TransactionViewModel extends AndroidViewModel {
+import lombok.Setter;
 
+public class TransactionViewModel extends AndroidViewModel {
 
     SharedPreferencesManager sharedPreferencesManager =
             new SharedPreferencesManager(getApplication());
@@ -27,6 +27,8 @@ public class TransactionViewModel extends AndroidViewModel {
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
     private final MutableLiveData<DayInfo> dayLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Float> userCreditLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> updateCreditLiveData = new MutableLiveData<>();
 
     public TransactionViewModel(Application application) {
         super(application);
@@ -57,7 +59,6 @@ public class TransactionViewModel extends AndroidViewModel {
         return ordersLiveData;
     }
 
-
     // RECHARGE WALLET
     private final MutableLiveData<String> transactionOutcome = new MutableLiveData<>();
 
@@ -85,20 +86,24 @@ public class TransactionViewModel extends AndroidViewModel {
         return transactionOutcome;
     }
 
-
     // GET USER TRANSACTIONS
     private final MutableLiveData<List<Transaction>> transactionsLiveData = new MutableLiveData<>();
 
     private void getUserTransactions(int userId) {
         isLoadingLiveData.setValue(true);
+        updateCreditLiveData.setValue(false);
         transactionRepository.getUserTransaction(userId, new TransactionRepository.TransactionsCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
                 isLoadingLiveData.setValue(false);
                 transactionsLiveData.setValue(transactions);
 
+
+
                 if (sharedPreferencesManager.getLastTransaction() != transactions.get(0).getId()) {
                     // send notification
+                    updateCreditLiveData.setValue(true);
+
                     NotificationHelper.showNotification(getApplication(),
                             getApplication().getString(R.string.new_transaction_notification_title),
                             getApplication().getString(R.string.new_transaction_notification_body
@@ -114,7 +119,10 @@ public class TransactionViewModel extends AndroidViewModel {
                 errorLiveData.setValue(errorMessage);
             }
         });
+    }
 
+    public LiveData<Boolean> getUpdateCreditLiveData() {
+        return updateCreditLiveData;
     }
 
     public void getDay() {
@@ -132,6 +140,18 @@ public class TransactionViewModel extends AndroidViewModel {
         });
     }
 
+    public void updateUserCredit(float newCredit) {
+        userCreditLiveData.setValue(newCredit);
+        if (creditUpdateListener != null) {
+            creditUpdateListener.onCreditUpdated(newCredit); // Notify the listener when credit is updated
+        }
+    }
+
+    // LiveData per osservare il credito
+    public LiveData<Float> getUserCreditLiveData() {
+        return userCreditLiveData;
+    }
+
     public LiveData<DayInfo> getDayLiveData() {
         return dayLiveData;
     }
@@ -147,13 +167,20 @@ public class TransactionViewModel extends AndroidViewModel {
         return transactionsLiveData;
     }
 
-
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
     }
 
     public LiveData<Boolean> getIsLoadingLiveData() {
         return isLoadingLiveData;
+    }
+
+    // Credit Update Listener Interface
+    @Setter
+    private CreditUpdateListener creditUpdateListener;
+
+    public interface CreditUpdateListener {
+        void onCreditUpdated(float newCredit);
     }
 
 }

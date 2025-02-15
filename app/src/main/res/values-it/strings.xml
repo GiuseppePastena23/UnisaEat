@@ -58,4 +58,8 @@
         🧺 Cestino Pasto: 3,00€
     </string>
 
+    <string name="add_funds">Aggiungi Fondi</string>
+    <string name="credit_card_number">Credit Card Number</string>
+    <string name="amount_text">Amount</string>
+    <string name="recharge_card">Recharge with Card</string>
 </resources>

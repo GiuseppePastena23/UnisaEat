@@ -60,4 +60,9 @@
         🥣 Reduced Meal B: €2.50\n
         🧺 Basket Meal: €3.00
     </string>
+    <string name="add_funds">Add Funds</string>
+    <string name="credit_card_number">Credit Card Number</string>
+    <string name="amount_text">Amount</string>
+    <string name="recharge_card">Recharge with Card</string>
+
 </resources>
