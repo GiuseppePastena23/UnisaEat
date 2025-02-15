@@ -101,7 +101,8 @@ public class TransactionViewModel extends AndroidViewModel {
                     // send notification
                     NotificationHelper.showNotification(getApplication(),
                             getApplication().getString(R.string.new_transaction_notification_title),
-                            getApplication().getString(R.string.new_transaction_notification_body)
+                            getApplication().getString(R.string.new_transaction_notification_body
+                            ) + "\n" + transactions.get(0).getAmount() + "€"
                     );
                 }
 
