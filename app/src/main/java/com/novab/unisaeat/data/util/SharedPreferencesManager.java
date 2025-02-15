@@ -27,6 +27,7 @@ public class SharedPreferencesManager {
         editor.putString("name", user.getName());
         editor.putString("surname", user.getSurname());
         editor.putString("email", user.getEmail());
+        editor.putString("password", user.getPassword());
         editor.putString("status", user.getStatus());
         editor.putString("phone", user.getPhone());
         editor.putFloat("credit", user.getCredit());
@@ -43,6 +44,7 @@ public class SharedPreferencesManager {
         user.setCf(sharedPreferences.getString("cf", ""));
         user.setName(sharedPreferences.getString("name", ""));
         user.setSurname(sharedPreferences.getString("surname", ""));
+        user.setPassword(sharedPreferences.getString("password", ""));
         user.setEmail(sharedPreferences.getString("email", ""));
         user.setStatus(sharedPreferences.getString("status", ""));
         user.setPhone(sharedPreferences.getString("phone", ""));

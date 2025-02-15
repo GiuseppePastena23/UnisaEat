@@ -16,20 +16,23 @@ import androidx.lifecycle.ViewModelProvider;
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
+import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.view.employee.HomeEmployeeActivity;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
     private EditText emailEditText, passwordEditText;
+    SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
+        sharedPreferencesManager = new SharedPreferencesManager(this);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         User user = sharedPreferencesManager.getUser();
@@ -75,16 +78,14 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginClick() {
         String email = emailEditText.getText().toString().trim();
-        String password = "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"; //passwordEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        Toast.makeText(this, "Password: " + password, Toast.LENGTH_SHORT).show();
 
-        // TODO:
-        // email = "m.r";
+        if (!email.isEmpty() && !password.isEmpty()) {
 
-
-        /*!password.isEmpty()*/
-        if (!email.isEmpty()) {
-            userViewModel.login(email, password);
-            // TODO: UPDATE TOKEN
+            String hashedPassword = Utilities.hash(password);
+            Toast.makeText(this, "PasswordHash: " + hashedPassword, Toast.LENGTH_SHORT).show();
+            userViewModel.login(email, hashedPassword);
         } else {
             Toast.makeText(this, getString(R.string.both_email_password_error),
                     Toast.LENGTH_SHORT).show();
@@ -163,12 +164,16 @@ public class LoginActivity extends AppCompatActivity {
     private void goToHome() {
         userViewModel.getUser();
         userViewModel.getUserLiveData().observe(this, user -> {
-            // TODO: userViewModel.updateToken();
-            Intent intent = new Intent(this,
-                    user.getStatus().equals("employee") ? HomeEmployeeActivity.class :
-                            HomeActivity.class);
-            startActivity(intent);
-            finish();
+            if(user.getPassword().equals(sharedPreferencesManager.getUser().getPassword())){
+                Intent intent = new Intent(this,
+                        user.getStatus().equals("employee") ? HomeEmployeeActivity.class :
+                                HomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                return;
+            }
+
         });
     }
 }

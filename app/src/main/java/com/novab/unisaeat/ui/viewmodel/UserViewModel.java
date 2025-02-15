@@ -67,7 +67,9 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void getUser() {
-        getUserById(sharedPreferencesManager.getUser().getId());
+        String email = sharedPreferencesManager.getUser().getEmail();
+        String password = sharedPreferencesManager.getUser().getPassword();
+        login(email, password);
     }
 
     public LiveData<User> getUserLiveData() {
