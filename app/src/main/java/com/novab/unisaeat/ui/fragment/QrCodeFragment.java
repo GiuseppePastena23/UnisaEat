@@ -66,25 +66,26 @@ public class QrCodeFragment extends Fragment {
 
     private void generateQrCode(String qrCode, ImageView qrImageView) {
         try {
-            int size = 1024;  // Size of the QR code
+            int size = 1024;  // Dimensione del QR code
 
-            // Create the QR code writer
+            // Creazione del writer QR
             QRCodeWriter writer = new QRCodeWriter();
 
-            // Generate the QR code matrix
+            // Generazione della matrice QR
             BitMatrix bitMatrix = writer.encode(qrCode, BarcodeFormat.QR_CODE, size, size);
 
-            // Create a bitmap and set pixels all at once
-            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
+            // Creazione del bitmap con canale alpha (trasparenza)
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
             for (int y = 0; y < size; y++) {
                 for (int x = 0; x < size; x++) {
-                    bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                    bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.TRANSPARENT);
                 }
             }
 
-            // Set the Bitmap to the ImageView
+            // Imposta il Bitmap sull'ImageView
             qrImageView.setImageBitmap(bitmap);
-            qrImageView.setBackgroundColor(Color.TRANSPARENT);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
