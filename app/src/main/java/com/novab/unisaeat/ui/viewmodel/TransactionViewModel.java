@@ -1,19 +1,25 @@
 package com.novab.unisaeat.ui.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.Transaction;
 import com.novab.unisaeat.data.repository.TransactionRepository;
 import com.novab.unisaeat.data.util.DayInfo;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
+import com.novab.unisaeat.ui.util.NotificationHelper;
+import com.novab.unisaeat.ui.view.user.HomeActivity;
 
 import java.util.List;
 
 public class TransactionViewModel extends AndroidViewModel {
+
+
     SharedPreferencesManager sharedPreferencesManager =
             new SharedPreferencesManager(getApplication());
 
@@ -29,6 +35,7 @@ public class TransactionViewModel extends AndroidViewModel {
 
     // ORDERS FOR EMPLOYEE
     private final MutableLiveData<List<Transaction>> ordersLiveData = new MutableLiveData<>();
+
     public void getOrders() {
         isLoadingLiveData.setValue(true);
 
@@ -45,6 +52,7 @@ public class TransactionViewModel extends AndroidViewModel {
             }
         });
     }
+
     public LiveData<List<Transaction>> getOrdersLiveData() {
         return ordersLiveData;
     }
@@ -52,6 +60,7 @@ public class TransactionViewModel extends AndroidViewModel {
 
     // RECHARGE WALLET
     private final MutableLiveData<String> transactionOutcome = new MutableLiveData<>();
+
     public void doTransaction(int userId, float amount, String mode) {
         isLoadingLiveData.setValue(true);
         transactionRepository.doTransaction(userId, amount, mode, new TransactionRepository.WalletRechargeCallback() {
@@ -87,6 +96,16 @@ public class TransactionViewModel extends AndroidViewModel {
             public void onSuccess(List<Transaction> transactions) {
                 isLoadingLiveData.setValue(false);
                 transactionsLiveData.setValue(transactions);
+
+                if (sharedPreferencesManager.getLastTransaction() != transactions.get(0).getId()) {
+                    // send notification
+                    NotificationHelper.showNotification(getApplication(),
+                            getApplication().getString(R.string.new_transaction_notification_title),
+                            getApplication().getString(R.string.new_transaction_notification_body)
+                    );
+                }
+
+                sharedPreferencesManager.saveLastTransaction(transactions.get(0).getId());
             }
 
             @Override
@@ -94,6 +113,7 @@ public class TransactionViewModel extends AndroidViewModel {
                 errorLiveData.setValue(errorMessage);
             }
         });
+
     }
 
     public void getDay() {
@@ -121,6 +141,7 @@ public class TransactionViewModel extends AndroidViewModel {
     public void getUserTransactions() {
         getUserTransactions(sharedPreferencesManager.getUser().getId());
     }
+
     public LiveData<List<Transaction>> getTransactionsLiveData() {
         return transactionsLiveData;
     }

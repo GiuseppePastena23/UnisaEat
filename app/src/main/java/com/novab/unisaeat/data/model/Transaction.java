@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction implements Serializable {
-    private String id;
+    private int id;
     @SerializedName("user_id")
     private String userId;
     private String amount;

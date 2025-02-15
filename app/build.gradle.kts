@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("androidx.work:work-runtime:2.8.1")
     implementation(libs.lombok)
     implementation(libs.biometric)
     compileOnly(libs.lombok)

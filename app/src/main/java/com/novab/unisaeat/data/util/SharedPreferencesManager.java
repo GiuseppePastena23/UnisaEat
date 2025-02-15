@@ -52,6 +52,19 @@ public class SharedPreferencesManager {
         return user;
     }
 
+    public void saveLastTransaction(int idTransaction) {
+        editor.putInt("idTransaction", idTransaction);
+        editor.apply();
+    }
+
+    public int getLastTransaction() {
+        return sharedPreferences.getInt("idTransaction", -1);
+    }
+
+    public float getUserCredit() {
+        return sharedPreferences.getFloat("credit", -1f);
+    }
+
     public void saveBiometricCheckbox(boolean isChecked) {
         editor.putBoolean("biometric", isChecked);
         editor.apply();

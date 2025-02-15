@@ -42,4 +42,8 @@
     <string name="credit_text">"Credit: "</string>
     <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
     <string name="order_hour_error_msg">Cannot order anything after 10PM</string>
+    <string name="new_transaction_notification_title">New Transaction</string>
+    <string name="new_transaction_notification_body">A new transaction has been added to your wallet</string>
+    <string name="promo_notification_title">Check out our new promo!</string>
+    <string name="promo_notification_message">Open UnisaEat for news</string>
 </resources>
