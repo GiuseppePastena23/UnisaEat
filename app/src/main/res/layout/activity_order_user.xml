@@ -3,37 +3,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- FrameLayout for Fragment container on top -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <!-- LinearLayout centered in the parent -->
     <LinearLayout
+        android:layout_centerInParent="true"
+        style="@style/RoundedCard"
         android:id="@+id/linearLayout"
-        android:padding="40dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+        android:padding="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- TextView centered over the Spinner -->
+        <TextView
+            android:id="@+id/select_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:text="Select Item"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="22sp" />
+
+        <!-- Spinner -->
         <Spinner
             android:id="@+id/products_spinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="50dp" />
 
-            android:layout_centerHorizontal="true"
-            android:layout_margin="40dp"
-            android:layout_marginTop="40dp" />
-    <TimePicker
-        android:id="@+id/time_picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <View
+            android:layout_marginBottom="20dp"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/secondary"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/divider" />
 
-        android:timePickerMode="spinner"/>
+        <!-- TextView for Select Hour -->
+        <TextView
 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:text="Select Hour"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="22sp" />
 
+        <!-- TimePicker -->
+        <TimePicker
+            android:elevation="2dp"
+            android:layout_gravity="center"
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
 
+        <!-- Divider -->
+        <View
+            android:backgroundTint="@color/secondary"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/divider" />
 
+        <!-- Total text with value -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/total_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: "
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/total_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="€ 0.00"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="10dp" />
+        </LinearLayout>
+
+        <!-- Button to Preorder -->
         <Button
-
+            android:layout_marginTop="20dp"
             style="@style/MainButton"
-        android:id="@+id/order_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Prenota" />
-
+            android:id="@+id/order_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prenota" />
     </LinearLayout>
 </RelativeLayout>

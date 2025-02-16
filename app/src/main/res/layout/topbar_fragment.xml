@@ -44,13 +44,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Divider -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/clickableContainer"
-            android:background="@drawable/divider"
-            android:backgroundTint="@color/third" />
+
 
     </RelativeLayout>
 

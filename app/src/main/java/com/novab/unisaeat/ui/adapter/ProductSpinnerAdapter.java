@@ -42,7 +42,7 @@ public class ProductSpinnerAdapter extends ArrayAdapter<String> {
         TextView textView = convertView.findViewById(R.id.spinnerItemText);
         String productName = productNames.get(position);
         Float price = products.get(productName);
-        textView.setText(productName + " - €" + String.format("%.2f", price));
+        textView.setText(productName );
         return convertView;
     }
 }

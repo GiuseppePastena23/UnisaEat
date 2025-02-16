@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,17 +12,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.adapter.ProductSpinnerAdapter;
+import com.novab.unisaeat.ui.fragment.TopBarFragment;
 import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 
 import java.util.HashMap;
-
 
 public class OrderActivity extends AppCompatActivity {
 
     private Spinner productsSpinner;
     private TimePicker timePicker;
     private Button orderButton;
+    private TextView totalValue;
     private TransactionViewModel transactionViewModel;
     private HashMap<String, Float> products;
 
@@ -29,8 +31,10 @@ public class OrderActivity extends AppCompatActivity {
         productsSpinner = findViewById(R.id.products_spinner);
         timePicker = findViewById(R.id.time_picker);
         orderButton = findViewById(R.id.order_btn);
+        totalValue = findViewById(R.id.total_value);
         timePicker.setIs24HourView(true);
         populateSpinner();
+        updateTotalValue();
     }
 
     private void populateSpinner() {
@@ -41,10 +45,25 @@ public class OrderActivity extends AppCompatActivity {
 
         ProductSpinnerAdapter spinnerAdapter = new ProductSpinnerAdapter(this, products);
         productsSpinner.setAdapter(spinnerAdapter);
+        productsSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
+                updateTotalValue();
+            }
+
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private void updateTotalValue() {
+        String product = productsSpinner.getSelectedItem().toString();
+        float price = products.get(product);
+        totalValue.setText("€ " + String.format("%.2f", price));
     }
 
     private void doOrder() {
-        TransactionViewModel transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
         String product = productsSpinner.getSelectedItem().toString();
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
@@ -54,14 +73,11 @@ public class OrderActivity extends AppCompatActivity {
         transactionViewModel.doTransaction(price, mode);
         transactionViewModel.getTransactionOutcome().observe(this, outcome -> {
             if (outcome != null) {
-
-                Utilities.showAlertDialog(this, getString(
-                                R.string.order_confirmed),
+                Utilities.showAlertDialog(this, getString(R.string.order_confirmed),
                         getString(R.string.order_success_msg) + hour + ":" + minute + "\n" +
                                 getString(R.string.products_text) + ":\n" + product, (dialog, which) -> {
                             finish();
                         });
-
             } else {
                 Log.e("OrderActivity", "Error in order");
             }
@@ -79,7 +95,7 @@ public class OrderActivity extends AppCompatActivity {
         // Get the current hour and minute
         transactionViewModel.getDay();
         int currentHour = transactionViewModel.getDayLiveData().getValue().getHour();
-        int currentMinute = transactionViewModel.getDayLiveData().getValue().getHour();
+        int currentMinute = transactionViewModel.getDayLiveData().getValue().getMinute();
 
         // Get the selected hour and minute
         int selectedHour = timePicker.getHour();
@@ -107,8 +123,8 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
-        checkDay();
 
+        checkDay();
 
     }
 
@@ -118,14 +134,13 @@ public class OrderActivity extends AppCompatActivity {
             int weekDay = dayInfo.getDay();
             int hour = dayInfo.getHour();
             int minute = dayInfo.getMinute();
-
+            weekDay = 1; // TODO: remove
             // CHECK IF DAY IS SATURDAY OR SUNDAY 5=Saturday 6=Sunday
             if (weekDay == 5 || weekDay == 6) {
                 Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_day_error_msg), (dialog, which) -> {
                     finish();
-                    }, false);
+                }, false);
             } else {
-
                 // CHECK IF TIME IS AFTER 22:00
                 if (hour > 22 || (hour == 22 && minute > 0)) {
                     Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_hour_error_msg), (dialog, which) -> {
@@ -134,6 +149,10 @@ public class OrderActivity extends AppCompatActivity {
                 }
                 // EVERYTHING GOOD
                 setContentView(R.layout.activity_order_user);
+                TopBarFragment topBarFragment = new TopBarFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, topBarFragment)
+                        .commit();
                 associateUI();
                 orderButton.setOnClickListener(v -> {
                     if (checkHour()) {
@@ -143,7 +162,6 @@ public class OrderActivity extends AppCompatActivity {
                     }
                 });
             }
-
         });
 
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
@@ -152,8 +170,5 @@ public class OrderActivity extends AppCompatActivity {
                 transactionViewModel.getDay();
             }
         });
-
     }
-
-
 }
