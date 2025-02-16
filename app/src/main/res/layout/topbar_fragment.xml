@@ -2,27 +2,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/topbar_background"
-    android:padding="25dp">
+    android:padding="16dp">
 
     <RelativeLayout
+        android:layout_alignParentStart="true"
         android:layout_width="wrap_content"
+        android:elevation="10dp"
+        android:padding="10dp"
         android:layout_height="wrap_content">
 
         <!-- Wrapping FrameLayout and TextView in a LinearLayout for clickable behavior -->
         <LinearLayout
             android:id="@+id/clickableContainer"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
             android:onClick="openUserInfo"
             android:orientation="horizontal">
+
+
             <!-- Profile Image -->
             <FrameLayout
                 android:id="@+id/profile_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginRight="5dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
@@ -49,13 +54,14 @@
     </RelativeLayout>
 
     <LinearLayout
+
+        android:layout_marginRight="25dp"
         android:layout_centerVertical="true"
         android:id="@+id/creditContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
+        android:padding="8dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="@drawable/custom_border"
         android:layout_alignParentEnd="true">
 
@@ -63,13 +69,16 @@
             android:id="@+id/credit_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="0.00 €"
             android:textSize="16sp"
             android:textColor="@color/secondary"
             android:layout_marginEnd="8dp" />
 
         <Button
+
             android:id="@+id/addCredit_btn"
+            android:foreground="@drawable/ripple_plus"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_centerInParent="true"

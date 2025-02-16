@@ -12,6 +12,7 @@
 
     <!-- LinearLayout centered in the parent -->
     <LinearLayout
+        android:layout_below="@id/fragment_container"
         android:layout_centerInParent="true"
         style="@style/RoundedCard"
         android:id="@+id/linearLayout"

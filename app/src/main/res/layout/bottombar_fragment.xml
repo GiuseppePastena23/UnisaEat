@@ -21,7 +21,7 @@
         android:gravity="center"
         android:showDividers="middle"
         android:divider="@drawable/divider"
-        android:dividerPadding="8dp">
+        android:dividerPadding="25dp">
 
         <!-- Wallet Icon -->
         <ImageButton
@@ -29,11 +29,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_wallet"
-            android:background="@android:color/transparent"
             android:scaleX="1.2"
             android:scaleY="1.2"
+            android:background="@drawable/ripple_custom"
+            android:src="@drawable/ic_wallet"
             android:contentDescription="Wallet" />
+
 
         <!-- Preorder Icon -->
         <ImageButton
@@ -42,9 +43,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_preorder"
-            android:background="@android:color/transparent"
             android:scaleX="1.2"
             android:scaleY="1.2"
+            android:background="@drawable/ripple_custom"
             android:contentDescription="Preorder" />
 
         <!-- Menu Icon -->
@@ -54,7 +55,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_menu"
-            android:background="@android:color/transparent"
+            android:background="@drawable/ripple_custom"
             android:scaleX="1.2"
             android:scaleY="1.2"
             android:contentDescription="Menu" />
@@ -66,7 +67,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_settings"
-            android:background="@android:color/transparent"
+            android:background="@drawable/ripple_custom"
             android:scaleX="1.2"
             android:scaleY="1.2"
             android:contentDescription="Settings" />
