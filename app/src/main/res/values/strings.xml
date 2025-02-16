@@ -64,5 +64,6 @@
     <string name="credit_card_number">Credit Card Number</string>
     <string name="amount_text">Amount</string>
     <string name="recharge_card">Recharge with Card</string>
+    <string name="show_qr_code">Show QR Code to the Operator</string>
 
 </resources>

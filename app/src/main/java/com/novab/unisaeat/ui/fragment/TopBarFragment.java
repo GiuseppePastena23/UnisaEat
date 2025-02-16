@@ -2,13 +2,12 @@ package com.novab.unisaeat.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,7 +16,7 @@ import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.model.User;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
 import com.novab.unisaeat.ui.view.user.RechargeWalletActivity;
-import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
+import com.novab.unisaeat.ui.view.user.UserInfoActivity;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
 public class TopBarFragment extends Fragment {
@@ -40,6 +39,8 @@ public class TopBarFragment extends Fragment {
         nameTextView = view.findViewById(R.id.name_text_view);
         creditTextView = view.findViewById(R.id.credit_text_view);
         addCreditButton = view.findViewById(R.id.addCredit_btn);
+        LinearLayout clickableContainer = view.findViewById(R.id.clickableContainer);
+        clickableContainer.setOnClickListener(v -> openUserInfo());
 
         nameTextView.setText(String.format("%s %s", user.getName(), user.getSurname()));
         creditTextView.setText(String.format("%.2f€", user.getCredit()));
@@ -80,5 +81,12 @@ public class TopBarFragment extends Fragment {
                 creditTextView.setText(String.format("%.2f€", user.getCredit()));
             }
         });
+    }
+
+    public void openUserInfo() {
+
+        Intent intent = new Intent(getContext(), UserInfoActivity.class);
+        startActivity(intent);
+
     }
 }

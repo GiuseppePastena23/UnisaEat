@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/rounded_background"
+        style="@style/RoundedCard"
         android:padding="24dp">
 
         <!-- PayPal Button -->

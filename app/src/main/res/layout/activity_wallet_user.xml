@@ -38,10 +38,10 @@
         android:id="@+id/separator"
         android:layout_width="200dp"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/goto_recharge_btn"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/separator_gradient"
-        android:layout_below="@id/goto_recharge_btn"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/divider" />
 
     <!-- Background per la lista transazioni con shading -->
     <LinearLayout

@@ -70,7 +70,13 @@ public class MenuActivity extends AppCompatActivity {
 
     private void updateButtonColors() {
         for (int i = 0; i < 5; i++) {
-            buttons[i].setBackgroundColor(i == selectedDay ? getResources().getColor(R.color.primary, null) : getResources().getColor(R.color.fourth, null));
+            if (i == selectedDay) {
+                buttons[i].setBackgroundColor((getResources().getColor(R.color.primary, null)));
+                buttons[i].setEnabled(false);
+            } else {
+                buttons[i].setBackgroundColor(getResources().getColor(R.color.fourth, null));
+                buttons[i].setEnabled(true);
+            }
         }
     }
 

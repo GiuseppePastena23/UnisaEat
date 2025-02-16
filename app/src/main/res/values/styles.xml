@@ -20,4 +20,13 @@
     </style>
 
 
+    <style name="RoundedCard" parent="Widget.Design.ScrimInsetsFrameLayout">
+        <item name="android:background">@drawable/rounded_background</item>
+        <item name="android:padding">24dp</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:clipToPadding">true</item>
+    </style>
+
+
 </resources>

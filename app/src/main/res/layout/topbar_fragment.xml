@@ -2,23 +2,60 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/topbar_background"
-    android:padding="20dp"
-    >
-    <TextView
-        android:id="@+id/name_text_view"
+    android:padding="25dp">
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mario Rossi"
-        android:textColor="@color/secondary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_height="wrap_content">
 
-        />
+        <!-- Wrapping FrameLayout and TextView in a LinearLayout for clickable behavior -->
+        <LinearLayout
+            android:id="@+id/clickableContainer"
+            android:layout_width="wrap_content"
 
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openUserInfo"
+            android:orientation="horizontal">
+            <!-- Profile Image -->
+            <FrameLayout
+                android:id="@+id/profile_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_profile" />
+
+            <!-- Name TextView -->
+            <TextView
+                android:id="@+id/name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/profile_image"
+                android:padding="5dp"
+                android:shadowColor="@color/third"
+                android:shadowRadius="10"
+                android:text="Mario Rossi"
+                android:textColor="@color/secondary"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/clickableContainer"
+            android:background="@drawable/divider"
+            android:backgroundTint="@color/third" />
+
+    </RelativeLayout>
 
     <LinearLayout
+        android:layout_centerVertical="true"
         android:id="@+id/creditContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +65,6 @@
         android:background="@drawable/custom_border"
         android:layout_alignParentEnd="true">
 
-
         <TextView
             android:id="@+id/credit_text_view"
             android:layout_width="wrap_content"
@@ -36,8 +72,7 @@
             android:text="0.00 €"
             android:textSize="16sp"
             android:textColor="@color/secondary"
-            android:layout_marginEnd="8dp"/>
-
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/addCredit_btn"
@@ -48,4 +83,5 @@
             android:scaleType="center" />
 
     </LinearLayout>
+
 </RelativeLayout>

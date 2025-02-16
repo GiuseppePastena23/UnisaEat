@@ -6,17 +6,52 @@
     android:gravity="center"
     android:padding="16dp">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="gone" />
 
+    <RelativeLayout
+        android:id="@+id/qr_container"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/qr_rounded_background"
+        android:clipToPadding="true"
+        android:elevation="10dp"
+
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/qr_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="@string/show_qr_code"
+
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/qr_code_text"
+            android:layout_centerInParent="true"
+            android:background="@drawable/divider"
+            android:backgroundTint="@android:color/darker_gray" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="gone" />
     <ImageView
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qr_code_text"
         android:id="@+id/qr_image_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </LinearLayout>

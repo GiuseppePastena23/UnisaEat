@@ -6,11 +6,8 @@
     <FrameLayout android:id="@+id/background_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:elevation="10dp"
-        android:background="@drawable/rounded_background"
-        android:layout_centerInParent="true"
-        android:padding="24dp">
+        style="@style/RoundedCard"
+        android:layout_centerInParent="true">
 
         <!-- LinearLayout containing EditTexts and Button -->
         <LinearLayout

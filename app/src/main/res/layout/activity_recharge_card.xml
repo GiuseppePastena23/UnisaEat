@@ -4,15 +4,10 @@
 
     <!-- FrameLayout with rounded background and elevation -->
     <FrameLayout
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:elevation="10dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/rounded_background"
-        android:padding="24dp">
+        style="@style/RoundedCard">
 
 
         <!-- Vertical LinearLayout for EditTexts and Button -->
@@ -133,7 +128,7 @@
                     android:id="@+id/increase_amount_button"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/plus"
+                    android:background="@drawable/ic_plus"
                     android:textColor="@android:color/white"/>
             </LinearLayout>
 
