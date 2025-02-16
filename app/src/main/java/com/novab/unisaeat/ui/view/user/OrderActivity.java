@@ -9,16 +9,24 @@ import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.novab.unisaeat.R;
+import com.novab.unisaeat.data.util.SharedPreferencesManager;
 import com.novab.unisaeat.ui.adapter.ProductSpinnerAdapter;
 import com.novab.unisaeat.ui.fragment.TopBarFragment;
+import com.novab.unisaeat.ui.util.NotificationWorker;
 import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class OrderActivity extends AppCompatActivity {
+    private final boolean DEBUG = true; // TODO: remove in conditions as well
 
     private Spinner productsSpinner;
     private TimePicker timePicker;
@@ -70,9 +78,18 @@ public class OrderActivity extends AppCompatActivity {
         float price = products.get(product) * -1; // negative value for order
         String mode = "order;" + product;
 
+        // Calcolo del timestamp per oggi con l'orario selezionato per la notifica
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long timestamp = calendar.getTimeInMillis(); // Millisecondi dall'epoch
+
         transactionViewModel.doTransaction(price, mode);
         transactionViewModel.getTransactionOutcome().observe(this, outcome -> {
             if (outcome != null) {
+                scheduleOrderNotification(timestamp);
                 Utilities.showAlertDialog(this, getString(R.string.order_confirmed),
                         getString(R.string.order_success_msg) + hour + ":" + minute + "\n" +
                                 getString(R.string.products_text) + ":\n" + product, (dialog, which) -> {
@@ -102,17 +119,17 @@ public class OrderActivity extends AppCompatActivity {
         int selectedMinute = timePicker.getMinute();
 
         // If the selected time is before 09:00, it's not valid
-        if (selectedHour < 9) {
+        if (!DEBUG && selectedHour < 9) {
             return false;
         }
 
         // If the selected time is after 22:00, it's not valid
-        if (selectedHour > 22 || (selectedHour == 22 && selectedMinute > 0)) {
+        if (!DEBUG && selectedHour > 22 || (selectedHour == 22 && selectedMinute > 0)) {
             return false;
         }
 
         // If the selected time is before the current time, it's not valid
-        if (selectedHour < currentHour || (selectedHour == currentHour && selectedMinute < currentMinute)) {
+        if (!DEBUG && selectedHour < currentHour || (selectedHour == currentHour && selectedMinute < currentMinute)) {
             return false;
         }
 
@@ -123,9 +140,7 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
-
         checkDay();
-
     }
 
     private void checkDay() {
@@ -136,13 +151,13 @@ public class OrderActivity extends AppCompatActivity {
             int minute = dayInfo.getMinute();
             weekDay = 1; // TODO: remove
             // CHECK IF DAY IS SATURDAY OR SUNDAY 5=Saturday 6=Sunday
-            if (weekDay == 5 || weekDay == 6) {
+            if (!DEBUG && weekDay == 5 || weekDay == 6) {
                 Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_day_error_msg), (dialog, which) -> {
                     finish();
                 }, false);
             } else {
                 // CHECK IF TIME IS AFTER 22:00
-                if (hour > 22 || (hour == 22 && minute > 0)) {
+                if (!DEBUG && hour > 22 || (hour == 22 && minute > 0)) {
                     Utilities.showAlertDialog(this, getString(R.string.order_denied), getString(R.string.order_hour_error_msg), (dialog, which) -> {
                         finish();
                     }, false);
@@ -171,4 +186,28 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void scheduleOrderNotification(long orderTimestamp) {
+        long notificationTime = orderTimestamp - (10 * 60 * 1000); // 10 minuti prima
+        long delay = notificationTime - System.currentTimeMillis(); // Quanto manca
+
+        if (delay > 0) {
+            Data data = new Data.Builder()
+                    .putString(NotificationWorker.NOTIFICATION_TYPE, "ORDER")
+                    .build();
+
+            OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+                    .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                    .setInputData(data)
+                    .build();
+
+            WorkManager.getInstance(this).enqueue(request);
+
+            Log.d("OrderActivity", "Notifica ordine schedulata tra " + (delay / 1000) + " secondi.");
+        } else {
+            Log.d("OrderActivity", "L'orario selezionato è troppo vicino, notifica non schedulata.");
+        }
+    }
+
 }

@@ -98,4 +98,6 @@
     <string name="empty_email_message">Controlla il campo email</string>
     <string name="empty_password_title">Campo password vuoto</string>
     <string name="empty_password_message">Controlla il campo password</string>
+    <string name="order_notification_title">Promemoria Ordine</string>
+    <string name="order_notification_message">Il tuo ordine sarà disponibile tra 10 min</string>
 </resources>

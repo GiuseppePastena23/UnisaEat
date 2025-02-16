@@ -102,6 +102,8 @@
     <string name="empty_email_message">Check the email field</string>
     <string name="empty_password_title">Empty password field</string>
     <string name="empty_password_message">Check the password field</string>
+    <string name="order_notification_title">Order remainder</string>
+    <string name="order_notification_message">Your order will be available in 10 min</string>
 
 
 </resources>

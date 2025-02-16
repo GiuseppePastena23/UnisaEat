@@ -35,6 +35,11 @@ public class NotificationWorker extends Worker {
                             getApplicationContext().getString(R.string.promo_notification_message)
                     );
                     break;
+                case "ORDER":
+                    sendNotification(context,
+                            getApplicationContext().getString(R.string.order_notification_title),
+                            getApplicationContext().getString(R.string.order_notification_message)
+                    );
             }
         }
 
