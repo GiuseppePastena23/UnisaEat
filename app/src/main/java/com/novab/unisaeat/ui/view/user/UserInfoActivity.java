@@ -11,43 +11,63 @@ import com.novab.unisaeat.data.util.SharedPreferencesManager;
 
 public class UserInfoActivity extends AppCompatActivity {
 
-    private TextView userNameText;
-    private TextView userSurnameText;
-    private TextView userCfText;
-    private TextView userEmailText;
-    private TextView userStatusText;
-    private TextView userPhoneText;
+    private TextView fullNameTextView;
+    private TextView cfTextView;
+    private TextView emailTextView;
+    private TextView phoneNumberTextView;
+    private TextView statusTextView;
+    private TextView creditInfoTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
-
-        associateUI();
-
         User user = sharedPreferencesManager.getUser();
 
+        associateUI();
         if (user != null) {
             setData(user);
+        } else {
+            finish();
         }
     }
 
     private void setData(User user) {
-        userNameText.setText(user.getName());
-        userSurnameText.setText(user.getSurname());
-        userCfText.setText(user.getCf());
-        userEmailText.setText(user.getEmail());
-        userStatusText.setText(user.getStatus());
-        userPhoneText.setText(user.getPhone());
+        String fullName = user.getName() + " " + user.getSurname();
+        int statusResId;
+
+        switch (user.getStatus()) {
+            case "student":
+                statusResId = R.string.student;
+                break;
+            case "professor":
+                statusResId = R.string.professor;
+                break;
+            case "employee":
+                statusResId = R.string.employee;
+                break;
+            default:
+                statusResId = R.string.student;
+                break;
+        }
+
+        fullNameTextView.setText(fullName);
+        cfTextView.setText(user.getCf());
+        emailTextView.setText(user.getEmail());
+        phoneNumberTextView.setText(user.getPhone());
+        statusTextView.setText(statusResId);
+        creditInfoTextView.setText(String.valueOf(user.getCredit()));
     }
 
+
     private void associateUI() {
-        userNameText = findViewById(R.id.user_name_text);
-        userSurnameText = findViewById(R.id.user_surname_text);
-        userCfText = findViewById(R.id.user_cf_text);
-        userEmailText = findViewById(R.id.user_email_text);
-        userStatusText = findViewById(R.id.user_status_text);
-        userPhoneText = findViewById(R.id.user_phone_text);
+        fullNameTextView = findViewById(R.id.full_name_text_view);
+        cfTextView = findViewById(R.id.cf_text_view);
+        emailTextView = findViewById(R.id.email_text_view);
+        phoneNumberTextView = findViewById(R.id.phone_number_text_view);
+        statusTextView = findViewById(R.id.status_text_view);
+        creditInfoTextView = findViewById(R.id.credit_info_text_view);
     }
 }

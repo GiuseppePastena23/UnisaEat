@@ -40,8 +40,8 @@
     <string name="owner_s_name">Owner\'s Name</string>
     <string name="fill_all_fields">Fill all fields</string>
     <string name="credit_text">"Credit "</string>
-    <string name="order_day_error_msg">Cannot order anything on Saturday and Sunday</string>
-    <string name="order_hour_error_msg">Cannot order anything after 10PM</string>
+    <string name="order_day_error_msg">Cannot order on Saturday and Sunday</string>
+    <string name="order_hour_error_msg">Cannot order after 10PM</string>
     <string name="new_transaction_notification_title">New Transaction</string>
     <string name="new_transaction_notification_body">A new transaction has been added to your wallet</string>
     <string name="promo_notification_title">Check out our new promo!</string>
@@ -66,5 +66,16 @@
     <string name="recharge_card">Recharge with Card</string>
     <string name="show_qr_code">Show QR Code to the Operator</string>
     <string name="dev_info_btn">About app</string>
+    <string name="general_info">General Information</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="account_info">Account Info</string>
+    <string name="status" translatable="false">Status</string>
+    <string name="academic_year">A.Y.</string>
+    <string name="student">Student</string>
+    <string name="professor">Professor</string>
+    <string name="employee">Employee</string>
+    <string name="profile_picture">Profile picture</string>
 
 </resources>

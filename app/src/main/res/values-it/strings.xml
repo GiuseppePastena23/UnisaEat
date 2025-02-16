@@ -16,7 +16,7 @@
     <string name="name_text">Nome</string>
     <string name="surname_text">Cognome</string>
     <string name="info_title_text">Informazioni Utente</string>
-    <string name="scan_prompt">Scan QR code</string>
+    <string name="scan_prompt">Inquadra il QR Code</string>
     <string name="email_hint">Inserisci l\'email</string>
     <string name="login">Accedi</string>
     <string name="both_email_password_error">Inserisci email e password</string>
@@ -37,8 +37,8 @@
     <string name="owner_s_name">Nome del proprietario della carta</string>
     <string name="fill_all_fields">Riempi tutti i campi</string>
     <string name="credit_text">Credito</string>
-    <string name="order_day_error_msg">Cannot order anything on saturday and sunday</string>
-    <string name="order_hour_error_msg">Non e\' possibile ordinare niente dopo le 22:00</string>
+    <string name="order_day_error_msg">Non è possibile effetuare prenotazioni Sabato e Domenica</string>
+    <string name="order_hour_error_msg">Non è possibile ordinare dopo le 22:00</string>
     <string name="new_transaction_notification_title">Nuova Transazione</string>
     <string name="new_transaction_notification_body">Una nuova transazione è stata aggiunta al tuo portafoglio</string>
     <string name="promo_notification_title">Dai un\'occhiata alla nostra nuova promozione</string>
@@ -59,8 +59,18 @@
     </string>
 
     <string name="add_funds">Aggiungi Fondi</string>
-    <string name="credit_card_number">Credit Card Number</string>
-    <string name="amount_text">Amount</string>
-    <string name="recharge_card">Recharge with Card</string>
-    <string name="show_qr_code">Show QR Code to the Operator</string>
+    <string name="credit_card_number">Numero di Carta</string>
+    <string name="amount_text">Totale</string>
+    <string name="recharge_card">Ricarica con Carta</string>
+    <string name="show_qr_code">Mostra il Codice QR all\'Operatore</string>
+    <string name="dev_info_btn">Info App</string>
+    <string name="general_info">Informazioni Generali</string>
+    <string name="full_name">Nome e Cognome</string>
+    <string name="phone_number">Numero di Telefono</string>
+    <string name="account_info">Informazioni Profilo</string>
+    <string name="academic_year">A.A</string>
+    <string name="student">Studente</string>
+    <string name="professor">Docente</string>
+    <string name="employee">Operatore</string>
+    <string name="profile_picture">Immagine di profilo</string>
 </resources>
