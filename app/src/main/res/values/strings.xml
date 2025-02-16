@@ -65,5 +65,6 @@
     <string name="amount_text">Amount</string>
     <string name="recharge_card">Recharge with Card</string>
     <string name="show_qr_code">Show QR Code to the Operator</string>
+    <string name="dev_info_btn">About app</string>
 
 </resources>

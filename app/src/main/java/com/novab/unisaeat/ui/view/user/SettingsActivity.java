@@ -1,5 +1,7 @@
 package com.novab.unisaeat.ui.view.user;
 
+import static com.novab.unisaeat.ui.util.Utilities.showAlertDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CheckBox biometricCheckbox;
     private CheckBox loginCheckbox;
     private Spinner languageSpinner;
+    private Button aboutAppButton;
     private Button logoutButton;
 
     private String currentLanguage;
@@ -33,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
         biometricCheckbox = findViewById(R.id.biometric_checkbox);
         loginCheckbox = findViewById(R.id.login_checkbox);
         languageSpinner = findViewById(R.id.language_spinner);
+        aboutAppButton = findViewById(R.id.dev_info_btn);
         logoutButton = findViewById(R.id.logout_btn);
 
         initializeButtons();
@@ -44,6 +48,13 @@ public class SettingsActivity extends AppCompatActivity {
         userInfoButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, UserInfoActivity.class);
             startActivity(intent);
+        });
+        aboutAppButton.setOnClickListener(v -> {
+            showAlertDialog(this, "UnisaEat v1.0",
+                    "Developed with ❤️ by:\n\n" +
+                            "Giuseppe Pastena\t[05121/18169]\nhttps://github.com/GiuseppePastena23" + "\n\n" +
+                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n"
+            );
         });
         logoutButton.setOnClickListener(v -> {
             SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);

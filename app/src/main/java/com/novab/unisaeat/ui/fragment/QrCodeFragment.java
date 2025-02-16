@@ -57,6 +57,12 @@ public class QrCodeFragment extends Fragment {
             }
         });
 
+        userViewModel.getErrorLiveData().observe(getViewLifecycleOwner(), errorMessage -> {
+            if (errorMessage != null) {
+                userViewModel.getUser(); // Request user data when the fragment is created
+            }
+        });
+
         userViewModel.getIsLoadingLiveData().observe(getViewLifecycleOwner(), isLoading -> {
             progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         });
