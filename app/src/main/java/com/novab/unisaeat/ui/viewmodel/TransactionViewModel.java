@@ -92,17 +92,29 @@ public class TransactionViewModel extends AndroidViewModel {
     private void getUserTransactions(int userId) {
         isLoadingLiveData.setValue(true);
         updateCreditLiveData.setValue(false);
+        Log.d("TAG", "UTENTE ATTUALE SHAD: " + sharedPreferencesManager.getUser().toString() + " last transaction: " + sharedPreferencesManager.getLastTransaction());
         transactionRepository.getUserTransaction(userId, new TransactionRepository.TransactionsCallback() {
             @Override
             public void onSuccess(List<Transaction> transactions) {
                 isLoadingLiveData.setValue(false);
                 transactionsLiveData.setValue(transactions);
 
+                if (transactions.isEmpty()) {
+                    return;
+                }
 
 
+                // Check if there is a new transaction
                 if (sharedPreferencesManager.getLastTransaction() != transactions.get(0).getId()) {
+                    Log.d("TransactionViewModel", "Salvataggio last transaction ID: " + transactions.get(0).getId());
+                    sharedPreferencesManager.saveLastTransaction(transactions.get(0).getId());
+
+                    int savedId = sharedPreferencesManager.getLastTransaction();
+                    Log.d("TransactionViewModel", "Valore salvato dopo aggiornamento: " + savedId);
+
                     // send notification
                     updateCreditLiveData.setValue(true);
+                    // sharedPreferencesManager.saveLastTransaction(transactions.get(0).getId());
 
                     NotificationHelper.showNotification(getApplication(),
                             getApplication().getString(R.string.new_transaction_notification_title),
@@ -110,8 +122,6 @@ public class TransactionViewModel extends AndroidViewModel {
                             ) + "\n" + transactions.get(0).getAmount() + "€"
                     );
                 }
-
-                sharedPreferencesManager.saveLastTransaction(transactions.get(0).getId());
             }
 
             @Override

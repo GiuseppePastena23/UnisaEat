@@ -77,5 +77,31 @@
     <string name="professor">Professor</string>
     <string name="employee">Employee</string>
     <string name="profile_picture">Profile picture</string>
+    <string name="no_transaction_found">No transaction found!</string>
+    <string name="transactions_list">Transactions List</string>
+    <string name="recharge_wallet">Recharge Wallet</string>
+    <string name="registration_successful_title">Registration Successful</string>
+    <string name="registration_successful_message">You may now log in.</string>
+    <string name="registration_failed_title">Registration Failed</string>
+    <string name="registration_failed_message">We\'ve encountered a problem during registration. Please try again later.</string>
+    <string name="register">Register</string>
+    <string name="show">Show</string>
+    <string name="name_hint">Insert name</string>
+    <string name="surname_hint">Insert surname</string>
+    <string name="cf_hint">Insert CF</string>
+    <string name="phone_hint">Insert phone number</string>
+    <string name="empty_name_title">Empty Name Field</string>
+    <string name="empty_name_message">Check the name field</string>
+    <string name="empty_surname_title">Empty surname field</string>
+    <string name="empty_surname_message">Check the surname field</string>
+    <string name="empty_cf_title">Empty CF field</string>
+    <string name="empty_cf_message">Check the CF field</string>
+    <string name="empty_phone_title">Empty phone field</string>
+    <string name="empty_phone_message">Check the phone field</string>
+    <string name="empty_email_title">Empty email field</string>
+    <string name="empty_email_message">Check the email field</string>
+    <string name="empty_password_title">Empty password field</string>
+    <string name="empty_password_message">Check the password field</string>
+
 
 </resources>

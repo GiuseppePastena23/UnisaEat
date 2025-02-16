@@ -36,4 +36,7 @@ public interface ApiService {
 
     @GET("/menu")
     Call<String> getMenu(@Query("day") int day);
+
+    @POST("/register")
+    Call<Void> register(@Body Map<String, String> userData);
 }

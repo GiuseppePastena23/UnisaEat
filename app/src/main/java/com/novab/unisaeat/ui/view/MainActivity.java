@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         NotificationHelper.createNotificationChannel(this);
-        checkAndRequestNotificationPermission();
         scheduleNotifications();
 
         Intent intent = new Intent(this, LoginActivity.class);
@@ -41,13 +40,6 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void checkAndRequestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_CODE);
-            }
-        }
-    }
 
     private void scheduleNotifications() {
         Log.d("TAG", "scheduleNotifications: Scheduling notifications...");

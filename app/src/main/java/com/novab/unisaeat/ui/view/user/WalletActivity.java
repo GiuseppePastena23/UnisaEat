@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -25,9 +26,10 @@ public class WalletActivity extends AppCompatActivity {
 
     private TransactionViewModel transactionViewModel;
     private UserViewModel userViewModel;
+
     private ListView transactionsListView;
     private ProgressBar progressBar;
-
+    private TextView noTransactionFoundTextView;
     private Button rechargeButton;
 
     @Override
@@ -55,6 +57,7 @@ public class WalletActivity extends AppCompatActivity {
 
     private void associateUI() {
         progressBar = findViewById(R.id.progress_bar);
+        noTransactionFoundTextView = findViewById(R.id.no_transaction_found_text_view);
         transactionsListView = findViewById(R.id.transactions_list_view);
         rechargeButton = findViewById(R.id.goto_recharge_btn);
         rechargeButton.setOnClickListener(v -> {
@@ -69,7 +72,9 @@ public class WalletActivity extends AppCompatActivity {
             if (transactions != null && !transactions.isEmpty()) {
                 setAdapter(transactions);
             } else {
-                //TODO: set text to no transactions present
+                progressBar.setVisibility(View.GONE);
+                transactionsListView.setVisibility(View.GONE);
+                noTransactionFoundTextView.setVisibility(View.VISIBLE);
             }
         });
 

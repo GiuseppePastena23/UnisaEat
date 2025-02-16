@@ -20,6 +20,7 @@ public class UserViewModel extends AndroidViewModel {
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoadingLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> registrationOutcomeLiveData = new MutableLiveData<>();
 
     public UserViewModel(Application application) {
         super(application);
@@ -50,6 +51,25 @@ public class UserViewModel extends AndroidViewModel {
         });
     }
 
+    public void register(User user) {
+        isLoadingLiveData.setValue(true);
+        userRepository.register(user, new UserRepository.RegisterCallback() {
+            @Override
+            public void onSuccess(String message) {
+                Log.d("UserViewModel", "Registration successful: " + message);
+                isLoadingLiveData.setValue(false);
+                registrationOutcomeLiveData.setValue(true);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.d("UserViewModel", "Registration failed: " + errorMessage);
+                isLoadingLiveData.setValue(false);
+                errorLiveData.setValue(errorMessage);
+            }
+        });
+    }
+
     public void getUserById(int id) {
         isLoadingLiveData.setValue(true);
         userRepository.getUserById(id, new UserRepository.LoginCallback() {
@@ -72,8 +92,8 @@ public class UserViewModel extends AndroidViewModel {
         login(email, password);
     }
 
+
     public LiveData<User> getUserLiveData() {
-        Log.d("TAG", "getUserLiveData: " + userLiveData.getValue());
         return userLiveData;
     }
 
@@ -83,6 +103,10 @@ public class UserViewModel extends AndroidViewModel {
 
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
+    }
+
+    public LiveData<Boolean> getRegistrationOutcomeLiveData() {
+        return registrationOutcomeLiveData;
     }
 
     private void clearLiveData() {

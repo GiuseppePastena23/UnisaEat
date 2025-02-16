@@ -2,6 +2,7 @@ package com.novab.unisaeat.data.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.novab.unisaeat.data.model.User;
 
@@ -54,7 +55,7 @@ public class SharedPreferencesManager {
 
     public void saveLastTransaction(int idTransaction) {
         editor.putInt("idTransaction", idTransaction);
-        editor.apply();
+        boolean success = editor.commit();
     }
 
     public int getLastTransaction() {

@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferencesManager sharedPreferencesManager;
     private CheckBox showPasswordCheckBox;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -58,6 +59,13 @@ public class LoginActivity extends AppCompatActivity {
     private void associateUI() {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
+
+        Button registerButton = findViewById(R.id.register_btn);
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
         Button loginButton = findViewById(R.id.login_btn);
         loginButton.setOnClickListener(v -> onLoginClick());
 
@@ -98,12 +106,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginClick() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-        Toast.makeText(this, "Password: " + password, Toast.LENGTH_SHORT).show();
 
         if (!email.isEmpty() && !password.isEmpty()) {
 
             String hashedPassword = Utilities.hash(password);
-            Toast.makeText(this, "PasswordHash: " + hashedPassword, Toast.LENGTH_SHORT).show();
             userViewModel.login(email, hashedPassword);
         } else {
             Toast.makeText(this, getString(R.string.both_email_password_error),

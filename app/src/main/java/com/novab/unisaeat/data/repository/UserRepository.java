@@ -39,6 +39,34 @@ public class UserRepository {
         });
     }
 
+    public void register(User user, final RegisterCallback callback) {
+        Map<String, String> userData = Map.of(
+                "name", user.getName(),
+                "surname", user.getSurname(),
+                "cf", user.getCf(),
+                "email", user.getEmail(),
+                "password", user.getPassword(),
+                "phone", user.getPhone(),
+                "status", user.getStatus()
+        );
+
+        apiService.register(userData).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess("User registered successfully");
+                } else {
+                    callback.onError("Failed to register user");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                callback.onError(t.getMessage());
+            }
+        });
+    }
+
     public void getUserById(int id, final LoginCallback callback) {
         apiService.getUserById(id).enqueue(new Callback<User>() {
             @Override
@@ -62,6 +90,12 @@ public class UserRepository {
 
     public interface LoginCallback {
         void onSuccess(User user);  // Provide the User object when login is successful
+
+        void onError(String errorMessage);  // Handle error cases
+    }
+
+    public interface RegisterCallback {
+        void onSuccess(String message);
 
         void onError(String errorMessage);  // Handle error cases
     }

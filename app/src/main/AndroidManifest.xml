@@ -34,6 +34,9 @@
             android:name=".ui.view.user.LoginActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.view.user.RegisterActivity"
+            android:exported="true" />
+        <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"

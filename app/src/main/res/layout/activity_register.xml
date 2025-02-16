@@ -24,10 +24,68 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="6dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/login"
+                android:text="@string/register"
                 android:textColor="@color/primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+
+            <!-- Name EditText -->
+            <EditText
+                android:id="@+id/name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/name_hint"
+                android:background="@drawable/rounded_edittext"
+                android:inputType="text" />
+
+            <!-- Surname EditText -->
+            <EditText
+                android:id="@+id/surname_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/surname_hint"
+                android:inputType="text" />
+
+            <!-- CF EditText -->
+            <EditText
+                android:id="@+id/cf_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/cf_hint"
+                android:inputType="text" />
+
+            <!-- Phone EditText -->
+            <EditText
+                android:id="@+id/phone_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:autofillHints="email"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/phone_hint"
+                android:inputType="phone" />
+
+            <Spinner
+                android:id="@+id/status_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <!-- DIVISORE -->
+            <View
+                android:layout_width="150dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/divider" />
+
 
             <!-- Email EditText -->
             <EditText
@@ -48,7 +106,6 @@
 
                 <!-- Password EditText -->
                 <EditText
-
                     android:id="@+id/password_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -57,7 +114,6 @@
                     android:autofillHints="password"
                     android:background="@drawable/rounded_edittext"
                     android:hint="@string/password_hint"
-
                     android:inputType="textPassword" />
 
                 <!-- Show Password CheckBox -->
@@ -71,26 +127,20 @@
 
             </RelativeLayout>
 
-            <!-- Login Button -->
+
             <Button
-                android:id="@+id/login_btn"
+                android:id="@+id/register_btn"
                 style="@style/MainButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login" />
+                android:text="@string/register" />
+
+            <ProgressBar
+                android:id="@+id/register_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
         </LinearLayout>
     </FrameLayout>
-
-    <Button
-        android:id="@+id/register_btn"
-        style="@style/MainButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/background_frame"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/secondary"
-        android:text="@string/register" />
-
 
 </RelativeLayout>

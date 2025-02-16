@@ -13,26 +13,24 @@
         style="@style/MainButton"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
+        android:layout_below="@id/top_fragment_container"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Ricarica Portafoglio"
-        android:layout_below="@id/top_fragment_container"/>
-
-    <!-- Separatore con effetto sfumato -->
+        android:text="@string/recharge_wallet" />
 
 
     <!-- Titolo lista transazioni con sfondo per separazione -->
     <TextView
         android:id="@+id/transactions_title"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
+        android:layout_below="@id/separator"
         android:layout_marginTop="20dp"
-        android:text="Lista Transazioni"
-        android:textColor="#444444"
+        android:gravity="center"
+        android:text="@string/transactions_list"
+        android:textColor="@color/primary"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_below="@id/separator" />
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/separator"
@@ -48,9 +46,9 @@
         android:id="@+id/transactions_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/transactions_title"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:layout_below="@id/transactions_title">
+        android:orientation="vertical">
 
         <!-- ProgressBar per il caricamento -->
         <ProgressBar
@@ -59,9 +57,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:indeterminate="true"
-            android:visibility="gone"
-            android:layout_centerHorizontal="true" />
+            android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/no_transaction_found_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/no_transaction_found"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <!-- Lista transazioni -->
         <ListView
