@@ -81,7 +81,7 @@
     <string name="registration_failed_title">Registrazione fallita</string>
     <string name="registration_failed_message">Abbiamo riscontrato un problema durante la registrazione. Per favore, riprova più tardi.</string>
     <string name="register">Registrati</string>
-    <string name="show">Mostra</string>
+    <string name="show">Mostra Password</string>
     <string name="name_hint">Inserisci nome</string>
     <string name="surname_hint">Inserisci cognome</string>
     <string name="cf_hint">Inserisci CF</string>
@@ -98,4 +98,5 @@
     <string name="empty_email_message">Controlla il campo email</string>
     <string name="empty_password_title">Campo password vuoto</string>
     <string name="empty_password_message">Controlla il campo password</string>
+    <string name="remember">Ricordami</string>
 </resources>

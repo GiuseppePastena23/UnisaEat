@@ -23,7 +23,6 @@ import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.view.employee.HomeEmployeeActivity;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 
-import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     SharedPreferencesManager sharedPreferencesManager;
     private CheckBox showPasswordCheckBox;
+    private CheckBox rememberMeCheckBox;
 
 
     @Override
@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
     private void associateUI() {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
+        rememberMeCheckBox = findViewById(R.id.remember_me_checkbox);
 
         Button registerButton = findViewById(R.id.register_btn);
         registerButton.setOnClickListener(v -> {
@@ -106,6 +107,11 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginClick() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+        if (rememberMeCheckBox.isChecked()) {
+            sharedPreferencesManager.saveLogin(true);
+        } else {
+            sharedPreferencesManager.saveLogin(false);
+        }
 
         if (!email.isEmpty() && !password.isEmpty()) {
 

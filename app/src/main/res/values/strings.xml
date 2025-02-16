@@ -85,7 +85,7 @@
     <string name="registration_failed_title">Registration Failed</string>
     <string name="registration_failed_message">We\'ve encountered a problem during registration. Please try again later.</string>
     <string name="register">Register</string>
-    <string name="show">Show</string>
+    <string name="show">Show Password</string>
     <string name="name_hint">Insert name</string>
     <string name="surname_hint">Insert surname</string>
     <string name="cf_hint">Insert CF</string>
@@ -102,6 +102,7 @@
     <string name="empty_email_message">Check the email field</string>
     <string name="empty_password_title">Empty password field</string>
     <string name="empty_password_message">Check the password field</string>
+    <string name="remember">Remember me</string>
 
 
 </resources>
