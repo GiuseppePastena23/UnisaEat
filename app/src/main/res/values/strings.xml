@@ -64,5 +64,6 @@
     <string name="credit_card_number">Credit Card Number</string>
     <string name="amount_text">Amount</string>
     <string name="recharge_card">Recharge with Card</string>
+    <string name="dev_info_btn">About app</string>
 
 </resources>

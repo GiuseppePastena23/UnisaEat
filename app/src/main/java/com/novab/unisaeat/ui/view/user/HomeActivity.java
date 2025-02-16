@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -46,7 +47,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
             handler.postDelayed(this, 2000);
-
         }
     };
 
@@ -56,12 +56,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_user);
 
-
         topBarFragment = new TopBarFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.top_fragment_container, topBarFragment)
                 .commit();
-
 
         // Load Bottom Bar Fragment
         getSupportFragmentManager().beginTransaction()
@@ -98,7 +96,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
     public void showQRCode() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.qr_fragment_container, new QrCodeFragment())
@@ -107,12 +104,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void associateUI() {
-
-
-
-
-
-
         setObservers();
     }
 
@@ -123,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         });
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
-                Log.e("HomeActivity", errorMessage);
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
                 userViewModel.getUser();
             }
             /*

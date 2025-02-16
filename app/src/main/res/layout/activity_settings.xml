@@ -45,6 +45,18 @@
         android:layout_marginBottom="24dp"
         android:background="@android:drawable/btn_dropdown" />
 
+
+    <!-- Dev info Button -->
+    <Button
+        android:id="@+id/dev_info_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/fourth"
+        android:text="@string/dev_info_btn"
+        android:textColor="@android:color/white" />
+
+
     <!-- Logout Button -->
     <Button
         android:id="@+id/logout_btn"

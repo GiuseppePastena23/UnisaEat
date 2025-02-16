@@ -44,6 +44,12 @@ public class QrCodeFragment extends Fragment {
             }
         });
 
+        userViewModel.getErrorLiveData().observe(getViewLifecycleOwner(), errorMessage -> {
+            if (errorMessage != null) {
+                userViewModel.getUser(); // Request user data when the fragment is created
+            }
+        });
+
         userViewModel.getIsLoadingLiveData().observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading) {
                 progressBar.setVisibility(View.VISIBLE); // Show progress bar while loading data
@@ -60,8 +66,6 @@ public class QrCodeFragment extends Fragment {
         qrImageView.setImageBitmap(null); // Clear QR code when the fragment is paused
         progressBar.setVisibility(View.GONE); // Hide progress bar when the fragment is paused
     }
-
-
 
 
     private void generateQrCode(String qrCode, ImageView qrImageView) {
