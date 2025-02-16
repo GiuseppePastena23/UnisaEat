@@ -2,10 +2,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/spinnerItemText"
     android:layout_width="match_parent"
+    android:text="Prova"
     android:layout_height="wrap_content"
     android:ellipsize="end"
     android:gravity="start"
     android:maxLines="1"
     android:padding="8dp"
+    android:textColor="@android:color/black"
     android:textAlignment="viewStart"
-    android:textSize="16sp" />
+    android:textSize="22sp" />
