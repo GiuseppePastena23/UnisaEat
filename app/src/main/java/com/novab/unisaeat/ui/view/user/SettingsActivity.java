@@ -66,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         loginCheckbox.setChecked(login);
         if (biometric) {
             loginCheckbox.setEnabled(false);
+            loginCheckbox.setChecked(true);
         }
         biometricCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
             biometric = b;

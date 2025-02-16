@@ -6,6 +6,7 @@ import android.text.InputType;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferencesManager sharedPreferencesManager;
     private CheckBox showPasswordCheckBox;
     private CheckBox rememberMeCheckBox;
+    private ImageView fingerprintButton;
 
 
     @Override
@@ -43,16 +45,26 @@ public class LoginActivity extends AppCompatActivity {
 
         User user = sharedPreferencesManager.getUser();
         boolean biometric = sharedPreferencesManager.getBiometricCheckbox();
+        boolean fastLogin = sharedPreferencesManager.getLogin();
 
         if (user != null) {
             if (!biometric) {
-                goToHome();
+
+                // Se l'utente ha già effettuato l'accesso e non ha selezionato
+                // l'autenticazione biometrica, vai alla schermata principale
+                if (fastLogin) {
+                    goToHome();
+                } else {
+                    resetUi();
+                }
             } else {
+                // Se l'utente ha già effettuato l'accesso e ha selezionato
+                // l'autenticazione biometrica, mostra il prompt biometrico
                 checkAndAuthenticate();
             }
         } else {
-            setContentView(R.layout.activity_login);
-            associateUI();
+            // Se l'utente non ha effettuato l'accesso, mostra la schermata di login
+            resetUi();
         }
     }
 
@@ -60,6 +72,12 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
         rememberMeCheckBox = findViewById(R.id.remember_me_checkbox);
+        ImageView fingerprintButton = findViewById(R.id.fingerprint_button);
+        fingerprintButton.setOnClickListener(v -> {
+            checkAndAuthenticate();
+        });
+        fingerprintButton.setVisibility(sharedPreferencesManager.getBiometricCheckbox() ? ImageView.VISIBLE : ImageView.GONE);
+
 
         Button registerButton = findViewById(R.id.register_btn);
         registerButton.setOnClickListener(v -> {
@@ -88,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
 
         showPasswordCheckBox = findViewById(R.id.show_password_checkbox);
         showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -173,16 +192,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                setContentView(R.layout.activity_login);
-                associateUI();
                 Toast.makeText(LoginActivity.this, "Authentication error: " + errString, Toast.LENGTH_SHORT).show();
+                resetUi();
             }
 
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
-                setContentView(R.layout.activity_login);
-                associateUI();
                 Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -200,9 +216,22 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                return;
+                // Se la password dell'utente è stata modificata, mostra la schermata di login
+                resetUi();
             }
 
         });
+
+        userViewModel.getErrorLiveData().observe(this, errorMessage -> {
+            if (errorMessage != null) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    public void resetUi() {
+        setContentView(R.layout.activity_login);
+        associateUI();
     }
 }
