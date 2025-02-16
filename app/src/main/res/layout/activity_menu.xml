@@ -61,6 +61,7 @@
 
     <!-- Immagine centrata -->
     <ImageView
+
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,9 +86,11 @@
 
     <!-- Testo sotto l'immagine -->
     <TextView
+        style="@style/RoundedCard"
         android:id="@+id/price_list_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/price_list"
         android:padding="8dp"
         android:textColor="@android:color/black"

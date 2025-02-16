@@ -4,12 +4,8 @@ import static com.novab.unisaeat.ui.util.Utilities.showAlertDialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button userInfoButton;
     private CheckBox biometricCheckbox;
     private CheckBox loginCheckbox;
-    private Spinner languageSpinner;
+
     private Button aboutAppButton;
     private Button logoutButton;
 
@@ -35,13 +31,13 @@ public class SettingsActivity extends AppCompatActivity {
         userInfoButton = findViewById(R.id.user_info_btn);
         biometricCheckbox = findViewById(R.id.biometric_checkbox);
         loginCheckbox = findViewById(R.id.login_checkbox);
-        languageSpinner = findViewById(R.id.language_spinner);
+
         aboutAppButton = findViewById(R.id.dev_info_btn);
         logoutButton = findViewById(R.id.logout_btn);
 
         initializeButtons();
         intializeCheckbox();
-        initializeSpinner();
+
     }
 
     private void initializeButtons() {
@@ -90,32 +86,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeSpinner() {
-        String[] languages = getResources().getStringArray(R.array.language_codes);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
-        languageSpinner.setAdapter(adapter);
-        currentLanguage = getResources().getConfiguration().getLocales().get(0).getLanguage();
-        int index = 0;
-        for (int i = 0; i < languages.length; i++) {
-            if (languages[i].equals(currentLanguage)) {
-                index = i;
-                break;
-            }
-        }
-        languageSpinner.setSelection(index);
-        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

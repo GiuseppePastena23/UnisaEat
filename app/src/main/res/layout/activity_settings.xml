@@ -1,70 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
-    <!-- User Info Button -->
-    <Button
-        android:id="@+id/user_info_btn"
-        android:layout_width="match_parent"
+    <!-- Main Buttons Section -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/RoundedCard"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="User Info" />
+        android:orientation="vertical"
 
-    <!-- Biometric Checkbox -->
-    <CheckBox
-        android:id="@+id/biometric_checkbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Enable Biometric Login" />
+        >
 
-    <!-- Login Checkbox -->
-    <CheckBox
-        android:id="@+id/login_checkbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Enable Auto Login" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/settings"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <!-- Language Selection Spinner -->
-    <TextView
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/divider">
+
+
+        </View>
+
+
+        <!-- User Info Button -->
+        <Button
+            android:id="@+id/user_info_btn"
+            style="@style/MainButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="User Info" />
+
+        <!-- Developer Info Button -->
+        <Button
+            android:id="@+id/dev_info_btn"
+            style="@style/MainButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/dev_info_btn"
+            android:textColor="@android:color/white" />
+
+        <!-- Logout Button -->
+        <Button
+            android:id="@+id/logout_btn"
+            style="@style/MainButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:text="@string/exit_btn"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/RoundedCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="Select Language"
-        android:textSize="16sp" />
+        android:layout_below="@id/linearLayout"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/language_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:background="@android:drawable/btn_dropdown" />
+        <CheckBox
+            android:id="@+id/biometric_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Biometric Login" />
 
+        <CheckBox
+            android:id="@+id/login_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Auto Login" />
+    </LinearLayout>
 
-    <!-- Dev info Button -->
-    <Button
-        android:id="@+id/dev_info_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/fourth"
-        android:text="@string/dev_info_btn"
-        android:textColor="@android:color/white" />
-
-
-    <!-- Logout Button -->
-    <Button
-        android:id="@+id/logout_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="@string/exit_btn"
-        android:textColor="@android:color/white" />
-
-</LinearLayout>
+</RelativeLayout>
