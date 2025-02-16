@@ -33,7 +33,7 @@
     <string name="login_successful">Login successful</string>
     <string name="order_confirmed">Order Confirmed</string>
     <string name="order_denied">Order Denied</string>
-    <string name="order_success_msg">Order Confirmed at</string>
+    <string name="order_success_msg">Order Confirmed at </string>
     <string name="order_error_msg">Order Denied</string>
     <string name="order_time_error_msg">The selected time is not available. Please choose a time between 9 AM and 10 PM that is later than the current time.</string>
     <string name="order_credit_error_msg">You do not have enough credit in your wallet</string>

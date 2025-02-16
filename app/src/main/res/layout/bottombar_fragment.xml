@@ -31,10 +31,8 @@
             android:layout_weight="1"
             android:src="@drawable/ic_wallet"
             android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:padding="15dp"
-            android:maxWidth="32dp"
-            android:maxHeight="32dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:contentDescription="Wallet" />
 
         <!-- Preorder Icon -->
@@ -45,10 +43,8 @@
             android:layout_weight="1"
             android:src="@drawable/ic_preorder"
             android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:padding="15dp"
-            android:maxWidth="32dp"
-            android:maxHeight="32dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:contentDescription="Preorder" />
 
         <!-- Menu Icon -->
@@ -59,10 +55,8 @@
             android:layout_weight="1"
             android:src="@drawable/ic_menu"
             android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:padding="15dp"
-            android:maxWidth="32dp"
-            android:maxHeight="32dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:contentDescription="Menu" />
 
         <!-- Settings Icon -->
@@ -73,10 +67,8 @@
             android:layout_weight="1"
             android:src="@drawable/ic_settings"
             android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:padding="15dp"
-            android:maxWidth="32dp"
-            android:maxHeight="32dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:contentDescription="Settings" />
 
     </LinearLayout>

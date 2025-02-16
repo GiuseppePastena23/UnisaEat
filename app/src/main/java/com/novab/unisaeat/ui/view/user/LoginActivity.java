@@ -160,7 +160,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                // FIXME: is this good?
                 super.onAuthenticationError(errorCode, errString);
                 setContentView(R.layout.activity_login);
                 associateUI();
@@ -169,7 +168,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onAuthenticationFailed() {
-                // FIXME: is this good?
                 super.onAuthenticationFailed();
                 setContentView(R.layout.activity_login);
                 associateUI();
