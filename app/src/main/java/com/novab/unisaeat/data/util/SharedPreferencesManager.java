@@ -66,6 +66,17 @@ public class SharedPreferencesManager {
         return sharedPreferences.getFloat("credit", -1f);
     }
 
+
+    public void saveOrderTime(long time) {
+        editor.putLong("orderTime", time);
+        editor.apply();
+    }
+
+    public long getOrderTime() {
+        return sharedPreferences.getLong("orderTime", -1);
+    }
+
+
     public void saveBiometricCheckbox(boolean isChecked) {
         editor.putBoolean("biometric", isChecked);
         editor.apply();
