@@ -101,4 +101,6 @@
     <string name="remember">Ricordami</string>
     <string name="order_notification_title">Promemoria Ordine</string>
     <string name="order_notification_message">Il tuo ordine sarà disponibile tra 10 min</string>
+    <string name="low_credit_notification_title">Credito Basso</string>
+    <string name="low_credit_notification_message">È ora di ricaricare il tuo portafoglio</string>
 </resources>

@@ -32,7 +32,8 @@ public class NotificationHelper {
     public static boolean shouldSendNotification(Context context, String notificationType) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         long lastTime = prefs.getLong(notificationType, 0);
-        return System.currentTimeMillis() - lastTime > NOTIFICATION_INTERVAL;
+        // return System.currentTimeMillis() - lastTime > NOTIFICATION_INTERVAL;
+        return true;
     }
 
     public static void updateLastNotificationTime(Context context, String notificationType) {

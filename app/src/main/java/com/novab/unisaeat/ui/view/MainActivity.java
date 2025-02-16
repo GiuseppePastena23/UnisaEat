@@ -1,5 +1,7 @@
 package com.novab.unisaeat.ui.view;
 
+import static com.novab.unisaeat.ui.util.NotificationHelper.shouldSendNotification;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -44,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
     private void scheduleNotifications() {
         Log.d("TAG", "scheduleNotifications: Scheduling notifications...");
 
-        scheduleOneTimeNotification("PROMO", 0); // Notifica immediata per le promo
-        scheduleRecurringNotification("PROMO", 15); // Promo ogni 15 minuti
-        scheduleRecurringNotification("LOW_CREDIT", 360); // Low credit ogni 6 ore
+        scheduleRecurringNotification("PROMO", 60 * 24);
+
+        if (shouldSendNotification(this, "LOW_CREDIT")) {
+            scheduleOneTimeNotification("LOW_CREDIT", 0);
+        }
     }
 
     private void scheduleOneTimeNotification(String type, long delay) {

@@ -105,6 +105,8 @@
     <string name="remember">Remember me</string>
     <string name="order_notification_title">Order remainder</string>
     <string name="order_notification_message">Your order will be available in 10 min</string>
+    <string name="low_credit_notification_title">Low Credit</string>
+    <string name="low_credit_notification_message">It\'s time to recharge your wallet</string>
 
 
 </resources>

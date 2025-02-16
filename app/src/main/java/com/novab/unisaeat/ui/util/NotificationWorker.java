@@ -49,7 +49,11 @@ public class NotificationWorker extends Worker {
     private void checkAndNotifyLowCredit(Context context) {
         float credito = getUserCredit();
         if (credito != -1f && credito < 5f && NotificationHelper.shouldSendNotification(context, "LOW_CREDIT")) {
-            sendNotification(context, "Low Credit", "Il tuo credito è inferiore a 5€! Ricarica ora.");
+            sendNotification(
+                    context,
+                    getApplicationContext().getString(R.string.low_credit_notification_title),
+                    getApplicationContext().getString(R.string.low_credit_notification_message)
+            );
             NotificationHelper.updateLastNotificationTime(context, "LOW_CREDIT");
         }
     }
