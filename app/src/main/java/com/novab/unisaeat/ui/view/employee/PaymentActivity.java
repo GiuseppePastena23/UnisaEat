@@ -30,7 +30,7 @@ public class PaymentActivity extends AppCompatActivity {
     private static final float REDUCED_MEAL_B_PRICE = 2.5f;
     private static final float BASKET_MEAL_PRICE = 3.0f;
     private UserViewModel userViewModel;
-    private TextView userNameText, userSurnameText, userCreditText, amountText;
+    private TextView userNameText, userCreditText, amountText;
     private ListView productsList;
     private Button makePaymentButton, cancelPaymentButton;
     private ArrayList<Product> products;
@@ -66,7 +66,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     private void associateUI() {
         userNameText = findViewById(R.id.user_name_text);
-        userSurnameText = findViewById(R.id.user_surname_text);
+
 
         userCreditText = findViewById(R.id.user_credit_text);
 
@@ -123,6 +123,7 @@ public class PaymentActivity extends AppCompatActivity {
 
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+
         });
     }
 
@@ -150,8 +151,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void setUserData(User user) {
-        userNameText.setText(user.getName());
-        userSurnameText.setText(user.getSurname());
-        userCreditText.setText(String.valueOf(user.getCredit()));
+        userNameText.setText(String.format("%s %s", user.getName(), user.getSurname()));
+        userCreditText.setText(String.format("€%s", user.getCredit()));
     }
 }

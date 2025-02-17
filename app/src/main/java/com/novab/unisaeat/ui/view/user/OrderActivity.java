@@ -14,7 +14,6 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.novab.unisaeat.R;
-import com.novab.unisaeat.data.util.SharedPreferencesManager;
 import com.novab.unisaeat.ui.adapter.ProductSpinnerAdapter;
 import com.novab.unisaeat.ui.fragment.TopBarFragment;
 import com.novab.unisaeat.ui.util.NotificationWorker;
@@ -137,12 +136,19 @@ public class OrderActivity extends AppCompatActivity {
         }
 
         // If the selected time is after 22:00, it's not valid
-        if (!DEBUG && selectedHour > 22 || (selectedHour == 22 && selectedMinute > 0)) {
+        if (!DEBUG && (selectedHour > 22 || (selectedHour == 22 && selectedMinute > 0))) {
             return false;
         }
 
         // If the selected time is before the current time, it's not valid
-        if (!DEBUG && selectedHour < currentHour || (selectedHour == currentHour && selectedMinute < currentMinute)) {
+        if (!DEBUG && (selectedHour < currentHour || (selectedHour == currentHour && selectedMinute < currentMinute))) {
+            return false;
+        }
+
+        int totalCurrentMinutes = currentHour * 60 + currentMinute;
+        int totalSelectedMinutes = selectedHour * 60 + selectedMinute;
+
+        if (!DEBUG && totalSelectedMinutes < totalCurrentMinutes + 5) {
             return false;
         }
 

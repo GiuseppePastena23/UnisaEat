@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         if (!checkInternet()) {
             Utilities.showAlertDialog(this, "No internet connection", "Please connect to the internet", (dialog, which) -> finish());
         } else {
-
             checkServerAsync();
         }
     }
@@ -66,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
                         scheduleNotifications();
                         Intent intent = new Intent(this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(new Intent(this, LoginActivity.class));
-
+                        startActivity(intent);
+                        Log.d("ServerCheck", "Server reachable, starting LoginActivity");
                         finish();
                     }
                 });
