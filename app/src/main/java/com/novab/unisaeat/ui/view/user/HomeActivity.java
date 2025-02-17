@@ -1,17 +1,12 @@
 package com.novab.unisaeat.ui.view.user;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +21,6 @@ import com.novab.unisaeat.ui.fragment.QrCodeFragment;
 import com.novab.unisaeat.ui.fragment.TopBarFragment;
 import com.novab.unisaeat.ui.viewmodel.TransactionViewModel;
 import com.novab.unisaeat.ui.viewmodel.UserViewModel;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class HomeActivity extends AppCompatActivity {
     private static final int NOTIFICATION_PERMISSION_CODE = 1;
@@ -59,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("HomeActivity", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_user);
         checkAndRequestNotificationPermission();

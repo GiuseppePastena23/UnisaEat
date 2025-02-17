@@ -59,8 +59,10 @@ public class LoginActivity extends AppCompatActivity {
                 checkAndAuthenticate();
             } else {
                 userViewModel.login(sharedPreferencesManager.getUser().getEmail(), sharedPreferencesManager.getUser().getPassword());
+
             }
         }
+
 
     }
 
@@ -115,8 +117,11 @@ public class LoginActivity extends AppCompatActivity {
                 sharedPreferencesManager.saveAutoLogin(rememberMe);
                 sharedPreferencesManager.saveLoggedIn(rememberMe);
                 sharedPreferencesManager.saveUser(user);
-                startActivity(new Intent(this, user.getStatus().equals("employee") ?
-                        HomeEmployeeActivity.class : HomeActivity.class));
+                Intent intent = new Intent(this, user.getStatus().equals("employee") ?
+                        HomeEmployeeActivity.class : HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
                 finish();
             } else {
                 Toast.makeText(this, "Login fallito!", Toast.LENGTH_SHORT).show();

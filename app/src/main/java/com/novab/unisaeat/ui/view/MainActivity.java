@@ -64,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         NotificationHelper.createNotificationChannel(this);
                         scheduleNotifications();
+                        Intent intent = new Intent(this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(new Intent(this, LoginActivity.class));
+
                         finish();
                     }
                 });

@@ -46,7 +46,6 @@ public class HomeEmployeeActivity extends AppCompatActivity {
 
         ordersButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, OrdersActivity.class);
-
             startActivity(intent);
         });
 
