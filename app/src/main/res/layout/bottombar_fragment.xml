@@ -11,7 +11,6 @@
 
     <!-- Bottom Navigation Bar -->
     <LinearLayout
-
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -24,53 +23,116 @@
         android:dividerPadding="25dp">
 
         <!-- Wallet Icon -->
-        <ImageButton
-            android:id="@+id/wallet_btn"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:background="@drawable/ripple_custom"
-            android:src="@drawable/ic_wallet"
-            android:contentDescription="Wallet" />
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/wallet_btn"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_custom"
+                android:contentDescription="@string/wallet"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:src="@drawable/ic_wallet" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/wallet"
+                android:textAlignment="center"
+                android:textColor="@color/secondary" />
+        </LinearLayout>
 
         <!-- Preorder Icon -->
-        <ImageButton
-            android:id="@+id/order_btn"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_preorder"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:background="@drawable/ripple_custom"
-            android:contentDescription="Preorder" />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/order_btn"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_custom"
+                android:contentDescription="@string/order"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:src="@drawable/ic_preorder" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/order"
+                android:textAlignment="center"
+                android:textColor="@color/secondary" />
+        </LinearLayout>
 
         <!-- Menu Icon -->
-        <ImageButton
-            android:id="@+id/menu_btn"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_menu"
-            android:background="@drawable/ripple_custom"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:contentDescription="Menu" />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/menu_btn"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_custom"
+                android:contentDescription="@string/menu"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:src="@drawable/ic_menu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/menu"
+                android:textAlignment="center"
+                android:textColor="@color/secondary" />
+        </LinearLayout>
 
         <!-- Settings Icon -->
-        <ImageButton
-            android:id="@+id/settings_btn"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_settings"
-            android:background="@drawable/ripple_custom"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:contentDescription="Settings" />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/settings_btn"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_custom"
+                android:contentDescription="@string/settings"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:src="@drawable/ic_settings" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/settings"
+                android:textAlignment="center"
+                android:textColor="@color/secondary" />
+        </LinearLayout>
 
     </LinearLayout>
 

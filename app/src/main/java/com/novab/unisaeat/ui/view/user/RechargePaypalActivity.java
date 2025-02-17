@@ -68,7 +68,7 @@ public class RechargePaypalActivity extends AppCompatActivity {
     }
 
     private void processPayPalPayment() {
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(amount), "USD", "Recharge Wallet", PayPalPayment.PAYMENT_INTENT_SALE);
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(amount), "EUR", "Recharge Wallet", PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(RechargePaypalActivity.this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);

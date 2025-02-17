@@ -49,7 +49,8 @@ public class SettingsActivity extends AppCompatActivity {
                     "UnisaEat v1.0",
                     "Developed with ❤️ by:\n\n" +
                             "Giuseppe Pastena\t[05121/18169]\nhttps://github.com/GiuseppePastena23" + "\n\n" +
-                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n",
+                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n\n" +
+                            "App Logo made by: Davide(Cipo)\n",
                     (dialogInterface, i) -> {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/GiuseppePastena23/UnisaEat"));
                         startActivity(browserIntent);

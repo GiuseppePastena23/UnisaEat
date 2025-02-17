@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         if (!checkInternet()) {
-            // Mostra un alert se non c'è connessione a Internet
             Utilities.showAlertDialog(this, "No internet connection", "Please connect to the internet", (dialog, which) -> finish());
         } else {
 
