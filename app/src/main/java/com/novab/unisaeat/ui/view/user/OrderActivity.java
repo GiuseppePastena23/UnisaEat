@@ -33,7 +33,7 @@ public class OrderActivity extends AppCompatActivity {
     private Button orderButton;
     private TextView totalValue;
     private TransactionViewModel transactionViewModel;
-    private HashMap<String, Float> products;
+    private HashMap<Integer, Float> products;
 
     private void associateUI() {
         productsSpinner = findViewById(R.id.products_spinner);
@@ -47,9 +47,9 @@ public class OrderActivity extends AppCompatActivity {
 
     private void populateSpinner() {
         products = new HashMap<>();
-        products.put(getString(R.string.basket), 3.5f);
-        products.put(getString(R.string.salad), 2.5f);
-        products.put(getString(R.string.sandwich), 3f);
+        products.put(R.string.basket, 3.5f);
+        products.put(R.string.salad, 2.5f);
+        products.put(R.string.sandwich, 3f);
 
         ProductSpinnerAdapter spinnerAdapter = new ProductSpinnerAdapter(this, products);
         productsSpinner.setAdapter(spinnerAdapter);
@@ -66,17 +66,18 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void updateTotalValue() {
-        String product = productsSpinner.getSelectedItem().toString();
+        int product = (int) productsSpinner.getSelectedItem();
         float price = products.get(product);
         totalValue.setText("€ " + String.format("%.2f", price));
     }
 
     private void doOrder() {
-        String product = productsSpinner.getSelectedItem().toString();
+        int product = (int) productsSpinner.getSelectedItem();
+
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
         float price = products.get(product) * -1; // negative value for order
-        String mode = "order;" + product;
+        String mode = "order;" + getString(product);
 
         // Calcolo del timestamp per oggi con l'orario selezionato per la notifica
         Calendar calendar = Calendar.getInstance();
@@ -92,7 +93,7 @@ public class OrderActivity extends AppCompatActivity {
                 scheduleOrderNotification(timestamp);
                 Utilities.showAlertDialog(this, getString(R.string.order_confirmed),
                         getString(R.string.order_success_msg) + hour + ":" + minute + "\n" +
-                                getString(R.string.products_text) + ":\n" + product, (dialog, which) -> {
+                                getString(R.string.products_text) + ":\n" + getString(product), (dialog, which) -> {
                             finish();
                         });
             } else {

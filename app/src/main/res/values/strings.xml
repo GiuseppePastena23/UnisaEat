@@ -108,6 +108,10 @@
     <string name="low_credit_notification_title">Low Credit</string>
     <string name="low_credit_notification_message">It\'s time to recharge your wallet</string>
     <string name="recharge_paypal">Recharge with PayPal</string>
+    <string name="error">Error</string>
+    <string name="topup_cash">Topup Cash</string>
+    <string name="topup_online">Topup Online</string>
+    <string name="payment">Payment</string>
 
 
 </resources>

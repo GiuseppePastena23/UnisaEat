@@ -69,21 +69,21 @@ public class TransactionAdapter extends BaseAdapter {
             String[] parts = transactionModeString.split(";");
             productsLabel = context.getString(R.string.products_text) + ": " + parts[1];
             modeLabel = context.getString(R.string.order);
-            amountLabel = String.format("Amount: %s", Float.parseFloat(transaction.getAmount()) * -1);
+            amountLabel = String.format("%s: %s", context.getString(R.string.amount_text), Float.parseFloat(transaction.getAmount()) * -1);
         } else if (transactionModeString.equals("topup;cash") || transactionModeString.equals("topup;online")) {
-            modeLabel = transactionModeString.equals("topup;cash") ? "Topup Cash" : "Topup Online";
+            modeLabel = transactionModeString.equals("topup;cash") ? context.getString(R.string.topup_cash) : context.getString(R.string.topup_online);
         } else if (transactionModeString.startsWith("topup;")) {
             String topupType = transactionModeString.split(";")[1];
-            modeLabel = topupType.equals("cash") ? "Topup cash" : "Topup online";
+            modeLabel = topupType.equals("cash") ? context.getString(R.string.topup_cash) : context.getString(R.string.topup_online);
         } else if (transactionModeString.equals("payment")) {
-            modeLabel = "Pagamento Mensa";
+            modeLabel = context.getString(R.string.payment);
         } else {
             modeLabel = transactionModeString;
         }
 
         // Update the amount for transactions involving topups
         if (!transactionModeString.startsWith("order;")) {
-            amountLabel = String.format("Amount: %s", Float.parseFloat(transaction.getAmount()));
+            amountLabel = String.format("%s: %s", context.getString(R.string.amount_text), Float.parseFloat(transaction.getAmount()));
         }
 
         // Set values to the views

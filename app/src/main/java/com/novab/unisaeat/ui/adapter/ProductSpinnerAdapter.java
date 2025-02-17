@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProductSpinnerAdapter extends ArrayAdapter<String> {
+public class ProductSpinnerAdapter extends ArrayAdapter<Integer> {
     private Context context;
-    private HashMap<String, Float> products;
-    private List<String> productNames;
+    private HashMap<Integer, Float> products;
+    private List<Integer> productNames;
 
-    public ProductSpinnerAdapter(Context context, HashMap<String, Float> products) {
+    public ProductSpinnerAdapter(Context context, HashMap<Integer, Float> products) {
         super(context, R.layout.spinner_item, new ArrayList<>(products.keySet()));
         this.context = context;
         this.products = products;
@@ -40,9 +40,9 @@ public class ProductSpinnerAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(context).inflate(R.layout.spinner_item, parent, false);
         }
         TextView textView = convertView.findViewById(R.id.spinnerItemText);
-        String productName = productNames.get(position);
+        int productName = productNames.get(position);
         Float price = products.get(productName);
-        textView.setText(productName );
+        textView.setText(productName);
         return convertView;
     }
 }

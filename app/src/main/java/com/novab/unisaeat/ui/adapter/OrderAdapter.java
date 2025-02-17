@@ -56,7 +56,27 @@ public class OrderAdapter extends BaseAdapter {
         TextView transactionProducts = convertView.findViewById(R.id.transaction_products);
 
         String idLabel = String.format(("ID: %s"), transaction.getId());
-        String productsLabel = context.getString(R.string.products_text) + String.format(": %s", transaction.getMode().replace("order;", ""));
+        String productDbName = transaction.getMode().replace("order;", "");
+
+        String outputProduct;
+        switch (productDbName) {
+            case "Salad":
+                outputProduct = context.getString(R.string.salad);
+                break;
+            case "Basket":
+                outputProduct = context.getString(R.string.basket);
+                break;
+            case "Sandwich":
+                outputProduct = context.getString(R.string.sandwich);
+                break;
+            default:
+                outputProduct = context.getString(R.string.error);
+                break;
+        }
+
+
+        String productsLabel = context.getString(R.string.products_text) + String.format(": %s",
+                outputProduct);
 
 
         transactionId.setText(idLabel);

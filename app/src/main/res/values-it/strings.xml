@@ -104,4 +104,8 @@
     <string name="low_credit_notification_title">Credito Basso</string>
     <string name="low_credit_notification_message">È ora di ricaricare il tuo portafoglio</string>
     <string name="recharge_paypal">Recharge with PayPal</string>
+    <string name="error">Errore</string>
+    <string name="topup_cash">Ricarica in Contanti</string>
+    <string name="topup_online">Ricarica Online</string>
+    <string name="payment">Pagamento</string>
 </resources>
