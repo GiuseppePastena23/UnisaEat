@@ -87,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
         autoLoginCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
             autoLogin = b;
             sharedPreferencesManager.saveAutoLogin(autoLogin);
+            sharedPreferencesManager.saveLoggedIn(autoLogin);
         });
     }
 

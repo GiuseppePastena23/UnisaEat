@@ -111,7 +111,9 @@ public class LoginActivity extends AppCompatActivity {
     private void observeLogin() {
         userViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {
-                sharedPreferencesManager.saveAutoLogin(rememberMeCheckBox.isChecked());
+                boolean rememberMe = rememberMeCheckBox.isChecked();
+                sharedPreferencesManager.saveAutoLogin(rememberMe);
+                sharedPreferencesManager.saveLoggedIn(rememberMe);
                 sharedPreferencesManager.saveUser(user);
                 startActivity(new Intent(this, user.getStatus().equals("employee") ?
                         HomeEmployeeActivity.class : HomeActivity.class));

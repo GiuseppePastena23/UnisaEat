@@ -48,10 +48,11 @@ public class NotificationWorker extends Worker {
 
     private void checkAndNotifyLowCredit(Context context) {
         SharedPreferencesManager preferences = new SharedPreferencesManager(getApplicationContext());
+        boolean loggedIn = preferences.getLoggedIn();
         float credito = preferences.getUser().getCredit();
         String status = preferences.getUser().getStatus();
 
-        if (!status.equals("employee") && credito != -1f && credito < 5f && NotificationHelper.shouldSendNotification(context, "LOW_CREDIT")) {
+        if (!status.equals("employee") && loggedIn && credito < 5f && credito >= 0 && NotificationHelper.shouldSendNotification(context, "LOW_CREDIT")) {
             sendNotification(
                     context,
                     getApplicationContext().getString(R.string.low_credit_notification_title),

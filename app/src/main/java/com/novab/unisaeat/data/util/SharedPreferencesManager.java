@@ -66,10 +66,6 @@ public class SharedPreferencesManager {
         return sharedPreferences.getFloat("credit", -1f);
     }
 
-    public void saveAutoEmail(String email) {
-        editor.putString("email", email);
-        editor.apply();
-    }
 
     public void saveAutoLogin(boolean login) {
         editor.putBoolean("login", login);
@@ -79,19 +75,6 @@ public class SharedPreferencesManager {
     public boolean getAutoLogin() {
         Log.d("TAG", "getAutoLogin: " + sharedPreferences.getBoolean("login", false));
         return sharedPreferences.getBoolean("login", false);
-    }
-
-    public String getAutoEmail() {
-        return sharedPreferences.getString("email", "");
-    }
-
-    public void saveAutoPassword(String password) {
-        editor.putString("password", password);
-        editor.apply();
-    }
-
-    public String getAutoPassword() {
-        return sharedPreferences.getString("password", "");
     }
 
 
@@ -104,10 +87,15 @@ public class SharedPreferencesManager {
         return sharedPreferences.getBoolean("biometric", false);
     }
 
-
-    public boolean getLogin() {
-        return sharedPreferences.getBoolean("login", true);
+    public void saveLoggedIn(boolean isLoggedIn) {
+        editor.putBoolean("isLoggedIn", isLoggedIn);
+        editor.apply();
     }
+
+    public boolean getLoggedIn() {
+        return sharedPreferences.getBoolean("isLoggedIn", false);
+    }
+
 
     public void clearData() {
         editor.clear();
