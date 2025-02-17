@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- FrameLayout with rounded background and elevation -->
+    <FrameLayout
+        style="@style/RoundedCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+
+        <!-- Vertical LinearLayout for EditTexts and Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/recharge_paypal"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Owner's Name EditText -->
+
+
+            <!-- Expiration Date and CVV EditTexts -->
+
+            <View
+                android:layout_width="125dp"
+                android:layout_height="1dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/divider">
+
+            </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:text="@string/amount_text"
+                android:textSize="16sp"
+                android:textStyle="bold">
+
+
+            </TextView>
+
+            <!-- Amount Selection -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/decrease_amount_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_minus"
+                    android:foreground="@drawable/ripple_plus"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/amount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginRight="9dp"
+                    android:text="5"
+                    android:textColor="@android:color/black"
+
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/increase_amount_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_plus"
+                    android:foreground="@drawable/ripple_plus"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Recharge Button -->
+            <Button
+                android:id="@+id/recharge_button"
+                style="@style/PayPalButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PayPal"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

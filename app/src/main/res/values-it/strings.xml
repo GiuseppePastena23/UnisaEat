@@ -103,4 +103,5 @@
     <string name="order_notification_message">Il tuo ordine sarà disponibile tra 10 min</string>
     <string name="low_credit_notification_title">Credito Basso</string>
     <string name="low_credit_notification_message">È ora di ricaricare il tuo portafoglio</string>
+    <string name="recharge_paypal">Recharge with PayPal</string>
 </resources>

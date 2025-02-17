@@ -9,6 +9,7 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 lombok = "1.18.30"
 biometric = "1.1.0"
+paymentButtons = "2.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -20,6 +21,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
 biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }
+payment-buttons = { module = "com.paypal.android:payment-buttons", version.ref = "paymentButtons" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.fragment.TopBarFragment;
+import com.paypal.android.sdk.payments.PayPalPayment;
+
+import java.math.BigDecimal;
+
 
 public class RechargeWalletActivity extends AppCompatActivity {
 
@@ -37,15 +41,21 @@ public class RechargeWalletActivity extends AppCompatActivity {
                 .commit();
     }
 
+
     private void associateUi() {
         // PayPal Button click listener
         btnPayPal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show a toast message for PayPal button (not implemented)
-                Toast.makeText(getApplicationContext(), "PayPal integration not implemented", Toast.LENGTH_SHORT).show();
+                // Start PayPal payment flow
+                PayPalPayment payment = new PayPalPayment(new BigDecimal("10.00"), "USD", "Recharge Wallet", PayPalPayment.PAYMENT_INTENT_SALE);
+
+                Intent intent = new Intent(RechargeWalletActivity.this, RechargePaypalActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
+
 
         // Google Pay Button click listener
         btnGPay.setOnClickListener(new View.OnClickListener() {

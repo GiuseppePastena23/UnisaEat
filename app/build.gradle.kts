@@ -6,6 +6,8 @@ android {
     namespace = "com.novab.unisaeat"
     compileSdk = 34
 
+
+
     defaultConfig {
         applicationId = "com.novab.unisaeat"
         minSdk = 24
@@ -35,7 +37,7 @@ android {
 }
 
 dependencies {
-
+    implementation("com.paypal.sdk:paypal-android-sdk:2.14.6")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("androidx.work:work-runtime:2.8.1")
     implementation(libs.lombok)

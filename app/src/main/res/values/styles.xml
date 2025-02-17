@@ -29,4 +29,13 @@
     </style>
 
 
+    <!-- PayPal Button Style -->
+    <style name="PayPalButtonStyle" parent="Widget.MaterialComponents.Button">
+        <!-- Blue background with rounded corners -->
+        <item name="android:backgroundTint">@color/paypal_btn</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textAllCaps">false</item> <!-- Make text normal (not all caps) -->
+    </style>
+
+
 </resources>
