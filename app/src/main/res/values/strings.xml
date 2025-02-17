@@ -118,6 +118,7 @@
     <string name="cancel_payment">Cancel Payment</string>
     <string name="added_products">Added Products</string>
     <string name="string_complete_meal">Complete Meal</string>
+    <string name="unknown">Unknown</string>
 
 
 </resources>

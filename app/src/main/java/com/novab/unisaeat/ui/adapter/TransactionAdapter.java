@@ -1,7 +1,6 @@
 package com.novab.unisaeat.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,13 @@ import com.novab.unisaeat.data.model.Transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class TransactionAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Transaction> transactions;
+    private final Context context;
+    private final List<Transaction> transactions;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm:ss", Locale.getDefault());
 
     public TransactionAdapter(Context context, List<Transaction> transactions) {
         this.context = context;
@@ -30,70 +31,101 @@ public class TransactionAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Object getItem(int position) {
+        return transactions.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.transaction_row, parent, false);
+
+            holder = new ViewHolder();
+            holder.transactionId = convertView.findViewById(R.id.transaction_id);
+            holder.transactionDate = convertView.findViewById(R.id.transaction_date);
+            holder.transactionProducts = convertView.findViewById(R.id.transaction_products);
+            holder.transactionAmount = convertView.findViewById(R.id.transaction_amount);
+            holder.transactionMode = convertView.findViewById(R.id.transaction_mode);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
         Transaction transaction = transactions.get(position);
         String transactionModeString = transaction.getMode();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        String[] modeParts = transactionModeString.split(";");
 
-        // Find views once
-        TextView transactionId = convertView.findViewById(R.id.transaction_id);
-        TextView transactionDate = convertView.findViewById(R.id.transaction_date);
-        TextView transactionProducts = convertView.findViewById(R.id.transaction_products);
-        TextView transactionAmount = convertView.findViewById(R.id.transaction_amount);
-        TextView transactionMode = convertView.findViewById(R.id.transaction_mode);
+        // ID e data
+        holder.transactionId.setText(String.format("ID: %s", transaction.getId()));
+        holder.transactionDate.setText(sdf.format(transaction.getDatetime()));
 
-        // Prepare common variables
-        String idLabel = String.format("ID: %s", transaction.getId());
-        String formattedDate = sdf.format(transaction.getDatetime());
-        String amountLabel = String.format("Amount: %s", Float.parseFloat(transaction.getAmount()));
-        String productsLabel = "";
-        String modeLabel = "";
+        // Modalità transazione e importo
+        String modeLabel;
+        float amount = Float.parseFloat(transaction.getAmount());
+        String productsLabel = ""; // Default vuoto, verrà valorizzato solo per ordini
 
-        // Check transaction mode and handle cases
-        if (transactionModeString.startsWith("order;")) {
-            String[] parts = transactionModeString.split(";");
-            productsLabel = context.getString(R.string.products_text) + ": " + parts[1];
-            modeLabel = context.getString(R.string.order);
-            amountLabel = String.format("%s: %s", context.getString(R.string.amount_text), Float.parseFloat(transaction.getAmount()) * -1);
-        } else if (transactionModeString.equals("topup;cash") || transactionModeString.equals("topup;online")) {
-            modeLabel = transactionModeString.equals("topup;cash") ? context.getString(R.string.topup_cash) : context.getString(R.string.topup_online);
-        } else if (transactionModeString.startsWith("topup;")) {
-            String topupType = transactionModeString.split(";")[1];
-            modeLabel = topupType.equals("cash") ? context.getString(R.string.topup_cash) : context.getString(R.string.topup_online);
-        } else if (transactionModeString.equals("payment")) {
-            modeLabel = context.getString(R.string.payment);
-        } else {
-            modeLabel = transactionModeString;
+        switch (modeParts[0]) {
+            case "order":
+                modeLabel = context.getString(R.string.order);
+                amount *= -1; // Gli ordini scalano il credito
+
+                if (modeParts.length > 1) {
+                    String prodottoEngDb = modeParts[1];
+                    int resIdProdotto;
+                    switch (prodottoEngDb) {
+                        case "Salad":
+                            resIdProdotto = R.string.salad;
+                            break;
+                        case "Basket":
+                            resIdProdotto = R.string.basket;
+                            break;
+                        case "Sandwich":
+                            resIdProdotto = R.string.sandwich;
+                            break;
+                        default:
+                            resIdProdotto = R.string.unknown;
+                    }
+                    productsLabel = context.getString(R.string.products_text) + ": " + context.getString(resIdProdotto);
+                }
+                break;
+
+            case "topup":
+                modeLabel = modeParts.length > 1 && "cash".equals(modeParts[1])
+                        ? context.getString(R.string.topup_cash)
+                        : context.getString(R.string.topup_online);
+                break;
+
+            case "payment":
+                modeLabel = context.getString(R.string.payment);
+                break;
+
+            default:
+                modeLabel = transactionModeString;
+                break;
         }
 
-        // Update the amount for transactions involving topups
-        if (!transactionModeString.startsWith("order;")) {
-            amountLabel = String.format("%s: %s", context.getString(R.string.amount_text), Float.parseFloat(transaction.getAmount()));
-        }
-
-        // Set values to the views
-        transactionId.setText(idLabel);
-        transactionDate.setText(formattedDate);
-        transactionProducts.setText(productsLabel);
-        transactionMode.setText(modeLabel);
-        transactionAmount.setText(amountLabel);
+        // Imposta le TextView
+        holder.transactionMode.setText(modeLabel);
+        holder.transactionAmount.setText(String.format("%s: %.2f", context.getString(R.string.amount_text), amount));
+        holder.transactionProducts.setText(productsLabel); // Sarà vuoto per le ricariche e i pagamenti
 
         return convertView;
     }
 
+    static class ViewHolder {
+        TextView transactionId;
+        TextView transactionDate;
+        TextView transactionProducts;
+        TextView transactionAmount;
+        TextView transactionMode;
+    }
 }
