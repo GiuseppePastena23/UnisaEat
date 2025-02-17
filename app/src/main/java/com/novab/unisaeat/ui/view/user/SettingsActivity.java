@@ -5,21 +5,22 @@ import static com.novab.unisaeat.ui.util.Utilities.showAlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.data.util.SharedPreferencesManager;
 
 public class SettingsActivity extends AppCompatActivity {
+    SharedPreferencesManager sharedPreferencesManager;
 
     private boolean biometric;
-    private boolean login;
+    private boolean autoLogin;
 
     private Button userInfoButton;
-    private CheckBox biometricCheckbox;
-    private CheckBox loginCheckbox;
+    private SwitchCompat biometricCheckbox;
+    private SwitchCompat autoLoginCheckbox;
 
     private Button aboutAppButton;
     private Button logoutButton;
@@ -27,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void associateUI() {
         userInfoButton = findViewById(R.id.user_info_btn);
         biometricCheckbox = findViewById(R.id.biometric_checkbox);
-        loginCheckbox = findViewById(R.id.login_checkbox);
+        autoLoginCheckbox = findViewById(R.id.login_checkbox);
 
         aboutAppButton = findViewById(R.id.dev_info_btn);
         logoutButton = findViewById(R.id.logout_btn);
@@ -48,8 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
                     "UnisaEat v1.0",
                     "Developed with ❤️ by:\n\n" +
                             "Giuseppe Pastena\t[05121/18169]\nhttps://github.com/GiuseppePastena23" + "\n\n" +
-                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n\n" +
-                            "App Logo by: Davide(Cipo)\n\n",
+                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n",
                     (dialogInterface, i) -> {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/GiuseppePastena23/UnisaEat"));
                         startActivity(browserIntent);
@@ -58,7 +58,6 @@ public class SettingsActivity extends AppCompatActivity {
             );
         });
         logoutButton.setOnClickListener(v -> {
-            SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
             sharedPreferencesManager.clearData();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -68,27 +67,24 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void intializeCheckbox() {
         biometricCheckbox.setChecked(biometric);
-        loginCheckbox.setChecked(login);
+        autoLoginCheckbox.setChecked(autoLogin);
         if (biometric) {
-            loginCheckbox.setEnabled(false);
-            loginCheckbox.setChecked(true);
+            autoLoginCheckbox.setEnabled(false);
+            autoLoginCheckbox.setChecked(true);
         }
         biometricCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
             biometric = b;
-            SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
-            sharedPreferencesManager.saveBiometricCheckbox(b);
+            sharedPreferencesManager.saveBiometricAuth(b);
             if (b) {
-                loginCheckbox.setChecked(true);
-                loginCheckbox.setEnabled(false);
+                autoLoginCheckbox.setChecked(true);
+                autoLoginCheckbox.setEnabled(false);
             } else {
-                loginCheckbox.setEnabled(true);
-
+                autoLoginCheckbox.setEnabled(true);
             }
         });
-        loginCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
-            login = b;
-            SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
-            sharedPreferencesManager.saveLogin(b);
+        autoLoginCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
+            autoLogin = b;
+            sharedPreferencesManager.saveAutoLogin(autoLogin);
         });
     }
 
@@ -97,9 +93,9 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
-        biometric = sharedPreferencesManager.getBiometricCheckbox();
-        login = sharedPreferencesManager.getLogin();
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+        biometric = sharedPreferencesManager.getBiometricAuth();
+        autoLogin = sharedPreferencesManager.getAutoLogin();
         associateUI();
     }
 

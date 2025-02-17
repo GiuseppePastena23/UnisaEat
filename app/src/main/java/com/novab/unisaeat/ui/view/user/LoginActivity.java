@@ -27,121 +27,108 @@ import com.novab.unisaeat.ui.viewmodel.UserViewModel;
 import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private SharedPreferencesManager sharedPreferencesManager;
     private UserViewModel userViewModel;
     private EditText emailEditText, passwordEditText;
-    SharedPreferencesManager sharedPreferencesManager;
-    private CheckBox showPasswordCheckBox;
-    private CheckBox rememberMeCheckBox;
+    private CheckBox showPasswordCheckBox, rememberMeCheckBox;
+    private Button loginButton, registerButton;
     private ImageView fingerprintButton;
+
+    boolean bioAuthOutcome = false;
+    boolean wantsAutoLogin = false, wantsBiometric = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        setContentView(R.layout.activity_login);
+
         sharedPreferencesManager = new SharedPreferencesManager(this);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        User user = sharedPreferencesManager.getUser();
-        boolean biometric = sharedPreferencesManager.getBiometricCheckbox();
-        boolean fastLogin = sharedPreferencesManager.getLogin();
+        wantsAutoLogin = sharedPreferencesManager.getAutoLogin();
+        wantsBiometric = sharedPreferencesManager.getBiometricAuth();
 
-        if (user != null) {
-            if (!biometric) {
+        associateUI();
+        setupListeners();
+        observeLogin();
 
-                // Se l'utente ha già effettuato l'accesso e non ha selezionato
-                // l'autenticazione biometrica, vai alla schermata principale
-                if (fastLogin) {
-                    goToHome();
-                } else {
-                    resetUi();
-                }
-            } else {
-                // Se l'utente ha già effettuato l'accesso e ha selezionato
-                // l'autenticazione biometrica, mostra il prompt biometrico
+        if (wantsAutoLogin) {
+            if (wantsBiometric) {
                 checkAndAuthenticate();
+            } else {
+                userViewModel.login(sharedPreferencesManager.getUser().getEmail(), sharedPreferencesManager.getUser().getPassword());
             }
-        } else {
-            // Se l'utente non ha effettuato l'accesso, mostra la schermata di login
-            resetUi();
         }
+
     }
 
     private void associateUI() {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
+        showPasswordCheckBox = findViewById(R.id.show_password_checkbox);
         rememberMeCheckBox = findViewById(R.id.remember_me_checkbox);
-        ImageView fingerprintButton = findViewById(R.id.fingerprint_button);
+        fingerprintButton = findViewById(R.id.fingerprint_button);
+        loginButton = findViewById(R.id.login_btn);
+        registerButton = findViewById(R.id.register_btn);
+
+        User tmp = sharedPreferencesManager.getUser();
+        if (tmp == null ||
+                (!wantsBiometric && (tmp.getEmail().isEmpty() || tmp.getPassword().isEmpty()))) {
+            fingerprintButton.setAlpha(0.1f);
+            fingerprintButton.setEnabled(false);
+        }
+    }
+
+    private void setupListeners() {
+        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            passwordEditText.setInputType(isChecked ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    : InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        });
+
+        registerButton.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
+
         fingerprintButton.setOnClickListener(v -> {
             checkAndAuthenticate();
         });
-        fingerprintButton.setVisibility(sharedPreferencesManager.getBiometricCheckbox() ? ImageView.VISIBLE : ImageView.GONE);
 
+        loginButton.setOnClickListener(v -> {
+            String email = emailEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
-        Button registerButton = findViewById(R.id.register_btn);
-        registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
-        });
-
-        Button loginButton = findViewById(R.id.login_btn);
-        loginButton.setOnClickListener(v -> onLoginClick());
-
-        userViewModel.getUserLiveData().observe(this, user -> {
-            if (user != null) {
-                Toast.makeText(this, getString(R.string.login_successful), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,
-                        user.getStatus().equals("employee") ? HomeEmployeeActivity.class :
-                                HomeActivity.class);
-                startActivity(intent);
-                finish();
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Compila tutti i campi!", Toast.LENGTH_SHORT).show();
+            } else {
+                userViewModel.login(email, Utilities.hash(password));
             }
         });
 
+    }
+
+
+    private void observeLogin() {
+        userViewModel.getUserLiveData().observe(this, user -> {
+            if (user != null) {
+                sharedPreferencesManager.saveAutoLogin(rememberMeCheckBox.isChecked());
+                sharedPreferencesManager.saveUser(user);
+                startActivity(new Intent(this, user.getStatus().equals("employee") ?
+                        HomeEmployeeActivity.class : HomeActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Login fallito!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         userViewModel.getErrorLiveData().observe(this, errorMessage -> {
             if (errorMessage != null) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
-
             }
         });
-
-
-        showPasswordCheckBox = findViewById(R.id.show_password_checkbox);
-        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // If the checkbox is checked, show the password
-                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-            } else {
-
-                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            }
-            // Move the cursor to the end of the text
-            passwordEditText.setSelection(passwordEditText.getText().length());
-        });
-
     }
 
-    public void onLoginClick() {
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
-        if (rememberMeCheckBox.isChecked()) {
-            sharedPreferencesManager.saveLogin(true);
-        } else {
-            sharedPreferencesManager.saveLogin(false);
-        }
 
-        if (!email.isEmpty() && !password.isEmpty()) {
-
-            String hashedPassword = Utilities.hash(password);
-            userViewModel.login(email, hashedPassword);
-        } else {
-            Toast.makeText(this, getString(R.string.both_email_password_error),
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
+    // **************** BIOMETRIC AUTHENTICATION **************** //
 
     private void checkAndAuthenticate() {
         BiometricManager biometricManager = BiometricManager.from(this);
@@ -186,14 +173,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-                goToHome();  // Vai alla schermata principale dopo il successo dell'autenticazione biometrica
+                userViewModel.login(sharedPreferencesManager.getUser().getEmail(), sharedPreferencesManager.getUser().getPassword());
             }
 
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
                 Toast.makeText(LoginActivity.this, "Authentication error: " + errString, Toast.LENGTH_SHORT).show();
-                resetUi();
             }
 
             @Override
@@ -203,35 +189,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         biometricPrompt.authenticate(buildBiometricPrompt());
-    }
-
-
-    private void goToHome() {
-        userViewModel.getUser();
-        userViewModel.getUserLiveData().observe(this, user -> {
-            if(user.getPassword().equals(sharedPreferencesManager.getUser().getPassword())){
-                Intent intent = new Intent(this,
-                        user.getStatus().equals("employee") ? HomeEmployeeActivity.class :
-                                HomeActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                // Se la password dell'utente è stata modificata, mostra la schermata di login
-                resetUi();
-            }
-
-        });
-
-        userViewModel.getErrorLiveData().observe(this, errorMessage -> {
-            if (errorMessage != null) {
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
-
-    public void resetUi() {
-        setContentView(R.layout.activity_login);
-        associateUI();
     }
 }

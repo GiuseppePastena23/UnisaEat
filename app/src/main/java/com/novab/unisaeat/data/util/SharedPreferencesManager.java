@@ -2,7 +2,6 @@ package com.novab.unisaeat.data.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.novab.unisaeat.data.model.User;
 
@@ -66,31 +65,43 @@ public class SharedPreferencesManager {
         return sharedPreferences.getFloat("credit", -1f);
     }
 
-
-    public void saveOrderTime(long time) {
-        editor.putLong("orderTime", time);
+    public void saveAutoEmail(String email) {
+        editor.putString("email", email);
         editor.apply();
     }
 
-    public long getOrderTime() {
-        return sharedPreferences.getLong("orderTime", -1);
+    public void saveAutoLogin(boolean login) {
+        editor.putBoolean("login", login);
+        editor.apply();
+    }
+
+    public boolean getAutoLogin() {
+        return sharedPreferences.getBoolean("login", false);
+    }
+
+    public String getAutoEmail() {
+        return sharedPreferences.getString("email", "");
+    }
+
+    public void saveAutoPassword(String password) {
+        editor.putString("password", password);
+        editor.apply();
+    }
+
+    public String getAutoPassword() {
+        return sharedPreferences.getString("password", "");
     }
 
 
-    public void saveBiometricCheckbox(boolean isChecked) {
+    public void saveBiometricAuth(boolean isChecked) {
         editor.putBoolean("biometric", isChecked);
         editor.apply();
     }
 
-    public boolean getBiometricCheckbox() {
+    public boolean getBiometricAuth() {
         return sharedPreferences.getBoolean("biometric", false);
     }
 
-
-    public void saveLogin(boolean login) {
-        editor.putBoolean("login", login);
-        editor.apply();
-    }
 
     public boolean getLogin() {
         return sharedPreferences.getBoolean("login", true);
