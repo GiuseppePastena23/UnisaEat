@@ -47,8 +47,11 @@ public class NotificationWorker extends Worker {
     }
 
     private void checkAndNotifyLowCredit(Context context) {
-        float credito = getUserCredit();
-        if (credito != -1f && credito < 5f && NotificationHelper.shouldSendNotification(context, "LOW_CREDIT")) {
+        SharedPreferencesManager preferences = new SharedPreferencesManager(getApplicationContext());
+        float credito = preferences.getUser().getCredit();
+        String status = preferences.getUser().getStatus();
+
+        if (!status.equals("employee") && credito != -1f && credito < 5f && NotificationHelper.shouldSendNotification(context, "LOW_CREDIT")) {
             sendNotification(
                     context,
                     getApplicationContext().getString(R.string.low_credit_notification_title),
@@ -56,11 +59,6 @@ public class NotificationWorker extends Worker {
             );
             NotificationHelper.updateLastNotificationTime(context, "LOW_CREDIT");
         }
-    }
-
-    private float getUserCredit() {
-        SharedPreferencesManager preferences = new SharedPreferencesManager(getApplicationContext());
-        return preferences.getUserCredit();
     }
 
     private void sendNotification(Context context, String title, String message) {

@@ -72,17 +72,19 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <CheckBox
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/biometric_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enable Biometric Login" />
 
-        <CheckBox
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/login_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enable Auto Login" />
+
+
     </LinearLayout>
 
 </RelativeLayout>
