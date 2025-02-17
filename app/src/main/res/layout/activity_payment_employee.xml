@@ -26,7 +26,7 @@
                     android:id="@+id/user_name_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name: "
+                    android:text="@string/name_text"
 
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="Surname: "
+                    android:text="@string/surname_text "
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="Credit: "
+                    android:text="@string/credit_text"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -69,21 +69,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Complete Meal" />
+                    android:text="@string/string_complete_meal" />
 
                 <Button
                     android:id="@+id/pizza_meal_btn"
                     style="@style/MainButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pizza Meal" />
+                    android:text="Pizza" />
 
                 <Button
                     android:id="@+id/salad_meal_btn"
                     style="@style/MainButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Salad Meal" />
+                    android:text="@string/salad" />
 
                 <Button
                     android:id="@+id/basket_meal_btn"
@@ -91,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Basket Meal" />
+                    android:text="@string/basket" />
 
                 <Button
                     android:id="@+id/reduced_meal_a_btn"
@@ -99,14 +99,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Reduced Meal A" />
+                    android:text="@string/reduced_meal_a" />
 
                 <Button
                     android:id="@+id/reduced_meal_b_btn"
                     style="@style/MainButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reduced Meal B" />
+                    android:text="@string/reduced_meal_b" />
             </LinearLayout>
         </FrameLayout>
 
@@ -129,14 +129,14 @@
                     style="@style/MainButton"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:text="Make Payment" />
+                    android:text="@string/make_payment" />
 
                 <Button
                     android:id="@+id/cancel_payment_btn"
                     style="@style/RedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cancel Payment" />
+                    android:text="@string/cancel_payment" />
 
                 <View
                     android:layout_width="150dp"
@@ -149,7 +149,7 @@
                     android:id="@+id/amount_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Amount"
+                    android:text="@string/amount_text"
                     android:textColor="@color/primary"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
                     android:paddingBottom="7dp"
-                    android:text="Added Products:"
+                    android:text="@string/added_products"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

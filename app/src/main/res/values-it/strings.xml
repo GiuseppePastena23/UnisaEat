@@ -5,6 +5,7 @@
     <string name="employee_main_title">Dashboard Lavoratore</string>
     <string name="orders_button">Prenotazioni</string>
     <string name="settings_btn">Impostazioni</string>
+    <string name="scan_btn">Scansiona QR</string>
     <string name="orders_btn">Gestisci Prenotazioni</string>
     <string name="salad">Insalatona</string>
     <string name="sandwich">Panino</string>
@@ -103,9 +104,15 @@
     <string name="order_notification_message">Il tuo ordine sarà disponibile tra 10 min</string>
     <string name="low_credit_notification_title">Credito Basso</string>
     <string name="low_credit_notification_message">È ora di ricaricare il tuo portafoglio</string>
-    <string name="recharge_paypal">Recharge with PayPal</string>
+    <string name="recharge_paypal">Ricarica con PayPal</string>
     <string name="error">Errore</string>
     <string name="topup_cash">Ricarica in Contanti</string>
     <string name="topup_online">Ricarica Online</string>
     <string name="payment">Pagamento</string>
+    <string name="string_complete_meal">Pasto Completo</string>
+    <string name="reduced_meal_a">Pasto Ridotto A</string>
+    <string name="reduced_meal_b">Pasto Ridotto B</string>
+    <string name="make_payment">Effettua Pagamento</string>
+    <string name="cancel_payment">Cancella Pagamento</string>
+    <string name="added_products">Prodotti Aggiunti</string>
 </resources>

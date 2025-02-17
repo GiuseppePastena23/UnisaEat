@@ -9,7 +9,7 @@
         android:text="UNISAEAT"
         android:textColor="@color/fourth"
         android:textSize="40sp"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/image"

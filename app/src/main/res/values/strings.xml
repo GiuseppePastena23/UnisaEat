@@ -6,12 +6,12 @@
     <string name="employee_main_title">Employee Dashboard</string>
     <string name="orders_button">Orders</string>
     <string name="settings_btn">Settings</string>
-    <string name="scan_btn" translatable="false">Scan QR</string>
+    <string name="scan_btn">Scan QR</string>
     <string name="orders_btn">Manage Orders</string>
     <string name="salad">Salad</string>
     <string name="sandwich">Sandwich</string>
     <string name="basket">Basket</string>
-    <string name="no_order_present_text">No orders present</string>
+    <string name="no_order_present_text">No orders available</string>
     <string name="date_text">Date</string>
     <string name="products_text">Products</string>
     <string name="exit_btn">Log out</string>
@@ -112,6 +112,12 @@
     <string name="topup_cash">Topup Cash</string>
     <string name="topup_online">Topup Online</string>
     <string name="payment">Payment</string>
+    <string name="reduced_meal_a">Reduced Meal A</string>
+    <string name="reduced_meal_b">Reduced Meal B</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="cancel_payment">Cancel Payment</string>
+    <string name="added_products">Added Products</string>
+    <string name="string_complete_meal">Complete Meal</string>
 
 
 </resources>
