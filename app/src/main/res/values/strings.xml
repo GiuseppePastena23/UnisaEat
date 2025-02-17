@@ -7,7 +7,7 @@
     <string name="orders_button">Orders</string>
     <string name="settings_btn">Settings</string>
     <string name="scan_btn" translatable="false">Scan QR</string>
-    <string name="orders_btn">Orders</string>
+    <string name="orders_btn">Manage Orders</string>
     <string name="salad">Salad</string>
     <string name="sandwich">Sandwich</string>
     <string name="basket">Basket</string>

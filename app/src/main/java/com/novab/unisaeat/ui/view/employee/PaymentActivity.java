@@ -30,7 +30,7 @@ public class PaymentActivity extends AppCompatActivity {
     private static final float REDUCED_MEAL_B_PRICE = 2.5f;
     private static final float BASKET_MEAL_PRICE = 3.0f;
     private UserViewModel userViewModel;
-    private TextView userNameText, userSurnameText, userCfText, userEmailText, userCreditText, amountText;
+    private TextView userNameText, userSurnameText, userCreditText, amountText;
     private ListView productsList;
     private Button makePaymentButton, cancelPaymentButton;
     private ArrayList<Product> products;
@@ -57,20 +57,21 @@ public class PaymentActivity extends AppCompatActivity {
             if (user == null || !user.getCf().equals(getIntent().getStringExtra("cf")) || !user.getToken().equals(getIntent().getStringExtra("token"))) {
                 Toast.makeText(this, "Invalid user or token", Toast.LENGTH_SHORT).show();
                 finish();
+            } else {
+                setUserData(user);
             }
-            setUserData(user);
+
         });
     }
 
     private void associateUI() {
         userNameText = findViewById(R.id.user_name_text);
         userSurnameText = findViewById(R.id.user_surname_text);
-        userCfText = findViewById(R.id.user_cf_text);
-        userEmailText = findViewById(R.id.user_email_text);
-        userCreditText = findViewById(R.id.user_credit_text);
-        productsList = findViewById(R.id.product_list);
-        amountText = findViewById(R.id.amount_text);
 
+        userCreditText = findViewById(R.id.user_credit_text);
+
+        amountText = findViewById(R.id.amount_text);
+        productsList = findViewById(R.id.product_list);
         makePaymentButton = findViewById(R.id.make_payment_btn);
         cancelPaymentButton = findViewById(R.id.cancel_payment_btn);
 
@@ -151,8 +152,6 @@ public class PaymentActivity extends AppCompatActivity {
     private void setUserData(User user) {
         userNameText.setText(user.getName());
         userSurnameText.setText(user.getSurname());
-        userCfText.setText(user.getCf());
-        userEmailText.setText(user.getEmail());
         userCreditText.setText(String.valueOf(user.getCredit()));
     }
 }

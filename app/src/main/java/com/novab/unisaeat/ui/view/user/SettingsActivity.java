@@ -2,10 +2,8 @@ package com.novab.unisaeat.ui.view.user;
 
 import static com.novab.unisaeat.ui.util.Utilities.showAlertDialog;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.OnClickAction;
 import android.widget.Button;
 import android.widget.CheckBox;
 
@@ -50,7 +48,8 @@ public class SettingsActivity extends AppCompatActivity {
                     "UnisaEat v1.0",
                     "Developed with ❤️ by:\n\n" +
                             "Giuseppe Pastena\t[05121/18169]\nhttps://github.com/GiuseppePastena23" + "\n\n" +
-                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n",
+                            "Pasquale Muraca\t[05121/16807]\nhttps://github.com/PasqualeMuraca" + "\n\n" +
+                            "App Logo by: Davide(Cipo)\n\n",
                     (dialogInterface, i) -> {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/GiuseppePastena23/UnisaEat"));
                         startActivity(browserIntent);

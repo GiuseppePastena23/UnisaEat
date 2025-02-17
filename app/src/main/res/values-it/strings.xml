@@ -5,7 +5,7 @@
     <string name="employee_main_title">Dashboard Lavoratore</string>
     <string name="orders_button">Prenotazioni</string>
     <string name="settings_btn">Impostazioni</string>
-    <string name="orders_btn">Prenotazioni</string>
+    <string name="orders_btn">Gestisci Prenotazioni</string>
     <string name="salad">Insalatona</string>
     <string name="sandwich">Panino</string>
     <string name="basket">Cestino</string>

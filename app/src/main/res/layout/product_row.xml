@@ -17,9 +17,7 @@
     <!-- Remove Button -->
     <Button
         android:id="@+id/remove_product_btn"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/red"
-        android:text="X"
-        android:textSize="20sp" />
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_remove" />
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.novab.unisaeat.ui.view.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,8 +84,7 @@ public class ScanActivity extends AppCompatActivity {
 
     private void handleScanResult(String result) {
         if (result != null) {
-            // If QR code is scanned, show a message and pass data to PaymentActivity
-            //Toast.makeText(this, "Scanned: " + result, Toast.LENGTH_LONG).show();
+            // If QR code is scanned pass data to PaymentActivity
             Intent intent = new Intent(this, PaymentActivity.class);
 
             String id = extractID(result);
@@ -96,11 +96,10 @@ public class ScanActivity extends AppCompatActivity {
             intent.putExtra("token", token); // pass the token
             startActivity(intent);
         } else {
-            // If scan is canceled, show a message
-            //Toast.makeText(this, "Scan Cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Scan Cancelled", Toast.LENGTH_SHORT).show();
         }
 
-        finish(); // Close the activity after handling the result
+        finish();
     }
 
 
