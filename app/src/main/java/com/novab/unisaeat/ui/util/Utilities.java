@@ -2,10 +2,17 @@ package com.novab.unisaeat.ui.util;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -86,5 +93,41 @@ public class Utilities {
                 throw new RuntimeException("SHA-256 algorithm not found", e);
             }
         }
+
+
+    public static boolean isConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager == null) {
+            return false;
+        }
+
+        Network network = connectivityManager.getActiveNetwork();
+        if (network == null) return false;
+
+        NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(network);
+        return capabilities != null &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+    }
+
+
+    public static boolean isServerReachable() {
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress("172.26.117.132", 5000), 3000); // Timeout set to 3 seconds
+            return true;
+        } catch (UnknownHostException e) {
+            Log.d("Server", "Host sconosciuto: strawberry", e);
+            return false;
+        } catch (IOException e) {
+            Log.d("Server", "Errore di connessione: " + e.getMessage(), e);
+            return false;
+        }
+
+    }
+
+
 
 }

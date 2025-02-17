@@ -2,17 +2,14 @@ package com.novab.unisaeat.ui.view;
 
 import static com.novab.unisaeat.ui.util.NotificationHelper.shouldSendNotification;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
@@ -22,8 +19,11 @@ import androidx.work.WorkManager;
 import com.novab.unisaeat.R;
 import com.novab.unisaeat.ui.util.NotificationHelper;
 import com.novab.unisaeat.ui.util.NotificationWorker;
+import com.novab.unisaeat.ui.util.Utilities;
 import com.novab.unisaeat.ui.view.user.LoginActivity;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,14 +33,49 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        NotificationHelper.createNotificationChannel(this);
-        scheduleNotifications();
+        if (!checkInternet()) {
+            // Mostra un alert se non c'è connessione a Internet
+            Utilities.showAlertDialog(this, "No internet connection", "Please connect to the internet", (dialog, which) -> finish());
+        } else {
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+            checkServerAsync();
+        }
     }
+
+    /**
+     * Controlla se il dispositivo è connesso a Internet.
+     */
+    private boolean checkInternet() {
+        return Utilities.isConnected(this);
+    }
+
+
+    private void checkServerAsync() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                boolean serverOnline = Utilities.isServerReachable();
+                Log.d("ServerCheck", "Server status: " + serverOnline);
+
+                runOnUiThread(() -> {
+                    if (!serverOnline) {
+                        Utilities.showAlertDialog(this, "Server unreachable", "The server is not responding. Try again later.", (dialog, which) -> finish());
+                    } else {
+                        NotificationHelper.createNotificationChannel(this);
+                        scheduleNotifications();
+                        startActivity(new Intent(this, LoginActivity.class));
+                        finish();
+                    }
+                });
+            } catch (Exception e) {
+                Log.e("ServerCheck", "Error checking server", e);
+            }
+        });
+    }
+
+
 
 
     private void scheduleNotifications() {
