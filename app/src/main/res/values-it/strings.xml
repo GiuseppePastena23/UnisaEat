@@ -115,4 +115,5 @@
     <string name="make_payment">Effettua Pagamento</string>
     <string name="cancel_payment">Cancella Pagamento</string>
     <string name="added_products">Prodotti Aggiunti</string>
+    <string name="unknown">Sconosciuto</string>
 </resources>
