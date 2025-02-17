@@ -72,6 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
             autoLoginCheckbox.setEnabled(false);
             autoLoginCheckbox.setChecked(true);
         }
+
         biometricCheckbox.setOnCheckedChangeListener((compoundButton, b) -> {
             biometric = b;
             sharedPreferencesManager.saveBiometricAuth(b);

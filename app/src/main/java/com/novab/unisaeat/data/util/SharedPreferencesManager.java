@@ -2,6 +2,7 @@ package com.novab.unisaeat.data.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.novab.unisaeat.data.model.User;
 
@@ -76,6 +77,7 @@ public class SharedPreferencesManager {
     }
 
     public boolean getAutoLogin() {
+        Log.d("TAG", "getAutoLogin: " + sharedPreferences.getBoolean("login", false));
         return sharedPreferences.getBoolean("login", false);
     }
 

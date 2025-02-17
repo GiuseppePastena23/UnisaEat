@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password_edit_text);
         showPasswordCheckBox = findViewById(R.id.show_password_checkbox);
         rememberMeCheckBox = findViewById(R.id.remember_me_checkbox);
+        rememberMeCheckBox.setChecked(wantsAutoLogin);
         fingerprintButton = findViewById(R.id.fingerprint_button);
         loginButton = findViewById(R.id.login_btn);
         registerButton = findViewById(R.id.register_btn);
