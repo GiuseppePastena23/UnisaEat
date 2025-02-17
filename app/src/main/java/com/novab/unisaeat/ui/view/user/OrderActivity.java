@@ -73,11 +73,23 @@ public class OrderActivity extends AppCompatActivity {
 
     private void doOrder() {
         int product = (int) productsSpinner.getSelectedItem();
+        String englishString;
 
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
         float price = products.get(product) * -1; // negative value for order
-        String mode = "order;" + getString(product);
+
+        if (product == R.string.basket) {
+            englishString = "Basket";
+        } else if (product == R.string.salad) {
+            englishString = "Salad";
+        } else if (product == R.string.sandwich) {
+            englishString = "Sandwich";
+        } else {
+            englishString = "Unknown";
+        }
+
+        String mode = "order;" + englishString;
 
         // Calcolo del timestamp per oggi con l'orario selezionato per la notifica
         Calendar calendar = Calendar.getInstance();
