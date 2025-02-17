@@ -122,7 +122,11 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         transactionViewModel.getErrorLiveData().observe(this, errorMessage -> {
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+            String messaggio = errorMessage;
+            if (errorMessage != null && errorMessage.equals("Transaction failed: 400")) {
+                messaggio = getString(R.string.insufficient_credit);
+            }
+            Toast.makeText(this, getString(R.string.insufficient_credit), Toast.LENGTH_SHORT).show();
 
         });
     }

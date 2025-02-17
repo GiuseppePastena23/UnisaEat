@@ -116,4 +116,7 @@
     <string name="cancel_payment">Cancella Pagamento</string>
     <string name="added_products">Prodotti Aggiunti</string>
     <string name="unknown">Sconosciuto</string>
+    <string name="enable_biometric_login">Abilita Autenticazione Biometrica</string>
+    <string name="enable_auto_login">Abilita Login Automatico</string>
+    <string name="insufficient_credit">Credito Insufficiente</string>
 </resources>

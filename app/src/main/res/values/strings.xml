@@ -119,6 +119,9 @@
     <string name="added_products">Added Products</string>
     <string name="string_complete_meal">Complete Meal</string>
     <string name="unknown">Unknown</string>
+    <string name="enable_biometric_login">Enable Biometric Login</string>
+    <string name="enable_auto_login">Enable Auto Login</string>
+    <string name="insufficient_credit">Insufficient Credit</string>
 
 
 </resources>

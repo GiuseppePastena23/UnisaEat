@@ -1,6 +1,7 @@
 package com.novab.unisaeat.ui.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -66,8 +67,6 @@ public class TransactionViewModel extends AndroidViewModel {
         transactionRepository.doTransaction(userId, amount, mode, new TransactionRepository.WalletRechargeCallback() {
             @Override
             public void onSuccess(String result) {
-
-
                 isLoadingLiveData.setValue(false);
                 transactionOutcome.setValue(result);
             }
