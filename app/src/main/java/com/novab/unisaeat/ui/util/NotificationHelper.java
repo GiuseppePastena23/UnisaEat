@@ -12,6 +12,8 @@ import androidx.core.app.NotificationManagerCompat;
 import android.Manifest;
 import android.os.Build;
 
+import com.novab.unisaeat.R;
+
 public class NotificationHelper {
     private static final String CHANNEL_ID = "general_notifications";
     private static final String PREFS_NAME = "NotificationPrefs";
@@ -49,7 +51,7 @@ public class NotificationHelper {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setSmallIcon(R.drawable.ic_menu)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

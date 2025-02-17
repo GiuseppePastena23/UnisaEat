@@ -2,6 +2,7 @@ package com.novab.unisaeat.ui.util;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -86,4 +87,4 @@ public class Utilities {
             }
         }
 
-    }
+}
