@@ -119,4 +119,13 @@
     <string name="enable_biometric_login">Abilita Autenticazione Biometrica</string>
     <string name="enable_auto_login">Abilita Login Automatico</string>
     <string name="insufficient_credit">Credito Insufficiente</string>
+    <string name="owner_name_too_short">Nome del proprietario troppo corto</string>
+    <string name="credit_card_number_should_be_16_digits">Il numero di carta dove essere di 16 cifre</string>
+    <string name="expiration_date_should_be_5_digits">La data di scadenza deve essere nel formato MM/YY</string>
+    <string name="cvv_should_be_3_digits">Il CVV deve essere di 3 cifre</string>
+    <string name="amount_should_be_positive">Il totale deve essere un numero positivo</string>
+    <string name="gpay_not_implemented">Integrazione con Google Pay non implementata</string>
+    <string name="payment_successful">Pagamento effettuato con successo</string>
+    <string name="payment_cancelled">Pagamento cancellato</string>
+    <string name="payment_invalid">Pagamento invalido</string>
 </resources>

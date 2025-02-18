@@ -122,6 +122,16 @@
     <string name="enable_biometric_login">Enable Biometric Login</string>
     <string name="enable_auto_login">Enable Auto Login</string>
     <string name="insufficient_credit">Insufficient Credit</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="owner_name_too_short">Owner\'s name is too short</string>
+    <string name="credit_card_number_should_be_16_digits">Credit card number should be 16 digits</string>
+    <string name="expiration_date_should_be_5_digits">Expiration date should be in the format MM/YY</string>
+    <string name="cvv_should_be_3_digits">CVV should be 3 digits</string>
+    <string name="amount_should_be_positive">Amount should be positive</string>
+    <string name="gpay_not_implemented">Google Pay integration not implemented</string>
+    <string name="payment_successful">Payment Successful</string>
+    <string name="payment_cancelled">Payment cancelled</string>
+    <string name="payment_invalid">Payment Invalid</string>
 
 
 </resources>

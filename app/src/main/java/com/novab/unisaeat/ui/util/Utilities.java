@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.novab.unisaeat.R;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -55,18 +57,18 @@ public class Utilities {
      * @param amount
      * @return
      */
-    public static String creditCardClearance(String ownerName, String creditCardNumber, String expirationDate, String cvv, float amount) {
-        String message = "OK";
+    public static int creditCardClearance(String ownerName, String creditCardNumber, String expirationDate, String cvv, float amount) {
+        int message = R.string.ok;
         if (ownerName.length() < 3) {
-            message = "Owner name is too short";
+            message = R.string.owner_name_too_short;
         } else if (creditCardNumber.length() != 16) {
-            message = "Credit card number should be 16 digits";
+            message = R.string.credit_card_number_should_be_16_digits;
         } else if (expirationDate.length() != 5) {
-            message = "Expiration date should be in the format MM/YY";
+            message = R.string.expiration_date_should_be_5_digits;
         } else if (cvv.length() != 3) {
-            message = "CVV should be 3 digits";
+            message = R.string.cvv_should_be_3_digits;
         } else if (amount <= 0) {
-            message = "Amount should be positive";
+            message = R.string.amount_should_be_positive;
         }
         return message;
     }

@@ -89,8 +89,8 @@ public class RechargeCardActivity extends AppCompatActivity {
             return;
         }
 
-        String outcome = creditCardClearance(ownerName, creditCardNumber, expirationDate, cvv, amount);
-        if (outcome.equals("OK")) {
+        int outcome = creditCardClearance(ownerName, creditCardNumber, expirationDate, cvv, amount);
+        if (outcome == R.string.ok) {
             transactionViewModel.doTransaction(amount, "topup;online");
         } else {
             Toast.makeText(this, outcome, Toast.LENGTH_SHORT).show();

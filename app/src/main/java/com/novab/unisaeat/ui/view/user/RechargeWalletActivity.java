@@ -17,24 +17,20 @@ import java.math.BigDecimal;
 
 public class RechargeWalletActivity extends AppCompatActivity {
 
-
     private Button btnPayPal, btnGPay, btnCreditCard;
     private TopBarFragment topBarFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recharge_wallet); // Replace with your actual layout file
+        setContentView(R.layout.activity_recharge_wallet);
 
-        // Initialize buttons
         btnPayPal = findViewById(R.id.btnPayPal);
         btnGPay = findViewById(R.id.btnGPay);
         btnCreditCard = findViewById(R.id.btnCreditCard);
 
-        // Associate the buttons with their respective actions
         associateUi();
 
-        // Add TopBarFragment
         topBarFragment = new TopBarFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.top_fragment_container, topBarFragment)
@@ -56,24 +52,11 @@ public class RechargeWalletActivity extends AppCompatActivity {
             }
         });
 
+        btnGPay.setOnClickListener(v -> Toast.makeText(getApplicationContext(), getString(R.string.gpay_not_implemented), Toast.LENGTH_SHORT).show());
 
-        // Google Pay Button click listener
-        btnGPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show a toast message for Google Pay button (not implemented)
-                Toast.makeText(getApplicationContext(), "Google Pay integration not implemented", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        btnCreditCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), RechargeCardActivity.class);
-                startActivity(intent);
-            }
+        btnCreditCard.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), RechargeCardActivity.class);
+            startActivity(intent);
         });
     }
 }

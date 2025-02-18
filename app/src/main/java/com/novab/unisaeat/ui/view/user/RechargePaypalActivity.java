@@ -37,15 +37,13 @@ public class RechargePaypalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge_paypal);
-
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
 
-        // Initialize UI elements
         associateUI();
     }
 
     private void associateUI() {
-        amountTextView = findViewById(R.id.amount_text);  // TextView to display amount
+        amountTextView = findViewById(R.id.amount_text);
         rechargeButton = findViewById(R.id.recharge_button);
         increaseAmountButton = findViewById(R.id.increase_amount_button);
         decreaseAmountButton = findViewById(R.id.decrease_amount_button);
@@ -53,7 +51,7 @@ public class RechargePaypalActivity extends AppCompatActivity {
         amountTextView.setText(String.valueOf(amount));
 
         increaseAmountButton.setOnClickListener(v -> {
-            amount += 5;  // Increase by 5 each time
+            amount += 5;
             amountTextView.setText(String.valueOf(amount));
         });
 
@@ -87,7 +85,7 @@ public class RechargePaypalActivity extends AppCompatActivity {
                     try {
                         String paymentDetails = confirm.toJSONObject().toString(4);
                         Log.i("PaymentConfirmation", paymentDetails);
-                        Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.payment_successful), Toast.LENGTH_SHORT).show();
                         transactionViewModel.doTransaction(amount, "topup;online");
                         finish();
                     } catch (JSONException e) {
@@ -95,10 +93,10 @@ public class RechargePaypalActivity extends AppCompatActivity {
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(this, "Payment Cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.payment_cancelled), Toast.LENGTH_SHORT).show();
                 finish();
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-                Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.payment_invalid), Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
