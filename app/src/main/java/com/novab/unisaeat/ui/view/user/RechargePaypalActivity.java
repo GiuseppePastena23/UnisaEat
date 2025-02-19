@@ -27,7 +27,7 @@ public class RechargePaypalActivity extends AppCompatActivity {
 
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK) // Change to ENVIRONMENT_SANDBOX for testing
-            .clientId("Ad4d3g_EehvMvNMeaMvVaZXkLoNS5zlHoG6QIjNiW0Xg0CjnRmBxj8PVVHjc9hIYZqYAlpz5QgdaEc3b");
+            .clientId("");
     private TransactionViewModel transactionViewModel;
     private TextView amountTextView;
     private Button rechargeButton, increaseAmountButton, decreaseAmountButton;
