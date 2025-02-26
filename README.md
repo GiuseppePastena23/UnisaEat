@@ -1,21 +1,52 @@
-# UnisaEat
+# 🍽️ UnisaEat
+<p align="center">
+  <img src="docs/unisaeatlogo.png" alt="UnisaEat Logo" width="200"/>
+</p>
+<p align="center">
+  <img src="docs/unisa.png" alt="Unisa Logo" width="100"/>
+  <img src="docs/etuitus.png" alt="eTuitus Logo" width="100"/>
+</p>
 
-Applicazione sviluppata durante il corso di Mobile Programming per il contest di eTuitus all'universita di salerno, Contest che e' stato vinto da questa applicazione.
- 
-UnisaEat è un'app Android pensata per migliorare l'esperienza degli studenti dell'Università di Salerno nella gestione dei pasti presso la mensa universitaria. L'app offre una serie di funzionalità che semplificano la prenotazione, il pagamento e la consultazione del menù.
+**UnisaEat** is an Android application that simplifies cafeteria experience for university students. 📱🍕🥗
 
-Caratteristiche principali
+## 🏆 App Contest 24/25 Winner  
 
-Visualizzazione del menù: Consulta il menù giornaliero della mensa universitaria in modo rapido e intuitivo.
+UnisaEat won the **App Contest 2024-2025**, an application development competition for students of the **Mobile Programming** course at the University of Salerno.  
 
-Prenotazione dei pasti: Ordina i tuoi pasti, box lunch o panini direttamente dall'app per evitare attese.
+The contest was organized in collaboration with **eTuitus**, which sponsored the event and provided the prize. The project was evaluated based on:  
 
-Portafoglio virtuale: Ricarica il tuo saldo e paga in modo semplice con un QR Code.
+- 💡 **Originality of the idea**  
+- 🔍 **App complexity**  
+- 🖥️ **Code quality**  
+- 🎨 **Usability of the final product**  
 
-Notifiche di promemoria: Ricevi un avviso pochi minuti prima dell'orario del ritiro del tuo ordine.
+The judging panel, composed of the course professor and eTuitus developers, awarded UnisaEat as the best project of the competition. 🏅📱
 
-Interfaccia user-friendly: Un design moderno e intuitivo per un'esperienza utente ottimale.
+Check out the presentation [here](docs/Presentazione.pdf)
 
-Contatti:
+---
 
-giuseppe.pastena23@gmail.com 
+## 📌 Main Features
+
+- 🔑 **Authentication** with user login and registration  
+- 🥗 **Daily menu view** for the university cafeteria  
+- 💳 **Payment and credit top-up management**  
+- 📅 **Orders** for in-place pickup of meals
+- 📜 **Transaction history**
+- 📷 **QR Code scanning** for user identification and faster payments  
+
+
+## 🚀 Technologies Used
+
+- **Android** (Java, MVVM, Retrofit)  
+- **Backend server side**: Flask + MariaDB on Raspberry Pi with ZeroTier🍓  
+- **REST API**: Retrofit for backend communication  
+
+
+## 👨‍💻 Developers
+<a href = "https://github.com/GiuseppePastena23/UnisaEat/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=GiuseppePastena23/UnisaEat"/>
+</a>
+
+giuseppe.pastena23@gmail.com
+pasqualemuraca2003@gmail.com
